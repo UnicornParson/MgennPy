@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 750px;
+                 background-color: #222222;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"font": {"color": "white"}, "group": 1, "id": "64", "label": "64", "shape": "dot", "size": 10, "title": "neuron 64"}, {"font": {"color": "white"}, "group": 2, "id": "100", "label": "100", "shape": "dot", "size": 10, "title": "outputs 73"}, {"font": {"color": "white"}, "group": 1, "id": "65", "label": "65", "shape": "dot", "size": 10, "title": "neuron 65"}, {"font": {"color": "white"}, "group": 2, "id": "101", "label": "101", "shape": "dot", "size": 10, "title": "outputs 73"}, {"font": {"color": "white"}, "group": 1, "id": "66", "label": "66", "shape": "dot", "size": 10, "title": "neuron 66"}, {"font": {"color": "white"}, "group": 2, "id": "102", "label": "102", "shape": "dot", "size": 10, "title": "outputs 73"}, {"font": {"color": "white"}, "group": 1, "id": "67", "label": "67", "shape": "dot", "size": 10, "title": "neuron 67"}, {"font": {"color": "white"}, "group": 2, "id": "103", "label": "103", "shape": "dot", "size": 10, "title": "outputs 73"}, {"font": {"color": "white"}, "group": 1, "id": "68", "label": "68", "shape": "dot", "size": 10, "title": "neuron 68"}, {"font": {"color": "white"}, "group": 2, "id": "104", "label": "104", "shape": "dot", "size": 10, "title": "outputs 73"}, {"font": {"color": "white"}, "group": 1, "id": "69", "label": "69", "shape": "dot", "size": 10, "title": "neuron 69"}, {"font": {"color": "white"}, "group": 2, "id": "105", "label": "105", "shape": "dot", "size": 10, "title": "outputs 73"}, {"font": {"color": "white"}, "group": 1, "id": "70", "label": "70", "shape": "dot", "size": 10, "title": "neuron 70"}, {"font": {"color": "white"}, "group": 2, "id": "106", "label": "106", "shape": "dot", "size": 10, "title": "outputs 73"}, {"font": {"color": "white"}, "group": 1, "id": "71", "label": "71", "shape": "dot", "size": 10, "title": "neuron 71"}, {"font": {"color": "white"}, "group": 2, "id": "107", "label": "107", "shape": "dot", "size": 10, "title": "outputs 73"}, {"font": {"color": "white"}, "group": 1, "id": "72", "label": "72", "shape": "dot", "size": 10, "title": "neuron 72"}, {"font": {"color": "white"}, "group": 2, "id": "108", "label": "108", "shape": "dot", "size": 10, "title": "outputs 73"}, {"font": {"color": "white"}, "group": 1, "id": "73", "label": "73", "shape": "dot", "size": 10, "title": "neuron 73"}, {"font": {"color": "white"}, "group": 2, "id": "109", "label": "109", "shape": "dot", "size": 10, "title": "outputs 73"}, {"font": {"color": "white"}, "group": 3, "id": "Alias1", "label": "Alias1", "shape": "dot", "size": 5, "title": "input Alias1"}, {"font": {"color": "white"}, "group": 3, "id": "Alias2", "label": "Alias2", "shape": "dot", "size": 5, "title": "input Alias2"}, {"font": {"color": "white"}, "group": 3, "id": "Alias3", "label": "Alias3", "shape": "dot", "size": 5, "title": "input Alias3"}, {"font": {"color": "white"}, "group": 3, "id": "Alias4", "label": "Alias4", "shape": "dot", "size": 5, "title": "input Alias4"}, {"font": {"color": "white"}, "group": 3, "id": "Alias5", "label": "Alias5", "shape": "dot", "size": 5, "title": "input Alias5"}, {"font": {"color": "white"}, "group": 3, "id": "Alias6", "label": "Alias6", "shape": "dot", "size": 5, "title": "input Alias6"}, {"font": {"color": "white"}, "group": 3, "id": "Alias7", "label": "Alias7", "shape": "dot", "size": 5, "title": "input Alias7"}, {"font": {"color": "white"}, "group": 3, "id": "Alias8", "label": "Alias8", "shape": "dot", "size": 5, "title": "input Alias8"}, {"font": {"color": "white"}, "group": 3, "id": "Alias9", "label": "Alias9", "shape": "dot", "size": 5, "title": "input Alias9"}, {"font": {"color": "white"}, "group": 1, "id": "ZERO_HOLE", "label": "ZERO_HOLE", "shape": "dot", "size": 1, "title": "missed node"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "from": "64", "length": 1, "to": "100", "width": 1}, {"arrows": "to", "from": "65", "length": 1, "to": "101", "width": 1}, {"arrows": "to", "from": "66", "length": 1, "to": "102", "width": 1}, {"arrows": "to", "from": "67", "length": 1, "to": "103", "width": 1}, {"arrows": "to", "from": "68", "length": 1, "to": "104", "width": 1}, {"arrows": "to", "from": "69", "length": 1, "to": "105", "width": 1}, {"arrows": "to", "from": "70", "length": 1, "to": "106", "width": 1}, {"arrows": "to", "from": "71", "length": 1, "to": "107", "width": 1}, {"arrows": "to", "from": "72", "length": 1, "to": "108", "width": 1}, {"arrows": "to", "from": "73", "length": 1, "to": "109", "width": 1}, {"arrows": "to", "from": "Alias1", "length": 3, "to": "65", "width": 3}, {"arrows": "to", "from": "Alias2", "length": 3, "to": "66", "width": 3}, {"arrows": "to", "from": "Alias3", "length": 3, "to": "67", "width": 3}, {"arrows": "to", "from": "Alias4", "length": 3, "to": "68", "width": 3}, {"arrows": "to", "from": "Alias5", "length": 3, "to": "69", "width": 3}, {"arrows": "to", "from": "Alias6", "length": 3, "to": "70", "width": 3}, {"arrows": "to", "from": "Alias7", "length": 3, "to": "71", "width": 3}, {"arrows": "to", "from": "Alias8", "length": 3, "to": "72", "width": 3}, {"arrows": "to", "from": "Alias9", "length": 3, "to": "73", "width": 3}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
