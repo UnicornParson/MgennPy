@@ -1,4 +1,4 @@
-import MgennPyEngine as mg
+import ApiClient as mg
 import json
 
 apiUrl = "http://192.168.44.214/mgenn/api.php"

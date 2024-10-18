@@ -100,20 +100,7 @@ class ApiClient:
 		#connection.request('POST', '/', headers = headers)
 
 
-class Neuron:
-	def __init__(self):
-		self.localId = MgennConsts.NULL_ID;
-		self.currentEnergy = 0.0
-		self.energyLeak = 0.0
-		self.peakEnergy = 0.0
-		self.mode = ""
-		self.receivers = 0
 
-	def deserialize(data):
-		i = 0
-
-	def serialize(data):
-		i = 0
 
 class Snapshot:
 	def __init__(self, engine):
