@@ -12,9 +12,10 @@ class Neuron(RunnableObject):
 		self.peakEnergy = 0.0
 		self.mode = ""
 		self.receivers = 0
+
 	def id(self):
 		return self.localId
-		
+
 	def required_keys(self) -> list:
 		return ["currentEnergy", "energyLeak", "mode", "peakEnergy", "receivers"]
 		
