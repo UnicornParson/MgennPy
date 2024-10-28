@@ -1,14 +1,10 @@
 import json
-import ApiDefs as defs
+import api_defs as defs
 import MgennTools as mtools
 import requests
 import time
 import base64
 
-class MgennConsts:
-	NULL_NAME = "NULL"
-	NULL_ID = 0
-	User_Agent = "MgennPy_0.1"
 
 class ApiRequest:
 	def __init__(self, cmd = "", args = 0, content = 0):

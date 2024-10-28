@@ -1,3 +1,5 @@
+from enum import Enum
+
 class ApiTag:
 	TAG_META = "meta"
 	TAG_CONTENT = "content"

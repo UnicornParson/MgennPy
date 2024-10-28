@@ -1,0 +1,8 @@
+ipython
+ipython
+jycm
+matplotlib
+networkx
+numpy
+pyvis
+Requests
