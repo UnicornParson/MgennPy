@@ -1,6 +1,3 @@
-from .neuron import Neuron
-from .core_object import CoreObject, RunnableObject
-__all__ = ["CoreObject", "Neuron", "RunnableObject"]
-
-
-
+lt value (or any low value) will hurt
+        performance, but it's good for data-safety.  Setting it to 0 will have
+        the same eff

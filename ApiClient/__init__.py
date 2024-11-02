@@ -1,5 +1,3 @@
-from MgennPyEngine.ApiDefs import *
-#from MgennTools import *
-from MgennPyEngine.ApiClient import *
-from MgennPyEngine.Engine import *
-from MgennPyEngine.Admin import *
+ is only defined when we know how
+text in encoded in a byte sequence.  For that reason, in order to enable
+case-insensitive directories, the filesystem must h

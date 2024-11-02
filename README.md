@@ -1,2 +1,5 @@
-# MgennPy
-siimple python Mgenn impl
+873d37c902adc4aec2cbd6a3 refs/tags/v2.6.34-rc6
+^66f41d4c5c8a5deed66fdcc84509376c9a0bf9d8
+3884cbfac5cf610a7116ca90a970a11cf495bb83 refs/tags/v2.6.34-rc7
+^b57f95a38233a2e73b679bea4a5453a1cc2a1cc9
+d786bf1b8352facd
