@@ -22,10 +22,10 @@ class ApiResponceMeta:
 		self.duration = 0
 	def load(self, respMataObject):
 		ret = False
-		self.state = respMataObject[defs.ApiTag.TAG_STATE];
-		self.token = respMataObject[defs.ApiTag.TAG_TOKEN];
-		self.comment = respMataObject[defs.ApiTag.TAG_COMMENT];
-		self.originator = respMataObject[defs.ApiTag.TAG_ORIGINATOR];
+		self.state = respMataObject[defs.ApiTag.TAG_STATE]
+		self.token = respMataObject[defs.ApiTag.TAG_TOKEN]
+		self.comment = respMataObject[defs.ApiTag.TAG_COMMENT]
+		self.originator = respMataObject[defs.ApiTag.TAG_ORIGINATOR]
 		ret = True
 		return ret
 
@@ -52,7 +52,7 @@ class ApiResponce:
 
 class ApiClient:
 	def __init__(self, apiUrl):
-		self.url = apiUrl;
+		self.url = apiUrl
 
 	def encondeContent(self, content):
 		jsonText = json.dumps(content).encode("utf-8")
@@ -80,14 +80,14 @@ class ApiClient:
 			print("invalid responce foramt: " + resp.text)
 			ret = ApiResponce()
 			ret.meta.state = defs.ApiRespState.RESP_STATE_INVALID_RESPONCE
-			return ret;
+			return ret
 
 		loadRc = ret.load(respJson)
 		if loadRc == False:
 			print("cannot parce responce " + str(respJson))
 			ret = ApiResponce()
 			ret.meta.state = defs.ApiRespState.RESP_STATE_INVALID_RESPONCE
-			return ret;
+			return ret
 
 		doneTime = time.time()
 		ret.meta.duration = doneTime - startTime
@@ -113,20 +113,20 @@ class Snapshot:
 		self.history = 0
 		self.inputs = 0
 		self.outputs = 0
-		self.engine = engine;
+		self.engine = engine
 
 	def getList():
 		print("get list")
 
 	def load(self, name, rev = -1):
 		if name == "":
-			print("empty name");
+			print("empty name")
 			return False
 
 		content = {defs.ApiTag.TAG_NAME: name}
 		resp = self.engine.query(defs.ApiCmd.CMD_GET_SNAPSHOT, 0, content)
 		if not self.engine.isResponseOk(resp):
-			print("error responce:" + resp.meta.state + " comment: " + resp.meta.comment);
+			print("error responce:" + resp.meta.state + " comment: " + resp.meta.comment)
 			return False
 		respContent = resp.content
 
@@ -148,7 +148,7 @@ class Snapshot:
 
 class Engine:
 	def __init__(self, apiUrl):
-		self.url = apiUrl;
+		self.url = apiUrl
 		self.client = 0
 
 	def start(self):
@@ -184,7 +184,7 @@ class Engine:
 
 class ApiAdminHelper:
 	def __init__(self, engine):
-		self.engine = engine;
+		self.engine = engine
 
 	def getSnapshotNames(self):
 		resp = self.engine.query(defs.ApiAdminCmd.CMD_GET_SNAPSHOTS_LIST)
