@@ -1,95 +1,197 @@
-0001198ac23ba893e
-e21868a4cdd93e5883ff61579d4cd799d1a3c244 refs/tags/v2.6.26-rc4
-^e490517a039a99d692cb3a5561941b0a5f576172
-9ab8267ac47ce50b932cc4b1cbd9b05e2faac8b7 refs/tags/v2.6.26-rc5
-^53c8ba95402be65d412a806cda3430f0e72cd107
-c047413a582cbf2c7e1b012458c1665d959703be refs/tags/v2.6.26-rc6
-^5dd34572ad9a3be430632dd42e4af2ea370b397b
-f40883d058ed196976285fc1fd5fd6c85dcb5bef refs/tags/v2.6.26-rc7
-^d70ac829b7f42d7ef4f879635c6a772b0b4ed0a2
-496a3db2bfb98f1e9c7b73514d8d25790f69f5fb refs/tags/v2.6.26-rc8
-^543cf4cb3fe6f6cae3651ba918b9c56200b257d0
-c22689a6f45beff21b97df566e0da17b4fa9ec19 refs/tags/v2.6.26-rc9
-^b7279469d66b55119784b8b9529c99c1955fe747
-4b5127df968616dee2f4775d795198878ef1638b refs/tags/v2.6.27
-^3fa8749e584b55f1180411ab1b51117190bac1e5
-78e28361b194c98eaa987e368264c2209ca08976 refs/tags/v2.6.27-rc1
-^6e86841d05f371b5b9b86ce76c02aaee83352298
-b27c893faffea2a0c49cf6170d89c2a7aeba6598 refs/tags/v2.6.27-rc2
-^0967d61ea0d8e8a7826bd8949cd93dd1e829ac55
-4aca83081f7ddf04d74989cc9b5e149160096324 refs/tags/v2.6.27-rc3
-^30a2f3c60a84092c8084dfe788b710f8d0768cd4
-0572569f90ba4175e0400f3be7b9f42e1c803e55 refs/tags/v2.6.27-rc4
-^6a55617ed5d1aa62b850de2cf66f5ede2eef4825
-d17d499628a7d4a34c11f54a203281773885a3e7 refs/tags/v2.6.27-rc5
-^24342c34a022ee90839873d91396045e12ef1090
-89c44b4a5ad50f8b85846b16af5f977f3861d197 refs/tags/v2.6.27-rc6
-^adee14b2e1557d0a8559f29681732d05a89dfc35
-cb1d73008533d7c4a949fc0867de2612dab23572 refs/tags/v2.6.27-rc7
-^72d31053f62c4bc464c2783974926969614a8649
-7b4e06aa7c0952353096105f87be67615e4382f5 refs/tags/v2.6.27-rc8
-^94aca1dac6f6d21f4b07e4864baf7768cabcc6e7
-5a97794d66909dbe3282062d7637705bcd352815 refs/tags/v2.6.27-rc9
-^4330ed8ed4da360ac1ca14b0fddff4c05b10de16
-8a38e7fd7a30cd44be954f9a3b062e607cec5d41 refs/tags/v2.6.28
-^4a6908a3a050aacc9c3a2f36b276b46c0629ad91
-cb50773491b0066d0e55f31f8875d5678fa3f8ad refs/tags/v2.6.28-rc1
-^57f8f7b60db6f1ed2c6918ab9230c4623a9dbe37
-5eb14db1f80df4eb0ecb0976e47e8e287e3175fc refs/tags/v2.6.28-rc2
-^0173a3265b228da319ceb9c1ec6a5682fd1b2d92
-31cb515c75388d457c2f318a0ee9606b3527852f refs/tags/v2.6.28-rc3
-^45beca08dd8b6d6a65c5ffd730af2eac7a2c7a03
-b65a80a5ee7923355cbca669cead08e067fc7ada refs/tags/v2.6.28-rc4
-^f7160c7573615ec82c691e294cf80d920b5d588d
-68185b00cf91c1c4dcc761a2f3a1631562ed52f3 refs/tags/v2.6.28-rc5
-^9bf1a2445f3c569098b8de7097ca324e65abecc2
-b503092a16bdba0a418e155fe592521fc20855af refs/tags/v2.6.28-rc6
-^13d428afc007fcfcd6deeb215618f54cf9c0cae6
-1a0bff987b27da5181f112bcc60f34d6fbb7e67e refs/tags/v2.6.28-rc7
-^061e41fdb5047b1fb161e89664057835935ca1d2
-6fa7003fe34e9a8a31fb91754f3c289cc045564b refs/tags/v2.6.28-rc8
-^8b1fae4e4200388b64dd88065639413cb3f1051c
-7d4b1bcc5e7411fc9e63f610c16e5de8fe6dfde8 refs/tags/v2.6.28-rc9
-^929096fe9ff1f4b3645cf3919527ab47e8d5e17c
-5dfd736f95b3d84a18b5bb8e50ac71f245438acf refs/tags/v2.6.29
-^8e0ee43bc2c3e19db56a4adaa9a9b04ce885cd84
-7a3862d6e9934ffe107fe7ddfbe2c63dba321793 refs/tags/v2.6.29-rc1
-^c59765042f53a79a7a65585042ff463b69cb248c
-d31ce8060b0e875179ba5ca1d40475dc2a082cc7 refs/tags/v2.6.29-rc2
-^1de9e8e70f5acc441550ca75433563d91b269bbe
-8be00154b8e949bf4b89ac198aef9a247532ac2d refs/tags/v2.6.29-rc3
-^18e352e4a73465349711a9324767e1b2453383e2
-87c16e9e8bb74f14f4504305957e4346e7fc46ea refs/tags/v2.6.29-rc4
-^8e4921515c1a379539607eb443d51c30f4f7f338
-1dcda2df87ba4ecc7988be7a45d01645e11c9f4c refs/tags/v2.6.29-rc5
-^d2f8d7ee1a9b4650b4e43325b321801264f7c37a
-0715562512ca6cf14c1b8f08e09d5907118deaf0 refs/tags/v2.6.29-rc6
-^20f4d6c3a2a23c5d7d9cc7f42fbb943ca7a03d1f
-b21232ea962bbaf0e909365f4964f6cceb2ba8ce refs/tags/v2.6.29-rc7
-^fec6c6fec3e20637bee5d276fb61dd8b49a3f9cc
-73e37758f6b500a67d918528204832cc8f256516 refs/tags/v2.6.29-rc8
-^041b62374c7fedc11a8a1eeda2868612d3d1436c
-fa9c4d0983f98945b32d6bd0dfc1ba1b02d3773c refs/tags/v2.6.30
-^07a2039b8eb0af4ff464efd3dfd95de5c02648c6
-42ae7400074d449189d41fceb6d6f871490d7842 refs/tags/v2.6.30-rc1
-^577c9c456f0e1371cbade38eaf91ae8e8a308555
-7c941a7798a5169ee0dd69a9e8d5c40ceb702023 refs/tags/v2.6.30-rc2
-^0882e8dd3aad33eca41696d463bb896e6c8817eb
-b2fdb301af8f488952aaab7de3ff8d3294c3274f refs/tags/v2.6.30-rc3
-^091069740304c979f957ceacec39c461d0192158
-176c5e45fe4f1c83df9429b7c2668b41446baac2 refs/tags/v2.6.30-rc4
-^091438dd5668396328a3419abcbc6591159eb8d1
-4266b00c9dc3e1e071bde0ebfeadc40bbc1e8316 refs/tags/v2.6.30-rc5
-^091bf7624d1c90cec9e578a18529f615213ff847
-6492b02a211a5fd0fc92e68d171fc3644cda71a7 refs/tags/v2.6.30-rc6
-^1406de8e11eb043681297adf86d6892ff8efc27a
-efa3e68c670b745894255af9827b3902bbc9376e refs/tags/v2.6.30-rc7
-^59a3759d0fe8d969888c741bb33f4946e4d3750d
-e6c72abc9d239d788b0cdb20cb3d20ba04c33707 refs/tags/v2.6.30-rc8
-^9fa7eb283c5cdc2b0f4a8cfe6387ed82e5e9a3d3
-a271b16ba5478acead8773ebe01ee9b6365154d8 refs/tags/v2.6.31
-^74fca6a42863ffacaf7ba6f1936a9f228950f657
-eeadf87f8411b42b9803312d2870aa424602a99c refs/tags/v2.6.31-rc1
-^28d0325ce6e0a52f53d8af687e6427fee59004d3
-c5d511255186f0bba081f11cbe11c856cadaedf7 refs/tags/v2.6.31-rc2
-^8e4a718ff38d8
+import json
+import api_defs as defs
+import MgennTools as mtools
+import requests
+import time
+import base64
+
+
+class ApiRequest:
+	def __init__(self, cmd = "", args = 0, content = 0):
+		self.cmd = cmd
+		self.args = args
+		self.content = content
+		self.token = mtools.generateToken()
+
+class ApiResponceMeta:
+	def __init__(self):
+		self.state = defs.ApiRespState.RESP_STATE_UNKNOWN
+		self.token = 0
+		self.comment = 0
+		self.originator = 0
+		self.duration = 0
+	def load(self, respMataObject):
+		ret = False
+		self.state = respMataObject[defs.ApiTag.TAG_STATE];
+		self.token = respMataObject[defs.ApiTag.TAG_TOKEN];
+		self.comment = respMataObject[defs.ApiTag.TAG_COMMENT];
+		self.originator = respMataObject[defs.ApiTag.TAG_ORIGINATOR];
+		ret = True
+		return ret
+
+class ApiResponce:
+	def __init__(self):
+		self.meta = ApiResponceMeta()
+		self.content = 0
+		self.state = 0
+		self.token = mtools.generateToken()
+
+	def load(self, respObject):
+		ret = False
+		try:
+			metaObj = respObject[defs.ApiTag.TAG_META]
+			self.meta.load(metaObj)
+			self.content = respObject[defs.ApiTag.TAG_CONTENT]
+			ret = True
+		except AttributeError:
+			print("invalid responce " + str(respObject))
+		except KeyError:
+			print("missing key in " + str(respObject))
+
+		return ret
+
+class ApiClient:
+	def __init__(self, apiUrl):
+		self.url = apiUrl;
+
+	def encondeContent(self, content):
+		jsonText = json.dumps(content).encode("utf-8")
+		b64 = base64.b64encode(jsonText)
+		return b64.decode('ASCII')
+
+	def query(self, request):
+		startTime = time.time()
+		ret = ApiResponce()
+		reqUrl = "%s?%s=%s&%s=%s&%s=%s" % (self.url, defs.ApiTag.TAG_CMD, request.cmd, defs.ApiTag.TAG_ARGS, request.args, defs.ApiTag.TAG_TOKEN, request.token)
+		payload = 0
+		if request.content:
+			payload = "content=" + self.encondeContent(request.content)
+
+		headers = {
+			"User-Agent": MgennConsts.User_Agent,
+			"X-Custom-User-Agent": MgennConsts.User_Agent,
+			"Content-Type": "application/x-www-form-urlencoded"
+		}
+
+		resp = requests.post(reqUrl, data = payload, headers=headers, allow_redirects = True, verify=False)
+		try:
+			respJson = resp.json()
+		except:
+			print("invalid responce foramt: " + resp.text)
+			ret = ApiResponce()
+			ret.meta.state = defs.ApiRespState.RESP_STATE_INVALID_RESPONCE
+			return ret;
+
+		loadRc = ret.load(respJson)
+		if loadRc == False:
+			print("cannot parce responce " + str(respJson))
+			ret = ApiResponce()
+			ret.meta.state = defs.ApiRespState.RESP_STATE_INVALID_RESPONCE
+			return ret;
+
+		doneTime = time.time()
+		ret.meta.duration = doneTime - startTime
+		return ret
+
+		#connection.request('POST', '/', headers = headers)
+
+
+
+
+class Snapshot:
+	def __init__(self, engine):
+		self.name = MgennConsts.NULL_NAME
+		self.parentName = MgennConsts.NULL_NAME
+		self.deltaName = MgennConsts.NULL_NAME
+		self.branchName = MgennConsts.NULL_NAME
+		self.branchSeq = 0
+		self.rev = 0
+		self.genearation = 0
+		self.tick = 0
+		self.neurons = 0
+		self.links = 0
+		self.history = 0
+		self.inputs = 0
+		self.outputs = 0
+		self.engine = engine;
+
+	def getList():
+		print("get list")
+
+	def load(self, name, rev = -1):
+		if name == "":
+			print("empty name");
+			return False
+
+		content = {defs.ApiTag.TAG_NAME: name}
+		resp = self.engine.query(defs.ApiCmd.CMD_GET_SNAPSHOT, 0, content)
+		if not self.engine.isResponseOk(resp):
+			print("error responce:" + resp.meta.state + " comment: " + resp.meta.comment);
+			return False
+		respContent = resp.content
+
+	def save(self):
+		i = 0
+
+	def clone(self):
+		i = 0
+
+	def deserialize(self, data):
+		i = 0
+
+	def serialize(self, data):
+		i = 0
+
+	def isValid(self):
+		return (self.engine != 0) and (self.name != MgennConsts.NULL_NAME)
+
+
+class Engine:
+	def __init__(self, apiUrl):
+		self.url = apiUrl;
+		self.client = 0
+
+	def start(self):
+		if self.url == "":
+			print("Empty ApiUrl")
+			return False
+		self.client = ApiClient(self.url)
+		return True
+
+	def query(self, cmd = "", args = 0, content = 0):
+		if self.client == 0:
+			print("engine is not started")
+			return False
+		req = ApiRequest(cmd, args, content)
+		resp = self.client.query(req)
+		return resp
+
+	def isResponseOk(self, resp):
+		return (resp.meta.state == defs.ApiRespState.RESP_STATE_OK)
+
+	def getSnapshotList(self, filter = ""):
+		args = 0
+		if filter != "":
+			args = filter
+
+		resp = self.query(defs.ApiCmd.CMD_GET_SNAPSHOTS_LIST, args)
+
+		if not self.isResponseOk(resp):
+			print("invalid responce")
+			return False
+
+		return resp.content
+
+class ApiAdminHelper:
+	def __init__(self, engine):
+		self.engine = engine;
+
+	def getSnapshotNames(self):
+		resp = self.engine.query(defs.ApiAdminCmd.CMD_GET_SNAPSHOTS_LIST)
+		if not self.engine.isResponseOk(resp):
+			print("invalid responce")
+			return False
+
+		return resp.content[defs.ApiTag.TAG_LIST]
+
+

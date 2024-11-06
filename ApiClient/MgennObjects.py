@@ -1,21 +1,61 @@
-me=usec
-        Maximum amount of time ext4 should wait for additional filesystem
-        operations to be batch together with a synchronous write operation.
-        Since a synchronous write operation is going to force a commit and then
-        a wait for the I/O complete, it doesn't cost much, and can be a huge
-        throughput win, we wait for a small amount of time to see if any other
-        transactions can piggyback on the synchronous write.   The algorithm
-        used is designed to automatically tune for the speed of the disk, by
-        measuring the amount of time (on average) that it takes to finish
-        committing a transaction.  Call this time the "commit time".  If the
-        time that the transaction has been running is less than the commit
-        time, ext4 will try sleeping for the commit time to see if other
-        operations will join the transaction.   The commit time is capped by
-        the max_batch_time, which defaults to 15000us (15ms).   This
-        optimization can be turned off entirely by setting max_batch_time to 0.
+class Neuron:
+	def __init__(self):
+		self.localId = MgennConsts.NULL_ID;
+		self.currentEnergy = 0.0
+		self.energyLeak = 0.0
+		self.peakEnergy = 0.0
+		self.mode = ""
+		self.receivers = 0
 
-  min_batch_time=usec
-        This parameter sets the commit time (as described above) to be at least
-        min_batch_time.  It defaults to zero microseconds.  Increasing this
-        parameter may improve the throughput of multi-threaded, synchronous
-    
+	def deserialize(data):
+		i = 0
+
+	def serialize(data):
+		i = 0
+
+class Snapshot:
+	def __init__(self, engine):
+		self.name = MgennConsts.NULL_NAME
+		self.parentName = MgennConsts.NULL_NAME
+		self.deltaName = MgennConsts.NULL_NAME
+		self.branchName = MgennConsts.NULL_NAME
+		self.branchSeq = 0
+		self.rev = 0
+		self.genearation = 0
+		self.tick = 0
+		self.neurons = 0
+		self.links = 0
+		self.history = 0
+		self.inputs = 0
+		self.outputs = 0
+		self.engine = engine;
+
+	def getList():
+		print("get list")
+
+	def load(self, name, rev = -1):
+		if name == "":
+			print("empty name");
+			return False
+
+		content = {defs.ApiTag.TAG_NAME: name}
+		resp = self.engine.query(defs.ApiCmd.CMD_GET_SNAPSHOT, 0, content)
+		if not self.engine.isResponseOk(resp):
+			print("error responce:" + resp.meta.state + " comment: " + resp.meta.comment);
+			return False
+		respContent = resp.content
+
+	def save(self):
+		i = 0
+
+	def clone(self):
+		i = 0
+
+	def deserialize(self, data):
+		i = 0
+
+	def serialize(self, data):
+		i = 0
+
+	def isValid(self):
+		return (self.engine != 0) and (self.name != MgennConsts.NULL_NAME)

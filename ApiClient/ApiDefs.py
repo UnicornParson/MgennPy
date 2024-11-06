@@ -1,66 +1,96 @@
-.. SPDX-License-Identifier: GPL-2.0
 
-========================
-ext4 General Information
-========================
+class MgennConsts:
+  NULL_NAME = "NULL"
+  NULL_ID = 0
+  User_Agent = "MgennPy_0.1"
 
-Ext4 is an advanced level of the ext3 filesystem which incorporates
-scalability and reliability enhancements for supporting large filesystems
-(64 bit) in keeping with increasing disk capacities and state-of-the-art
-feature requirements.
+class ApiTag:
+	TAG_META = "meta"
+	TAG_CONTENT = "content"
+	TAG_STATE = "state"
+	TAG_COMMENT = "comment"
+	TAG_CMD = "cmd"
+	TAG_ORIGINATOR = "originator"
+	TAG_TOKEN = "token"
+	TAG_ARGS = "args"
+	TAG_ALIAS = "alias"
+	TAG_NAME = "name"
+	TAG_PROCESSINGTIME = "queryduration"
+	TAG_SNAPSHOTSCOUNT = "snapshotscount"
+	TAG_ALIASESCOUNT = "aliasescount"
+	TAG_BLSIZE = "blsize"
+	TAG_RESP_CODE = "resp"
+	TAG_OWNER = "owner"
+	TAG_SNAPSHOT_NAME = "snapshotname"
+	TAG_SNAPSHOT_REV = "rev"
+	TAG_DELTA_NAME = "delta"
+	TAG_HASH = "hash"
+	TAG_LIST = "list"
+	TAG_ID = "id"
+	TAG_FILTER_NAME = "filter"
+	TAG_FILTER_MOD = "mod"
+	TAG_FILTER_ARGS = TAG_ARGS
 
-Mailing list:	linux-ext4@vger.kernel.org
-Web site:	http://ext4.wiki.kernel.org
 
+class ApiValus:
+  VALUE_YES = "y"
+  VALUE_NO = "n"
 
-Quick usage instructions
-========================
+class ApiRespState:
+  RESP_STATE_OK = "OK"
+  RESP_STATE_NOTFOUND = "not found"
+  RESP_STATE_DBERROR = "DB error"
+  RESP_STATE_ARG = "invalid argument"
+  RESP_STATE_ENGINE_ERROR = "engine error"
+  RESP_STATE_UNKNOWN = "unknown"
+  RESP_STATE_INVALID_RESPONCE = "invalid responce"
 
-Note: More extensive information for getting started with ext4 can be
-found at the ext4 wiki site at the URL:
-http://ext4.wiki.kernel.org/index.php/Ext4_Howto
+class ApiCmd:
+  CMD_GET_SNAPSHOTS_LIST = "getshapshotlist"
+  CMD_GET_SNAPSHOT = "getshapshot"
+  CMD_GET_STAT = "getstat"
+  CMD_GET_LAST_REV = "getlastrev"
 
-  - The latest version of e2fsprogs can be found at:
+  CMD_SET_SNAPSHOT_STATE = "setsnapshotstate"
+  CMD_SAVE_SNAPSHOT = "savesnapshot"
+  CMD_POST_TEST = "postecho"
 
-    https://www.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/
+  CMD_ALIAS_EXISTS = "alias.exists"
+  CMD_ALIAS_RESOLVE = "alias.resolve"
+  CMD_ALIAS_GET = "alias.get"
+  CMD_ALIAS_LIST = "alias.list"
 
-	or
+  CMD_BL_ASSIGN = "bl.assign"
+  CMD_BL_LIST = "bl.list"
+  CMD_BL_SET_STATE = "bl.setstate"
+  CMD_BL_LIST_SIZE = "bl.listsize"
+  CMD_BL_SET = "bl.set"
 
-    http://sourceforge.net/project/showfiles.php?group_id=2406
+class ApiAdminCmd:
+  CMD_GET_SNAPSHOTS_LIST = "admin.getshapshotlist"
+    
 
-	or grab the latest git repository from:
+class BlState:
+  BLSTATE_FREE = "free"
+  BLSTATE_NULL = "null"
+  BLSTATE_ASSIGNED = "assigned"
+  BLSTATE_FAILED = "failed"
+  BLSTATE_DONE = "done"
 
-   https://git.kernel.org/pub/scm/fs/ext2/e2fsprogs.git
+class ListFilter:
+  LISTFILTER_OWNER = "owner"
+  LISTFILTER_STATE = "state"
+  LISTFILTER_HASH = "hash"
 
-  - Create a new filesystem using the ext4 filesystem type:
+class ListFilterMod:
+  LISTFILTER_MOD_FIRST = "first"
+  LISTFILTER_MOD_LAST = "last"
 
-        # mke2fs -t ext4 /dev/hda1
-
-    Or to configure an existing ext3 filesystem to support extents:
-
-	# tune2fs -O extents /dev/hda1
-
-    If the filesystem was created with 128 byte inodes, it can be
-    converted to use 256 byte for greater efficiency via:
-
-        # tune2fs -I 256 /dev/hda1
-
-  - Mounting:
-
-	# mount -t ext4 /dev/hda1 /wherever
-
-  - When comparing performance with other filesystems, it's always
-    important to try multiple workloads; very often a subtle change in a
-    workload parameter can completely change the ranking of which
-    filesystems do well compared to others.  When comparing versus ext3,
-    note that ext4 enables write barriers by default, while ext3 does
-    not enable write barriers by default.  So it is useful to use
-    explicitly specify whether barriers are enabled or not when via the
-    '-o barriers=[0|1]' mount option for both ext3 and ext4 filesystems
-    for a fair comparison.  When tuning ext3 for best benchmark numbers,
-    it is often worthwhile to try changing the data journaling mode; '-o
-    data=writeback' can be faster for some workloads.  (Note however that
-    running mounted with data=writeback can potentially leave stale data
-    exposed in recently written files in case of an unclean shutdown,
-    which could be a security exposure in some situations.)  Configuring
-    the filesys
+class SnapshotState:
+  SNAPSHOT_STATE_NEW = "new"
+  SNAPSHOT_STATE_INPROGRESS = "inprogress"
+  SNAPSHOT_STATE_RESERVED = "reserved"
+  SNAPSHOT_STATE_READY = "ready"
+  SNAPSHOT_STATE_DEAD = "dead"
+  SNAPSHOT_STATE_ERROR_INTERNAL = "internalerror"
+  SNAPSHOT_STATE_ERROR_INVALID = "invalid"
