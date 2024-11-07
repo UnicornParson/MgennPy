@@ -14,6 +14,9 @@ class CoreObject:
     def serialize(self) -> dict:
         raise NotImplementedError("implementation missed ")
 
+    def reset(self):
+        pass
+
 class RunnableObject(CoreObject):
     def onTick(self, tick_num):
         raise NotImplementedError("implementation missed ")
