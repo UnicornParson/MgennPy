@@ -4,6 +4,7 @@ from .mgenn_consts import *
 from .api_defs import *
 from .object_factory import *
 from .package import *
+from .robots_logger import *
 
 __all__ = [
     "MgennConsts",
@@ -20,4 +21,5 @@ __all__ = [
     "ListFilterMod",
     "SnapshotState",
     "ObjectFactory",
-    "PackageUtils"]
+    "PackageUtils",
+    "RobotsLogger"]

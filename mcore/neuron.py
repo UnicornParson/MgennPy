@@ -1,5 +1,5 @@
 import math
-
+import copy
 from .core_object import RunnableObject
 from common import MgennConsts, MgennComon
 
@@ -21,6 +21,9 @@ class Neuron(RunnableObject):
 
     def required_keys(self) -> list:
         return ["currentEnergy", "energyLeak", "mode", "peakEnergy", "receivers"]
+
+    def clone(self):
+        return copy.deepcopy(self)
 
     def deserialize(self, data: dict):
         if MgennComon.hasMissingKeys(data, self.required_keys()):
@@ -50,15 +53,16 @@ class Neuron(RunnableObject):
 
     def onTick(self, tick_num)->float:
         if self.currentEnergy > self.peakEnergy or math.isclose(self.currentEnergy, self.peakEnergy):
-            print(f"{self} shots!")
             shot_energy = self.currentEnergy
             self.currentEnergy = 0.0
+            self.onRobotsEvent("NEURON_SHOT", {"tick":tick_num, "amp":shot_energy})
             return MgennComon.mround(shot_energy)
         self.currentEnergy -= MgennComon.mround(self.energyLeak)
         if self.currentEnergy < 0.0:
             self.currentEnergy = 0.0
         return 0.0
 
-    def onSignal(self, tick_num, amplitude:float):
+    def onSignal(self, tick_num, amplitude:float, from_id = 0):
+        self.onRobotsEvent("NEURON_IN", {"tick":tick_num, "amp":amplitude, "from": from_id})
         self.currentEnergy += MgennComon.mround(amplitude)
 
