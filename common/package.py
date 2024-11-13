@@ -49,10 +49,14 @@ class Package:
     def __contains__(self, key):
         return self.isLink(key) or self.isNeuron(key) or self.isOutput(key)
 
+    def __len__(self):
+        return len(self.inputs) + len(self.outputs) + len(self.links) + len(self.neurons)
+
     def clone(self):
         return copy.deepcopy(self)
 
-
+    def empty(self)->bool:
+        return bool(self.inputs) and bool(self.outputs) and bool(self.links) and bool(self.neurons)
 
     def findLink(self, id) -> int:
         for i in range(len(self.links)):

@@ -5,7 +5,6 @@ class CoreObject:
     def __str__(self):
         raise NotImplementedError("implementation missed ")
     def __repr__(self):
-        print("repr in ", type(self))
         return self.__str__()
     def id(self):
         raise NotImplementedError("implementation missed ")
@@ -21,15 +20,17 @@ class CoreObject:
         pass
 
     def onRobotsEvent(self, msg:str, args:dict):
+        src = f"{type(self).__name__}.{self.id()}.{self.__hash__():x}"
         if RobotsLogger.default:
-            args["oid"] = self.id
-            args["ohash"] = self.__hash__()
-            RobotsLogger.default.onEvent(msg, args)
+            args["oid"] = self.id()
+            args["ohash"] = f"{self.id()}.{self.__hash__():}"
+            RobotsLogger.default.onEvent(msg, args, src)
         else:
-            print(f"@ {msg} : {json.dumps(args)}")
-
+            print(f"@ {src} {msg} : {json.dumps(args)}")
 
 class RunnableObject(CoreObject):
+    def __init__(self) -> None:
+        super().__init__()
     def onTick(self, tick_num)->float:
         raise NotImplementedError("implementation missed ")
     def onSignal(self, tick_num, amplitude:float, from_id = 0):

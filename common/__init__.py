@@ -1,12 +1,12 @@
-
 from .mgenn_comon import *
 from .mgenn_consts import *
 from .api_defs import *
 from .object_factory import *
 from .package import *
 from .robots_logger import *
+from .functional import *
 
-__all__ = [
+__all__ = ["F",
     "MgennConsts",
     "ObjectIdType",
     "MgennComon",

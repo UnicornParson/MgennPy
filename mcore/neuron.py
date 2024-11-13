@@ -1,7 +1,7 @@
 import math
 import copy
 from .core_object import RunnableObject
-from common import MgennConsts, MgennComon
+from common import MgennConsts, MgennComon, F
 
 class Neuron(RunnableObject):
     def __init__(self):
@@ -47,6 +47,8 @@ class Neuron(RunnableObject):
                 self.energyLeak == other.energyLeak and
                 self.mode == other.mode and
                 self.receivers.sort() == other.receivers.sort())
+    def __hash__(self):
+        return F.uhash(frozenset(self.serialize().items()))
 
     def __str__(self):
         return f"N[{self.localId}]e:{self.currentEnergy} l:{self.energyLeak} p:{self.peakEnergy}"

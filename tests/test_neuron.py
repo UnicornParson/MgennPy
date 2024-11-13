@@ -8,7 +8,6 @@ class TestNeuron(unittest.TestCase):
         neuron = mc.Neuron()
         self.assertEqual(neuron.id(), MgennConsts.NULL_ID)
 
-
     def test_keys(self):
         neuron = mc.Neuron()
         k = neuron.required_keys()
@@ -17,7 +16,7 @@ class TestNeuron(unittest.TestCase):
     
     def __make_neuron(self):
         neuron = mc.Neuron()
-        neuron.localId = 33
+        neuron.localId = mc.F.generateOID()
         neuron.currentEnergy = 1.0
         neuron.energyLeak = 2.0
         neuron.peakEnergy = 3.0
@@ -34,6 +33,7 @@ class TestNeuron(unittest.TestCase):
             "receivers": [6, 5]
         }
         neuron = mc.Neuron()
+        neuron.localId = mc.F.generateOID()
         neuron.deserialize(data)
         self.assertEqual(neuron.currentEnergy, 99.9)
         self.assertEqual(neuron.energyLeak, 88.8)
@@ -43,6 +43,7 @@ class TestNeuron(unittest.TestCase):
 
     def test_leak(self):
         n = mc.Neuron()
+        n.localId = mc.F.generateOID()
         n.energyLeak = .1
         n.peakEnergy = 2.
         test_data = ([0.] * 18) +  [2.] + ([0.] * 18) +  [2.]

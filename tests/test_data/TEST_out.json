@@ -1,0 +1,337 @@
+{
+    "content": {
+        "external": {
+            "inputData": "LO886ad6f3f15297e56c7da4022ee89927ef0f3e92_20020.1646751077523.1"
+        },
+        "generation": 0,
+        "history": {
+            "items": []
+        },
+        "id": "4d014c646eab1cd96f7e1bf5ab8f1a905f9a68b6fee7faa4c0cd5345496cc95ef619856e2f44c32ecb0135af7a419b78787da787b48713b40e35c0e517132073:13388.1504363103804.18",
+        "inputs": [
+            {
+                "args": {
+                    "components": []
+                },
+                "name": "Alias1",
+                "receivers": [
+                    "11"
+                ],
+                "type": "tape"
+            },
+            {
+                "args": {
+                    "components": []
+                },
+                "name": "Alias2",
+                "receivers": [
+                    "12"
+                ],
+                "type": "tape"
+            },
+            {
+                "args": {
+                    "components": []
+                },
+                "name": "Alias3",
+                "receivers": [
+                    "13"
+                ],
+                "type": "tape"
+            },
+            {
+                "args": {
+                    "components": []
+                },
+                "name": "Alias4",
+                "receivers": [
+                    "14"
+                ],
+                "type": "tape"
+            },
+            {
+                "args": {
+                    "components": []
+                },
+                "name": "Alias5",
+                "receivers": [
+                    "15"
+                ],
+                "type": "tape"
+            },
+            {
+                "args": {
+                    "components": []
+                },
+                "name": "Alias6",
+                "receivers": [
+                    "16"
+                ],
+                "type": "tape"
+            },
+            {
+                "args": {
+                    "components": []
+                },
+                "name": "Alias7",
+                "receivers": [
+                    "17"
+                ],
+                "type": "tape"
+            },
+            {
+                "args": {
+                    "components": []
+                },
+                "name": "Alias8",
+                "receivers": [
+                    "18"
+                ],
+                "type": "tape"
+            },
+            {
+                "args": {
+                    "components": []
+                },
+                "name": "Alias9",
+                "receivers": [
+                    "19"
+                ],
+                "type": "tape"
+            }
+        ],
+        "outputs": [
+            {
+                "id": "100",
+                "name": "out0"
+            },
+            {
+                "id": "101",
+                "name": "out1"
+            },
+            {
+                "id": "102",
+                "name": "out2"
+            },
+            {
+                "id": "103",
+                "name": "out3"
+            },
+            {
+                "id": "104",
+                "name": "out4"
+            },
+            {
+                "id": "105",
+                "name": "out5"
+            },
+            {
+                "id": "106",
+                "name": "out6"
+            },
+            {
+                "id": "107",
+                "name": "out7"
+            },
+            {
+                "id": "108",
+                "name": "out8"
+            },
+            {
+                "id": "109",
+                "name": "out9"
+            }
+        ],
+        "parent": "4d014c646eab1cd96f7e1bf5ab8f1a905f9a68b6fee7faa4c0cd5345496cc95ef619856e2f44c32ecb0135af7a419b78787da787b48713b40e35c0e517132073:13388.1504363103804.18",
+        "seq": 1,
+        "storage": {
+            "links": [
+                {
+                    "attenuationPerTick": "0.020000",
+                    "events": [],
+                    "id": "10",
+                    "length": 2,
+                    "receiverId": "64"
+                },
+                {
+                    "attenuationPerTick": "0.020000",
+                    "events": [],
+                    "id": "11",
+                    "length": 2,
+                    "receiverId": "65"
+                },
+                {
+                    "attenuationPerTick": "0.020000",
+                    "events": [],
+                    "id": "12",
+                    "length": 2,
+                    "receiverId": "66"
+                },
+                {
+                    "attenuationPerTick": "0.020000",
+                    "events": [],
+                    "id": "13",
+                    "length": 2,
+                    "receiverId": "67"
+                },
+                {
+                    "attenuationPerTick": "0.020000",
+                    "events": [],
+                    "id": "14",
+                    "length": 2,
+                    "receiverId": "68"
+                },
+                {
+                    "attenuationPerTick": "0.020000",
+                    "events": [],
+                    "id": "15",
+                    "length": 2,
+                    "receiverId": "69"
+                },
+                {
+                    "attenuationPerTick": "0.020000",
+                    "events": [],
+                    "id": "16",
+                    "length": 2,
+                    "receiverId": "70"
+                },
+                {
+                    "attenuationPerTick": "0.020000",
+                    "events": [],
+                    "id": "17",
+                    "length": 2,
+                    "receiverId": "71"
+                },
+                {
+                    "attenuationPerTick": "0.020000",
+                    "events": [],
+                    "id": "18",
+                    "length": 2,
+                    "receiverId": "72"
+                },
+                {
+                    "attenuationPerTick": "0.020000",
+                    "events": [],
+                    "id": "19",
+                    "length": 2,
+                    "receiverId": "73"
+                }
+            ],
+            "neurons": [
+                {
+                    "currentEnergy": "0.000000",
+                    "energyLeak": "0.050000",
+                    "id": "64",
+                    "mode": "shared",
+                    "peakEnergy": "5.000000",
+                    "receivers": [
+                        "100"
+                    ]
+                },
+                {
+                    "currentEnergy": "0.000000",
+                    "energyLeak": "0.050000",
+                    "id": "65",
+                    "mode": "shared",
+                    "peakEnergy": "5.000000",
+                    "receivers": [
+                        "101"
+                    ]
+                },
+                {
+                    "currentEnergy": "0.000000",
+                    "energyLeak": "0.050000",
+                    "id": "66",
+                    "mode": "shared",
+                    "peakEnergy": "5.000000",
+                    "receivers": [
+                        "102"
+                    ]
+                },
+                {
+                    "currentEnergy": "0.000000",
+                    "energyLeak": "0.050000",
+                    "id": "67",
+                    "mode": "shared",
+                    "peakEnergy": "5.000000",
+                    "receivers": [
+                        "103"
+                    ]
+                },
+                {
+                    "currentEnergy": "0.000000",
+                    "energyLeak": "0.050000",
+                    "id": "68",
+                    "mode": "shared",
+                    "peakEnergy": "5.000000",
+                    "receivers": [
+                        "104"
+                    ]
+                },
+                {
+                    "currentEnergy": "0.000000",
+                    "energyLeak": "0.050000",
+                    "id": "69",
+                    "mode": "shared",
+                    "peakEnergy": "5.000000",
+                    "receivers": [
+                        "105"
+                    ]
+                },
+                {
+                    "currentEnergy": "0.000000",
+                    "energyLeak": "0.050000",
+                    "id": "70",
+                    "mode": "shared",
+                    "peakEnergy": "5.000000",
+                    "receivers": [
+                        "106"
+                    ]
+                },
+                {
+                    "currentEnergy": "0.000000",
+                    "energyLeak": "0.050000",
+                    "id": "71",
+                    "mode": "shared",
+                    "peakEnergy": "5.000000",
+                    "receivers": [
+                        "107"
+                    ]
+                },
+                {
+                    "currentEnergy": "0.000000",
+                    "energyLeak": "0.050000",
+                    "id": "72",
+                    "mode": "shared",
+                    "peakEnergy": "5.000000",
+                    "receivers": [
+                        "108"
+                    ]
+                },
+                {
+                    "currentEnergy": "0.000000",
+                    "energyLeak": "0.050000",
+                    "id": "73",
+                    "mode": "shared",
+                    "peakEnergy": "5.000000",
+                    "receivers": [
+                        "109"
+                    ]
+                }
+            ]
+        },
+        "tick": "0"
+    },
+    "contenttype": "json",
+    "meta": {
+        "branch": "testns",
+        "branchSeq": 2,
+        "generation": 0,
+        "name": "4d014c646eab1cd96f7e1bf5ab8f1a905f9a68b6fee7faa4c0cd5345496cc95ef619856e2f44c32ecb0135af7a419b78787da787b48713b40e35c0e517132073:13388.1504363103804.18",
+        "parentDelta": "NONE",
+        "parentSnapshot": "4d014c646eab1cd96f7e1bf5ab8f1a905f9a68b6fee7faa4c0cd5345496cc95ef619856e2f44c32ecb0135af7a419b78787da787b48713b40e35c0e517132073:13388.1504363103804.18",
+        "rev": 0,
+        "tick": 0
+    },
+    "state": "ready"
+}

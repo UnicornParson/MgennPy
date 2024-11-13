@@ -2,30 +2,6 @@ import unittest
 import mcore as mc
 
 from common import *
-'''
-        self.finalAmplitude = 0.
-        self.tick = 0
-        self.from_id = 0
-'''
-
-'''
-      "links": [
-        {
-          "attenuationPerTick": "0.020000",
-          "events": [],
-          "id": 10,
-          "length": 2,
-          "receiverId": 64
-        },
-    def reset(self):
-        self.localId = MgennConsts.NULL_ID
-        self.events = []
-        self.apt = 0.
-        self.length = 0
-        self.receiverId = 0
-        
-         '''
-
 
 class TestLink(unittest.TestCase):
     def test_valid_id(self):
@@ -51,7 +27,7 @@ class TestLink(unittest.TestCase):
     
     def __make_link(self):
         link = mc.Link()
-        link.localId = 33
+        link.localId = mc.F.generateOID()
         link.apt = 44.1
         link.length = 33
         link.receiverId = 22
@@ -80,13 +56,40 @@ class TestLink(unittest.TestCase):
         link.deserialize(data)
         self.assertEqual(link, orig)
 
+    def test_too_small_signall(self):
+        l = mc.Link()
+        l.localId = mc.F.generateOID()
+        l.apt = 0.1
+        l.length = 10
+        for i in range(99):
+            l.onSignal(tick_num = 1, amplitude = 1., from_id=i) ## too small
+            self.assertEqual(len(l.events), 0)
+        for i in range(99):
+            rc = l.onTick(i)
+            self.assertEqual(rc, 0.0)
+
     def test_signals(self):
-        pass
+        l = mc.Link()
+        l.localId = mc.F.generateOID()
+        l.apt = 0.1
+        l.length = 100
+        initial = 10
+        last_t = 0
+        for i in range(initial, 99):
+            l.onSignal(tick_num = i, amplitude = (1. + float(i)), from_id=i)
+        for i in range(initial, 99):
+            rc = l.onTick(l.length+i)
+            last_t = l.length+i
+            self.assertEqual(rc, (float(i-initial)+1.))
+        self.assertEqual(len(l.events), 0)
+        for i in range(last_t, last_t+99):
+            rc = l.onTick(i)
+
     def __make_data(self):
         return  {
           "attenuationPerTick": "0.020000",
           "events": [],
-          "id": 10,
+          "id": mc.F.generateOID(),
           "length": 2,
           "receiverId": 64
         }

@@ -1,7 +1,7 @@
 import math
 import copy
 from .core_object import RunnableObject, CoreObject
-from common import MgennConsts, MgennComon
+from common import MgennConsts, MgennComon, F
 '''
       "links": [
         {
@@ -34,13 +34,14 @@ public:
 
 class LinkEvent(CoreObject):
     def __init__(self):
+        super().__init__()
         self.reset()
 
     def __eq__(self, other):
         return (self.finalAmplitude == other.finalAmplitude and self.tick == other.tick)
 
     def __hash__(self):
-        return hash((self.finalAmplitude, self.tick))
+        return F.uhash((self.finalAmplitude, self.tick))
 
     def __lt__(self, other):
         return self.__hash__() < other.__hash__()
@@ -57,7 +58,6 @@ class LinkEvent(CoreObject):
         return f"LinkEvent(from_{self.from_id}. {self.finalAmplitude} at {self.tick})"
 
     def __repr__(self):
-        print("repr in ", type(self))
         return self.__str__()
 
     def id(self):
@@ -103,13 +103,12 @@ class Link(RunnableObject):
         return f"Link[{self.id()}](apt:{self.apt}, l:{self.length} to:{self.receiverId} events:{len(self.events)})"
 
     def __hash__(self):
-        return hash((self.apt, self.length, self.receiverId, self.events))
+        return F.uhash((self.apt, self.length, self.receiverId, frozenset(self.events)))
 
     def __lt__(self, other):
         return self.__hash__() < other.__hash__()
 
     def __repr__(self):
-        print("repr in ", type(self))
         return self.__str__()
 
     def __eq__(self, other):
@@ -154,12 +153,13 @@ class Link(RunnableObject):
         amp = 0.0
         filtered = []
         for e in self.events:
-            if e.tick >= tick_num:
+            if e.tick <= tick_num:
                 amp += e.finalAmplitude
                 self.onRobotsEvent("LINK_APPLY_EVENT", {"tick":e.tick, "amp":e.finalAmplitude, "from": e.from_id})
             else:
                 filtered.append(e)
         self.events = filtered
+        return amp
 
     def onSignal(self, tick_num, amplitude:float, from_id = 0):
         e = LinkEvent()
@@ -167,6 +167,6 @@ class Link(RunnableObject):
         if e.finalAmplitude <= 0.0:
             self.onRobotsEvent("LINK_IGNORE_SIGNAL", {"tick":tick_num, "amp":amplitude, "from": from_id})
             return
-        e.tick = tick_num
+        e.tick = tick_num + self.length
         e.from_id = from_id
         self.events.append(e)

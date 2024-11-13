@@ -5,8 +5,10 @@ import json
 class RobotsLogger():
     default = None
 
-
     def __init__(self) -> None:
+        self.log = []
+
+    def clean(self):
         self.log = []
 
     def onEvent(self, msg:str, args:dict, src:str):
@@ -17,6 +19,10 @@ class RobotsLogger():
             'args':args
         }
         self.log.append(msg)
+
+    def print(self):
+        for m in self.log:
+            print(f"{json.dumps(m)}")
 
     def __str__(self):
         msg = ""
