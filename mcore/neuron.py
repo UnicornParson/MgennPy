@@ -1,6 +1,7 @@
 import math
 import copy
-from .core_object import RunnableObject
+import numpy as np
+from .core_object import RunnableObject, CoreRobotKeys
 from common import MgennConsts, MgennComon, F
 
 class Neuron(RunnableObject):
@@ -33,6 +34,8 @@ class Neuron(RunnableObject):
         self.peakEnergy = float(data["peakEnergy"])
         self.mode = str(data["mode"])
         self.receivers = list(data["receivers"])
+        if 'id' in data:
+            self.localId = np.int64(data['id'])
 
     def serialize(self) -> dict:
         return {
@@ -40,13 +43,18 @@ class Neuron(RunnableObject):
             "energyLeak": self.energyLeak,
             "mode": self.mode,
             "peakEnergy": self.peakEnergy,
-            "receivers": self.receivers
+            "receivers": self.receivers,
+            'id': self.localId
         }
+
     def __eq__(self, other):
+        if other == None:
+            return False
         return (self.currentEnergy == other.currentEnergy and
                 self.energyLeak == other.energyLeak and
                 self.mode == other.mode and
                 self.receivers.sort() == other.receivers.sort())
+
     def __hash__(self):
         return F.uhash(frozenset(self.serialize().items()))
 
@@ -57,7 +65,7 @@ class Neuron(RunnableObject):
         if self.currentEnergy > self.peakEnergy or math.isclose(self.currentEnergy, self.peakEnergy):
             shot_energy = self.currentEnergy
             self.currentEnergy = 0.0
-            self.onRobotsEvent("NEURON_SHOT", {"tick":tick_num, "amp":shot_energy})
+            self.onRobotsEvent(CoreRobotKeys.NEURON_SHOT, {"tick":tick_num, "amp":shot_energy})
             return MgennComon.mround(shot_energy)
         self.currentEnergy -= MgennComon.mround(self.energyLeak)
         if self.currentEnergy < 0.0:
@@ -65,6 +73,6 @@ class Neuron(RunnableObject):
         return 0.0
 
     def onSignal(self, tick_num, amplitude:float, from_id = 0):
-        self.onRobotsEvent("NEURON_IN", {"tick":tick_num, "amp":amplitude, "from": from_id})
+        self.onRobotsEvent(CoreRobotKeys.NEURON_IN, {"tick":tick_num, "amp":amplitude, "from": from_id})
         self.currentEnergy += MgennComon.mround(amplitude)
 

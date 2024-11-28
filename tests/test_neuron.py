@@ -30,16 +30,20 @@ class TestNeuron(unittest.TestCase):
             "energyLeak": 88.8,
             "mode": "mmm",
             "peakEnergy": 77.7,
-            "receivers": [6, 5]
+            "receivers": [6, 5],
+            "id": 3333
         }
         neuron = mc.Neuron()
-        neuron.localId = mc.F.generateOID()
+        oid = mc.F.generateOID()
+        neuron.localId = oid
         neuron.deserialize(data)
         self.assertEqual(neuron.currentEnergy, 99.9)
         self.assertEqual(neuron.energyLeak, 88.8)
         self.assertEqual(neuron.mode, "mmm")
         self.assertEqual(neuron.peakEnergy, 77.7)
         self.assertEqual(neuron.receivers.sort(), [6, 5].sort())
+        self.assertEqual(neuron.localId, 3333)
+        self.assertNotEqual(neuron.localId, oid)
 
     def test_leak(self):
         n = mc.Neuron()
@@ -51,11 +55,12 @@ class TestNeuron(unittest.TestCase):
             n.onSignal(i, .2)
             tick_rc = n.onTick(i)
             self.assertEqual(tick_rc, expected)
-            # print(f"iter({i}) {n} ticks with {tick_rc} result ")
         self.assertEqual(n.currentEnergy, 0.)
 
     def test_eq(self):
         n1 = self.__make_neuron()
+        self.assertNotEqual(n1, None)
+        self.assertNotEqual(None, n1)
         n2 = self.__make_neuron()
         self.assertEqual(n1, n1)
         self.assertEqual(n2, n2)

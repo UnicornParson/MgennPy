@@ -1,8 +1,9 @@
 from enum import Enum
+import numpy as np
 
 class MgennConsts:
     NULL_NAME = "NULL"
-    NULL_ID = 0
+    NULL_ID = np.int64(0)
     User_Agent = "MgennPy_0.1"
     Calc_accuracy = 4
 

@@ -1,6 +1,7 @@
 import numpy as np
 import json
 import copy
+import os
 
 class PackageUtils:
     @staticmethod
@@ -56,7 +57,7 @@ class Package:
         return copy.deepcopy(self)
 
     def empty(self)->bool:
-        return bool(self.inputs) and bool(self.outputs) and bool(self.links) and bool(self.neurons)
+        return self.__len__() == 0
 
     def findLink(self, id) -> int:
         for i in range(len(self.links)):
@@ -90,6 +91,8 @@ class Package:
         return (self.findOutput(id) >= 0)
 
     def loadFile(self, fname):
+        if not os.path.isfile(fname):
+            FileNotFoundError(f"pkg not founf in {fname}")
         f = open(fname)
         self.pkg = json.load(f)
         f.close()

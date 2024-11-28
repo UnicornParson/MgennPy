@@ -1,6 +1,12 @@
 import json
 from common import *
 
+class CoreRobotKeys:
+    LINK_APPLY_EVENT = "LINK_APPLY_EVENT"
+    OUTUT_IN = "OUTUT_IN"
+    NEURON_SHOT = "NEURON_SHOT"
+    NEURON_IN = "NEURON_IN"
+
 class CoreObject:
     def __str__(self):
         raise NotImplementedError("implementation missed ")
@@ -25,8 +31,8 @@ class CoreObject:
             args["oid"] = self.id()
             args["ohash"] = f"{self.id()}.{self.__hash__():}"
             RobotsLogger.default.onEvent(msg, args, src)
-        else:
-            print(f"@ {src} {msg} : {json.dumps(args)}")
+        #else:
+        #    print(f"@ {src} {msg} : {json.dumps(args)}")
 
 class RunnableObject(CoreObject):
     def __init__(self) -> None:

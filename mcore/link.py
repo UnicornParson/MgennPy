@@ -1,36 +1,8 @@
 import math
 import copy
-from .core_object import RunnableObject, CoreObject
+import numpy as np
+from .core_object import RunnableObject, CoreObject, CoreRobotKeys
 from common import MgennConsts, MgennComon, F
-'''
-      "links": [
-        {
-          "attenuationPerTick": "0.020000",
-          "events": [],
-          "id": 10,
-          "length": 2,
-          "receiverId": 64
-        },
-
-        class stMLinkEventInfo: public DataObject
-{
-public:
-    stMLinkEventInfo();
-    ~stMLinkEventInfo();
-    bool operator==(const stMLinkEventInfo& other) const;
-    bool operator!=(const stMLinkEventInfo& other) const {return !(operator==(other));}
-    void reset() Q_DECL_OVERRIDE;
-    operator QString() const;
-    double finalAmplitude;
-    tickId_t tick;
-    MGennObjectId from;
-
-            eventObject.insert("id", id);
-        stMLinkEventInfo info = m_delayedEvents.value(id);
-        eventObject.insert("finalAmplitude", doubleToString(info.finalAmplitude));
-        eventObject.insert("tick", QVariant(info.tick));
-};
-'''
 
 class LinkEvent(CoreObject):
     def __init__(self):
@@ -112,6 +84,8 @@ class Link(RunnableObject):
         return self.__str__()
 
     def __eq__(self, other):
+        if other == None:
+            return False
         return (self.apt == other.apt and
                 self.length == other.length and
                 self.receiverId == other.receiverId and
@@ -125,11 +99,13 @@ class Link(RunnableObject):
 
     def deserialize(self, data: dict):
         if MgennComon.hasMissingKeys(data, self.required_keys()):
-            raise KeyError(f"missed keys in {data.keys()}")
+            raise KeyError(f"missed keys in {data.keys()} expected {self.required_keys()}")
         self.reset()
         self.apt = float(data["attenuationPerTick"])
         self.length = int(data["length"])
         self.receiverId = int(data["receiverId"])
+        if 'id' in data:
+            self.localId = np.int64(data['id'])
         for e in data["events"]:
             if not isinstance(e, dict):
                 raise ValueError(f"event {e} is not a dict")
@@ -140,6 +116,7 @@ class Link(RunnableObject):
 
     def serialize(self) -> dict:
         d = {
+            'id': self.localId,
             "attenuationPerTick":self.apt,
             "length":self.length,
             "receiverId":self.receiverId,
@@ -155,7 +132,7 @@ class Link(RunnableObject):
         for e in self.events:
             if e.tick <= tick_num:
                 amp += e.finalAmplitude
-                self.onRobotsEvent("LINK_APPLY_EVENT", {"tick":e.tick, "amp":e.finalAmplitude, "from": e.from_id})
+                self.onRobotsEvent(CoreRobotKeys.LINK_APPLY_EVENT, {"tick":e.tick, "amp":e.finalAmplitude, "from": e.from_id})
             else:
                 filtered.append(e)
         self.events = filtered

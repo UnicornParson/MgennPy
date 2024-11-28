@@ -47,9 +47,12 @@ class TestLink(unittest.TestCase):
         self.assertEqual(link.length, 2)
         self.assertEqual(link.receiverId, 64)
         self.assertEqual(link.events, [])
+        self.assertEqual(link.localId, 333)
 
     def test_serialize(self):
         orig = self.__make_link()
+        self.assertNotEqual(orig, None)
+        self.assertNotEqual(None, orig)
         data = orig.serialize()
         self.assertTrue(bool(data))
         link = mc.Link()
@@ -91,5 +94,6 @@ class TestLink(unittest.TestCase):
           "events": [],
           "id": mc.F.generateOID(),
           "length": 2,
-          "receiverId": 64
+          "receiverId": 64,
+          "id": 333
         }
