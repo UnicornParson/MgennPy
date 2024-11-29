@@ -57,6 +57,20 @@ class Core(CoreObject):
                 rc.append(obj)
         return rc
 
+    def links(self):
+        rc = []
+        for obj in self.content.values():
+            if isinstance(obj, Link):
+                rc.append(obj)
+        return rc
+
+    def outputs(self):
+        rc = []
+        for obj in self.content.values():
+            if isinstance(obj, Output):
+                rc.append(obj)
+        return rc
+
     def dump(self) -> Package:
         pkg = Package()
         pkg.generation = self.pkg.generation + 1

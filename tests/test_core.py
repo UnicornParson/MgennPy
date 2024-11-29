@@ -17,9 +17,22 @@ class TestCore(unittest.TestCase):
         core = mc.Core()
         core.load(pkg)
         self.assertFalse(core.empty())
-        print("load core ok")
+
         neurons = core.neurons()
         self.assertEqual(len(neurons), 10)
         for n in neurons:
             self.assertNotEqual(n, None)
             self.assertNotEqual(n.id(), MgennConsts.NULL_ID)
+
+        links = core.links()
+        self.assertEqual(len(links), 10)
+        for l in links:
+            self.assertNotEqual(l, None)
+            self.assertNotEqual(l.id(), MgennConsts.NULL_ID)
+
+        outputs = core.links()
+        self.assertEqual(len(outputs), 10)
+        for o in outputs:
+            self.assertNotEqual(o, None)
+            self.assertNotEqual(o.id(), MgennConsts.NULL_ID)
+

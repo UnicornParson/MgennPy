@@ -34,6 +34,7 @@ class CoreObject:
         #else:
         #    print(f"@ {src} {msg} : {json.dumps(args)}")
 
+
 class RunnableObject(CoreObject):
     def __init__(self) -> None:
         super().__init__()

@@ -10,6 +10,8 @@ class LinkEvent(CoreObject):
         self.reset()
 
     def __eq__(self, other):
+        if other == None:
+            return False
         return (self.finalAmplitude == other.finalAmplitude and self.tick == other.tick)
 
     def __hash__(self):
