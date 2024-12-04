@@ -78,6 +78,18 @@ class TestClockInput(unittest.TestCase):
             }
         }
 
+    def test_serialization(self):
+        data = self.__make_data()
+        ci = mc.ClockInput()
+        ci.deserialize(data)
+        self.assertEqual(ci.type, "clockgenerator")
+        self.assertEqual(ci.name, "Alias1")
+        self.assertEqual(ci.receivers.sort(), self.receivers.sort())
+        s_data = ci.serialize()
+        self.assertTrue(bool(s_data))
+        restored = mc.ClockInput()
+        restored.deserialize(s_data)
+
     def test_signals(self):
         data = self.__make_data()
         ci = mc.ClockInput()

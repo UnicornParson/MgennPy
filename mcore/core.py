@@ -5,18 +5,21 @@ from common import MgennConsts, MgennComon, F, Package, RobotsLogger
 from .neuron import Neuron
 from .link import Link, LinkEvent
 from .output import Output
-
+from .input import *
+from .clock_input import *
 
 class Core(CoreObject):
     def __init__(self) -> None:
         super().__init__()
         self.pkg = None
         self.content = {}
+        self.itape = None
+        self.autoinputs = {}
     def empty(self) -> bool:
-        return not bool(self.content)
+        return not (bool(self.content) or bool(self.autoinputs) or (self.itape != None))
 
     def __contains__(self, key):
-        return (key in self.content)
+        return (key in self.content) or (key in self.autoinputs) or (self.itape != None and (key in self.itape))
 
     def __len__(self):
         return len(self.content)
@@ -47,8 +50,32 @@ class Core(CoreObject):
             output = Output()
             output.deserialize(l)
             if output.id() in self.content:
-                raise ValueError(f"id {output.id()} is not unic in this core")
+                raise ValueError(f"output id {output.id()} is not unic in this core")
             self.content[output.id()] = output
+        for i in pkg.inputs:
+            if not isinstance(i, dict):
+                raise ValueError(f"input {l} is not a dict")
+            bi = Input()
+            if MgennComon.hasMissingKeys(i, bi.required_keys()):
+                raise KeyError(f"missed keys in {i.keys()} expected {bi.required_keys()}")
+            it = i["type"]
+            F.print(f"found input {it}")
+            if it == InputType.ClockGenerator:
+                ci = ClockInput()
+                ci.deserialize(i)
+                name = ci.name
+                if name in self.autoinputs:
+                    raise ValueError(f"input name {name} is not unic in this core")
+                F.print(f"new ClockGenerator input {name}")
+                self.autoinputs[name] = ci
+            elif it == InputType.Tape:
+                if self.itape == None: # firsat tape. make batch container
+                    self.itape = TapeInputsBatch()
+                self.itape.addPoint(i)
+            elif it == InputType.Passive:
+                F.print(f"ignore passive input {i['name']}")
+            else:
+                raise ValueError(f"input type {i['type']} is not supported")
 
     def neurons(self):
         rc = []
