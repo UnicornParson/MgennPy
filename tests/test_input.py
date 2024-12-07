@@ -103,5 +103,5 @@ class TestClockInput(unittest.TestCase):
             self.assertEqual(len(events), len(self.receivers))
             for e in events:
                 self.assertTrue(isinstance(e, tuple))
-                self.assertEqual(len(e), 2)
+                self.assertEqual(len(e), 3)
                 self.assertEqual(e[1], v)

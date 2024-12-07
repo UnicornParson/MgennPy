@@ -7,6 +7,8 @@ from .link import Link, LinkEvent
 from .output import Output
 from .input import *
 from .clock_input import *
+from .errors import *
+
 
 class Core(CoreObject):
     def __init__(self) -> None:
@@ -15,8 +17,14 @@ class Core(CoreObject):
         self.content = {}
         self.itape = None
         self.autoinputs = {}
+
+        self.pending_events = []
+
     def empty(self) -> bool:
         return not (bool(self.content) or bool(self.autoinputs) or (self.itape != None))
+
+    def is_dirty(self)->bool:
+        return bool(self.pending_events)
 
     def __contains__(self, key):
         return (key in self.content) or (key in self.autoinputs) or (self.itape != None and (key in self.itape))
@@ -97,6 +105,8 @@ class Core(CoreObject):
             if isinstance(obj, Output):
                 rc.append(obj)
         return rc
+    def autoinputs(self):
+        return copy.deepcopy(self.autoinputs.values())
 
     def dump(self) -> Package:
         pkg = Package()
@@ -122,6 +132,65 @@ class Core(CoreObject):
 
         self.pkg = pkg
         return pkg
+
+    def input_names(self) -> list:
+        if self.itape:
+            return self.itape.point_names()
+        return []
+
+    def update_inputs(self, row):
+        if self.itape:
+            self.itape.updateRow(row)
+
+    def __process_autoinputs(self):
+        count_before = len(self.pending_events)
+        for ai in self.autoinputs:
+            self.pending_events.extend(ai.makeEvents(self.pkg.tick))
+        F.print(f"autoinputs made {len(self.pending_events) - count_before} new events")
+
+    def __process_tapes(self):
+        if not self.itape:
+            return
+        count_before = len(self.pending_events)
+        self.pending_events.extend(self.itape.makeEvents(self.pkg.tick))
+        F.print(f"tape container made {len(self.pending_events) - count_before} new events")
+    def __process_content(self):
+        count_before = len(self.pending_events)
+        for e in self.content.values():
+            amp = e.onTick(self.pkg.tick)
+            self.pending_events.extend(e.makeEvents(amp))
+        F.print(f"active content ({len(self.content)} objects) made {len(self.pending_events) - count_before} new events")
+
+    def __process_events(self):
+        events = self.pending_events
+        self.pending_events = []
+        for target, amp, from_id in events:
+            
+            if target not in self.content:
+                raise ConnectivityError(f"({target} is not a valid target)")
+            if not self.content[target]:
+                raise BrokenObject(f"invalid object {target}")
+            F.print(f"process p.event {from_id}->{type(self.content[target]).__name__}_{target} amp:{amp}")
+            self.content[target].onSignal(self.pkg.tick, amp, from_id)
+
+    def __extract_outputs(self):
+        pass
+
+    def exec(self):
+        if self.empty():
+            raise ValueError("empty core")
+        if self.is_dirty():
+            raise DirtyObjectException(who = f"core_{self.__hash__}",
+                                       oid = self.pkg.snapshot_id,
+                                       message = f"core is ditry. has {len(self.pending_events)} pending events")
+        self.pkg.tick += 1
+        self.__process_autoinputs()
+        self.__process_tapes()
+        self.__process_content()
+        while(self.pending_events):
+            self.__process_events()
+        self.__extract_outputs()
+
 
 
 

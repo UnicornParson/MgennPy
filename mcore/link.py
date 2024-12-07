@@ -72,6 +72,10 @@ class Link(RunnableObject):
         self.apt = 0.
         self.length = 0
         self.receiverId = 0
+    def makeEvents(self, amp: float)->list:
+        if amp == 0.0:
+            return []
+        return [(self.receiverId, amp, self.localId)]
 
     def __str__(self):
         return f"Link[{self.id()}](apt:{self.apt}, l:{self.length} to:{self.receiverId} events:{len(self.events)})"

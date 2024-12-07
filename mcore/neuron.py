@@ -20,6 +20,14 @@ class Neuron(RunnableObject):
         self.mode = ""
         self.receivers = 0
 
+    def makeEvents(self, amp: float)->list:
+        if amp == 0.0:
+            return []
+        e = []
+        for r in self.receivers:
+            e.append((r, amp, self.localId))
+        return e
+
     def required_keys(self) -> list:
         return ["currentEnergy", "energyLeak", "mode", "peakEnergy", "receivers"]
 

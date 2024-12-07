@@ -36,12 +36,41 @@ class Input(CoreObject):
 
 ## point format {name: (receivers, args)}
 ## args not used but should be restored asis
+class TapeInputsRow():
+    def __init__(self, size:int, dtype=np.float):
+        if size < 1:
+            raise ValueError(f"invalid row size {size}")
+        self.data = np.zeros(size, dtype=dtype)
+        self.headers = []
+    def dprint(self):
+       F.print(self.__str__())
+    def is_valid(self) -> bool:
+        self.dprint()
+        return (len(self.headers) == self.data.size) and (np.ndim(self.data) == 1)
+    def is_empty(self) -> bool:
+        return (self.data.size == 0)
+    def value(self, name:str):
+        if self.is_empty():
+            return 0
+        if not self.is_valid():
+            raise ValueError(f"invalid row {self.__str__()}")
+        if name not in self.headers:
+            raise IndexError(f"{name} not found in row")
+        i = self.headers.index(name)
+        return self.data[i]
+    def __str__(self):
+        return f"TapeInputsRow h[{len(self.headers)}], d[s{self.data.size}.dim{np.ndim(self.data)}]"
+    def __repr__(self):
+        return self.__str__()
 
+        
 class TapeInputsBatch(Input):
     def __init__(self):
         super().__init__()
         self.type = InputType.Tape
         self.reset()
+        self.__row = None
+
 
     def addPoint(self, data: dict):
         if MgennComon.hasMissingKeys(data, self.required_keys()):
@@ -49,13 +78,38 @@ class TapeInputsBatch(Input):
         if data["type"] != self.type:
             raise ValueError("tape batch supports only tape points. but received")
         name = data["name"]
-        receivers = data["receivers"].sort()
+        receivers = list(data['receivers'])
         ex_args = data["args"]
 
         if name in self.points:
             raise KeyError(f"non unic name {name}")
 
+        F.print(f"store point {name} : r:{receivers} ex: {ex_args} data:{data}")
         self.points[name] = (receivers, ex_args)
+    
+    def updateRow(self, row):
+        if not row.is_valid():
+            raise ValueError("invalid row")
+        self.__row = row
+
+    def makeEvents(self, tick_num)->list:
+        if not self.__row or not self.__row.is_valid():
+            raise NoDataException("core row", "invalid row")
+        events = []
+        for name in self.points:
+            if name not in self.__row.headers:
+                raise IndexError(f"name {name} not found in row")
+            receivers = self.points[name][0]
+            F.print(f"proces point [{name}] : {self.points[name]}")
+            val = self.__row.value(name)
+            for r in receivers:
+                events.append((r, val, name))
+        return events
+
+    def point_names(self) -> list:
+        return list(self.points.keys())
+
+
         
     def __contains__(self, key):
         return (key in self.points)

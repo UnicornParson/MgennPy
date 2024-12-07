@@ -1,6 +1,7 @@
 import math
 import copy
 import numpy as np
+import json
 from .core_object import RunnableObject, CoreObject, CoreRobotKeys
 from common import MgennConsts, MgennComon, F
 from .input import Input, InputType
@@ -82,7 +83,7 @@ class ClockInput(Input):
         return (self.name == other.name and self.args == other.args and self.type == other.type and self.receivers.sort() == other.receivers.sort())
 
     def __hash__(self):
-        return F.uhash(frozenset(self.serialize().items()))
+        return F.uhash(json.dumps(self.serialize()))
 
     def __lt__(self, other):
         return self.__hash__() < other.__hash__()
@@ -127,8 +128,8 @@ class ClockInput(Input):
         if amp > 0.0:
             events = []
             for rc in self.receivers:
-                events.append((rc, amp))
-            F.print(f"created {len(events)} events")
+                events.append((rc, amp, f"ClockInput_{self.name}"))
+            F.print(f"{self.__hash__()} created {len(events)} events")
             return events
         F.print(f"no events")
         return []

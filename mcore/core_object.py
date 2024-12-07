@@ -42,3 +42,5 @@ class RunnableObject(CoreObject):
         raise NotImplementedError("implementation missed ")
     def onSignal(self, tick_num, amplitude:float, from_id = 0):
         raise NotImplementedError("implementation missed ")
+    def makeEvents(self, amp: float)->list:
+        raise NotImplementedError("implementation missed ")

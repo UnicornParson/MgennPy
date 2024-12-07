@@ -12,7 +12,8 @@ class Output(RunnableObject):
         return copy.deepcopy(self)
     def id(self):
         return self.localId
-
+    def makeEvents(self, amp: float)->list:
+        return []
     def reset(self):
         self.localId = MgennConsts.NULL_ID
         self.name = ""
