@@ -15,4 +15,4 @@ class TestPkg(unittest.TestCase):
         pkg = mc.Package()
         pkg.loadFile(self.__pkg_path)
         self.assertFalse(pkg.empty())
-        print("load pkg ok")
+        F.print("load pkg ok")

@@ -1,10 +1,11 @@
 import math
 import copy
+import pandas as pd
 from .core_object import RunnableObject, CoreObject
 from common import MgennConsts, MgennComon, F, Package, RobotsLogger
 from .neuron import Neuron
 from .link import Link, LinkEvent
-from .output import Output
+from .output import Output, OutputRecord
 from .input import *
 from .clock_input import *
 from .errors import *
@@ -173,10 +174,17 @@ class Core(CoreObject):
             F.print(f"process p.event {from_id}->{type(self.content[target]).__name__}_{target} amp:{amp}")
             self.content[target].onSignal(self.pkg.tick, amp, from_id)
 
-    def __extract_outputs(self):
-        pass
+    def __extract_outputs(self) -> OutputRecord:
+        record = OutputRecord()
+        headers = []
+        values = []
+        for o in self.outputs():
+            headers.append(o.name)
+            values.append(o.value)
+        record.data = pd.DataFrame(data = [values,], index = [str(self.pkg.tick)], columns=headers)
+        return record
 
-    def exec(self):
+    def exec(self) -> OutputRecord:
         if self.empty():
             raise ValueError("empty core")
         if self.is_dirty():
@@ -189,7 +197,9 @@ class Core(CoreObject):
         self.__process_content()
         while(self.pending_events):
             self.__process_events()
-        self.__extract_outputs()
+        record = self.__extract_outputs()
+
+        return record
 
 
 

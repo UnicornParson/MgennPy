@@ -1,8 +1,12 @@
 import copy
 import numpy as np
+
 from .core_object import RunnableObject, CoreRobotKeys
 from common import MgennConsts, MgennComon, F
-
+class OutputRecord:
+    def __init__(self) -> None:
+        #df = pd.DataFrame(A, index=names, columns=names)
+        self.data = None
 class Output(RunnableObject):
     def __init__(self):
         super().__init__()

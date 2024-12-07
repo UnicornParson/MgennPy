@@ -7,10 +7,11 @@ import time
 import datetime
 import sys
 import inspect
+import os
 
 class F():
     __nextId = 0
-    __debug = True
+    __debug_env = "MGENN_DEBUG"
 
     @staticmethod
     def here_str():
@@ -19,7 +20,10 @@ class F():
 
     @staticmethod
     def print(*args, **kwargs):
-        if not F.__debug:
+        if F.__debug_env not in os.environ:
+            return
+        e_debug = os.environ[F.__debug_env]
+        if e_debug != 1 and e_debug != "Y":
             return
         cf = inspect.stack()[1]
         current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")

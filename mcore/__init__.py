@@ -13,7 +13,7 @@ __all__ = [
     "Neuron", 
     "Link", "LinkEvent",  
     "Core", 
-    "Output", 
+    "Output", "OutputRecord", 
     "InputType", "Input", "TapeInputsBatch", "InputComponent", "ClockInput", "TapeInputsRow",
     "DirtyObjectException", "ConnectivityError", "NoDataException", "BrokenObject"
     ]
