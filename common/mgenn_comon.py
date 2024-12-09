@@ -14,9 +14,10 @@ class NumpyEncoder(json.JSONEncoder):
 
             return str(obj)
 
-        elif isinstance(obj, (np.float_, np.float16, np.float32, np.float64)):
+        elif isinstance(obj, (float, np.floating, np.float16, np.float32, np.float64)):
             return float(obj)
-
+        elif isinstance(obj, (np.int64, np.integer)):
+            return int(obj)
         elif isinstance(obj, (np.complex_, np.complex64, np.complex128)):
             return {'real': obj.real, 'imag': obj.imag}
 

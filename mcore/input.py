@@ -37,7 +37,7 @@ class Input(CoreObject):
 ## point format {name: (receivers, args)}
 ## args not used but should be restored asis
 class TapeInputsRow():
-    def __init__(self, size:int, dtype=np.float):
+    def __init__(self, size:int, dtype=float):
         if size < 1:
             raise ValueError(f"invalid row size {size}")
         self.data = np.zeros(size, dtype=dtype)

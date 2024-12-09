@@ -22,7 +22,7 @@ class RobotsLogger():
 
     def print(self):
         for m in self.log:
-            print(f"{json.dumps(m)}")
+            print(f"{json.dumps(m, default=str)}")
 
     def __str__(self):
         msg = ""
