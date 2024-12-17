@@ -2,7 +2,7 @@ import math
 import copy
 import pandas as pd
 from .core_object import RunnableObject, CoreObject
-from common import MgennConsts, MgennComon, F, Package, RobotsLogger
+from common import MgennConsts, MgennComon, F, Package, RobotsLogger, ObjectIdType
 from .neuron import Neuron
 from .link import Link, LinkEvent
 from .output import Output, OutputRecord
@@ -18,7 +18,8 @@ class Core(CoreObject):
         self.content = {}
         self.itape = None
         self.autoinputs = {}
-
+        if not RobotsLogger.default:
+            RobotsLogger.default = RobotsLogger()
         self.pending_events = []
 
     def empty(self) -> bool:
@@ -113,7 +114,7 @@ class Core(CoreObject):
         pkg = Package()
         pkg.generation = self.pkg.generation + 1
         pkg.seq = self.pkg.seq
-        pkg.snapshot_id = MgennComon.makeId()
+        pkg.snapshot_id = MgennComon.makeId(ObjectIdType.Core)
         pkg.parent = self.pkg.snapshot_id
         pkg.state = self.pkg.state
         pkg.tick = self.pkg.tick
@@ -122,14 +123,14 @@ class Core(CoreObject):
         pkg.history["format_ver"] = "0.1"
         pkg.history["items"] = copy.deepcopy(RobotsLogger.default.log)
         pkg.external = copy.deepcopy(self.pkg.external)
-        for elem in self.content:
+        for id, elem in self.content.items():
             data = elem.serialize()
             if isinstance(elem, Neuron):
-                print("save neuron")
+                F.print(f"save neuron {id}")
                 pkg.neurons.append(data)
             elif isinstance(elem, Link):
-                print("save neuron")
-                pkg.neurons.append(data)
+                F.print(f"save link {id}")
+                pkg.links.append(data)
 
         self.pkg = pkg
         return pkg
@@ -201,7 +202,13 @@ class Core(CoreObject):
 
         return record
 
+    def max_id(self):
+        return max(self.content.keys())
+    def next_id(self):
+        return self.max_id() + 1
 
+    def make_neuron(self):
+        pass
 
 
 '''

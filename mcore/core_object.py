@@ -24,6 +24,7 @@ class CoreObject:
 
     def reset(self):
         pass
+    
 
     def onRobotsEvent(self, msg:str, args:dict):
         src = f"{type(self).__name__}.{self.id()}.{self.__hash__():x}"

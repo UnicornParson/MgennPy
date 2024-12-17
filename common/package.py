@@ -2,10 +2,11 @@ import numpy as np
 import json
 import copy
 import os
-
+from .functional import F
+from .mgenn_comon import MgennComon 
 class PackageUtils:
     @staticmethod
-    def checkPkg(p: dict):
+    def checkRawPkg(p: dict):
         if "meta" not in p or not p["meta"]:
             raise ValueError("no meta")
         if "content" not in p or not p["content"]:
@@ -27,8 +28,30 @@ class PackageUtils:
             raise ValueError("meta[parent] does not match with snapshot! %s != %s" % (c["parent"], meta["parentSnapshot"]))
         if c["id"] != meta["name"]:
             raise ValueError("meta[id] does not match with snapshot! %s != %s" % (c["id"], meta["name"]))
-        print("pkg ok")
 
+    @staticmethod
+    def checkRawPkg_b(p: dict) -> bool:
+        try:
+            PackageUtils.checkRawPkg(p)
+            return True
+        except:
+            return False
+
+    def makeEmptyPkgData() -> dict:
+        return {}
+
+'''
+  "meta": {
+    "branch": "testns",
+    "branchSeq": 0,
+    "generation": 0,
+    "name": "4d014c646eab1cd96f7e1bf5ab8f1a905f9a68b6fee7faa4c0cd5345496cc95ef619856e2f44c32ecb0135af7a419b78787da787b48713b40e35c0e517132073:13388.1504363103804.18",
+    "parentDelta": "NONE",
+    "parentSnapshot": "NONE",
+    "rev": 0,
+    "tick": 0
+  },
+'''
 
 class Package:
     def __init__(self):
@@ -52,6 +75,31 @@ class Package:
 
     def __len__(self):
         return len(self.inputs) + len(self.outputs) + len(self.links) + len(self.neurons)
+
+    def isValid(self, explain = False):
+        if not self.state or not self.snapshot_id or not self.parent:
+            if explain:
+                F.print(f"required fields state:[{self.state}], snapshot_id:[{self.snapshot_id}], parent:[{self.parent}]")
+            return False
+        if not self.meta:
+            if explain:
+                F.print(f"no meta")
+            return False
+
+        if MgennComon.hasMissingKeys(self.meta, ["branch", "branchSeq", "generation", "name", "parentDelta", "parentSnapshot", "rev", "tick"]):
+            if explain:
+                F.print(f"missed keys in meta:{self.meta}")
+            return False
+        if not self.meta["name"]:
+            if explain:
+                F.print(f"no meta.name in meta:{self.meta}")
+            return False
+        if not self.meta["branch"]:
+            if explain:
+                F.print(f"no meta.branch in meta:{self.meta}")
+            return False
+
+        return True
 
     def clone(self):
         return copy.deepcopy(self)
@@ -96,7 +144,7 @@ class Package:
         f = open(fname)
         self.pkg = json.load(f)
         f.close()
-        PackageUtils.checkPkg(self.pkg)
+        PackageUtils.checkRawPkg(self.pkg)
 
         self.inputs = self.pkg["content"]["inputs"]
         self.outputs = self.pkg["content"]["outputs"]
