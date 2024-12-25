@@ -7,6 +7,7 @@ from .errors import *
 
 from .core_object import CoreObject, RunnableObject
 from .core import *
+from .engine import *
 
 __all__ = [
     "CoreObject", "RunnableObject",
@@ -15,5 +16,6 @@ __all__ = [
     "Core", 
     "Output", "OutputRecord", 
     "InputType", "Input", "TapeInputsBatch", "InputComponent", "ClockInput", "TapeInputsRow",
-    "DirtyObjectException", "ConnectivityError", "NoDataException", "BrokenObject"
+    "DirtyObjectException", "ConnectivityError", "NoDataException", "BrokenObject",
+    "Engine", "EngineCoreError", "EngineIOError"
     ]

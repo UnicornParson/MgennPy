@@ -17,3 +17,8 @@ class TestPkg(unittest.TestCase):
         self.assertFalse(pkg.empty())
         self.assertTrue(pkg.isValid(explain=True))
         F.print("load pkg ok")
+
+    def test_make_empty(self):
+        pkg = mc.Package.make_empty()
+        self.assertTrue(pkg.empty())
+        self.assertTrue(pkg.isValid(explain=True))

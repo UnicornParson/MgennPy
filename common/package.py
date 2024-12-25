@@ -4,6 +4,8 @@ import copy
 import os
 from .functional import F
 from .mgenn_comon import MgennComon 
+from .mgenn_consts import MgennConsts, ObjectIdType
+
 class PackageUtils:
     @staticmethod
     def checkRawPkg(p: dict):
@@ -40,20 +42,26 @@ class PackageUtils:
     def makeEmptyPkgData() -> dict:
         return {}
 
-'''
-  "meta": {
-    "branch": "testns",
-    "branchSeq": 0,
-    "generation": 0,
-    "name": "4d014c646eab1cd96f7e1bf5ab8f1a905f9a68b6fee7faa4c0cd5345496cc95ef619856e2f44c32ecb0135af7a419b78787da787b48713b40e35c0e517132073:13388.1504363103804.18",
-    "parentDelta": "NONE",
-    "parentSnapshot": "NONE",
-    "rev": 0,
-    "tick": 0
-  },
-'''
 
 class Package:
+    @staticmethod
+    def make_empty():
+        pkg = Package()
+        pkg.state = "new"
+        pkg.snapshot_id = MgennComon.makeId(ObjectIdType.Core)
+        pkg.meta = {
+            "branch":"default",
+            "branchSeq": 0,
+            "generation": 0,
+            "name": pkg.snapshot_id,
+            "parentDelta": "NONE",
+            "parentSnapshot": "NONE",
+            "rev": 0,
+            "tick": 0
+        }
+        pkg.parent = "NONE"
+        return pkg
+
     def __init__(self):
         self.pkg = {}
         self.inputs = []
@@ -294,3 +302,37 @@ class Package:
             return True
         print("source object [%s] not found!" % str(from_id))
         return False
+
+    def new_neuron(self, leak:float, peak:float, receivers:list):
+        id = self.nextId()
+        data = {
+          "currentEnergy": 0.000000,
+          "energyLeak": leak,
+          "id": id,
+          "mode": "shared",
+          "peakEnergy": peak,
+          "receivers": receivers
+        }
+        self.neurons.append(data)
+        return id
+
+    def new_link(self, apt:float, length:int, receiver:np.int64):
+        id = self.nextId()
+        data = {
+          "attenuationPerTick": apt,
+          "events": [],
+          "id": id,
+          "length": length,
+          "receiverId": receiver
+        }
+        self.links.append(data)
+        return id
+
+    def new_output(self, name:str):
+        id = self.nextId()
+        data = {
+          "name": name,
+          "id": id,
+        }
+        self.outputs.append(data)
+        return id

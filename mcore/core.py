@@ -111,6 +111,8 @@ class Core(CoreObject):
         return copy.deepcopy(self.autoinputs.values())
 
     def dump(self) -> Package:
+        if not self.pkg:
+            self.pkg = Package.make_empty()
         pkg = Package()
         pkg.generation = self.pkg.generation + 1
         pkg.seq = self.pkg.seq
@@ -184,7 +186,10 @@ class Core(CoreObject):
             values.append(o.value)
         record.data = pd.DataFrame(data = [values,], index = [str(self.pkg.tick)], columns=headers)
         return record
-
+    def tick(self):
+        if self.pkg:
+            return self.pkg.tick
+        return 0
     def exec(self) -> OutputRecord:
         if self.empty():
             raise ValueError("empty core")
@@ -206,27 +211,3 @@ class Core(CoreObject):
         return max(self.content.keys())
     def next_id(self):
         return self.max_id() + 1
-
-    def make_neuron(self):
-        pass
-
-
-'''
-class Package:
-    def __init__(self):
-        self.pkg = {}
-        self.inputs = []
-        self.outputs = []
-        self.links = []
-        self.neurons = []
-        self.state = "ready"
-        self.meta = {}
-        self.history = {}
-        self.external = {}
-        self.tick = np.int64(0)
-        self.generation = 0
-        self.seq = 0
-        self.snapshot_id = ""
-        self.parent = ""
-
-'''

@@ -11,6 +11,13 @@ class TestCore(unittest.TestCase):
     def test_check_examplee(self):
         self.assertTrue(os.path.isfile(self.__pkg_path))
 
+    def test_empty_core(self):
+        core = mc.Core()
+        self.assertTrue(core.empty())
+        pkg = core.dump()
+        self.assertTrue(pkg.isValid())
+        self.assertTrue(pkg.empty())
+
     def test_load_from_file(self):
         pkg = mc.Package()
         pkg.loadFile(self.__pkg_path)

@@ -1,6 +1,8 @@
 import math
 import copy
 import numpy as np
+import pandas as pd
+
 from .core_object import RunnableObject, CoreObject, CoreRobotKeys
 from common import MgennConsts, MgennComon, F
 
@@ -42,6 +44,13 @@ class TapeInputsRow():
             raise ValueError(f"invalid row size {size}")
         self.data = np.zeros(size, dtype=dtype)
         self.headers = []
+    def from_frame(self, df:pd.DataFrame, row_index = 0):
+        if not df or len(df) <= row_index:
+            raise ValueError(f"no row {row_index} in data frame")
+        self.headers = df.columns.tolist()
+        self.data = df.iloc[row_index].to_numpy()
+        if not self.is_valid():
+            raise ValueError("invalid dataframe")
     def dprint(self):
        F.print(self.__str__())
     def is_valid(self) -> bool:

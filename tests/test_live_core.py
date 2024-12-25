@@ -34,3 +34,7 @@ class TestLiveCore(unittest.TestCase):
         exp_o_names = ["out0",  "out1",  "out2",  "out3",  "out4",  "out5",  "out6",  "out7",  "out8",  "out9"]
         F.print(f"o_record: {record.data}")
         self.assertEqual(list(record.data.columns.values).sort(), exp_o_names.sort())
+
+    def test_pd_to_pd(self):
+        pkg = mc.Package.make_empty()
+        
