@@ -64,12 +64,13 @@ class Neuron(RunnableObject):
                 self.receivers.sort() == other.receivers.sort())
 
     def __hash__(self):
-        return F.uhash(frozenset(self.serialize().items()))
+        return F.uhash(tuple(self.serialize().items()))
 
     def __str__(self):
         return f"N[{self.localId}]e:{self.currentEnergy} l:{self.energyLeak} p:{self.peakEnergy}"
 
     def onTick(self, tick_num)->float:
+        prev = self.currentEnergy
         if self.currentEnergy > self.peakEnergy or math.isclose(self.currentEnergy, self.peakEnergy):
             shot_energy = self.currentEnergy
             self.currentEnergy = 0.0
@@ -78,9 +79,14 @@ class Neuron(RunnableObject):
         self.currentEnergy -= MgennComon.mround(self.energyLeak)
         if self.currentEnergy < 0.0:
             self.currentEnergy = 0.0
+        self.__on_e_changed(prev)
         return 0.0
-
+    def __on_e_changed(self, prev):
+        F.print(f"N[{self.localId}] changed {prev} --> {self.currentEnergy} in {F.caller_str()}")
     def onSignal(self, tick_num, amplitude:float, from_id = 0):
         self.onRobotsEvent(CoreRobotKeys.NEURON_IN, {"tick":tick_num, "amp":amplitude, "from": from_id})
+        prev = self.currentEnergy
         self.currentEnergy += MgennComon.mround(amplitude)
+        self.__on_e_changed(prev)
+        
 

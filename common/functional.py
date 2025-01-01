@@ -8,15 +8,21 @@ import datetime
 import sys
 import inspect
 import os
+import pandas as pd
 
 class F():
     __nextId = 0
     __debug_env = "MGENN_DEBUG"
 
     @staticmethod
+    def caller_str():
+        cf = inspect.stack()[2]
+        return f"[{cf.function}.{cf.lineno}]"
+
+    @staticmethod
     def here_str():
         cf = inspect.stack()[1]
-        return f"[{cf.function}.{cf.f_lineno}]"
+        return f"[{cf.function}.{cf.lineno}]"
 
     @staticmethod
     def print(*args, **kwargs):
@@ -32,7 +38,8 @@ class F():
 
     @staticmethod
     def uhash(data):
-        return ctypes.c_size_t(hash(data)).value
+        ## hash(str(data)) hack for types like list of tuples or tuples of lists
+        return ctypes.c_size_t(hash(str(data))).value
 
     @staticmethod
     def random_id(length):
@@ -113,3 +120,7 @@ class F():
         id = "L%s.%s.%s" % (F.getNodeName() ,str(time.monotonic()).replace(".", ""), str(F.generateOID()))
         F.print(f"new id {id}")
         return id
+
+    @staticmethod
+    def df2str(df:pd.DataFrame)->str:
+        return ' | '.join(df.apply(lambda x: ':'.join(x.astype(str)), axis=1))

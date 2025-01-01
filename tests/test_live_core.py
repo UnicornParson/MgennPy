@@ -37,4 +37,59 @@ class TestLiveCore(unittest.TestCase):
 
     def test_pd_to_pd(self):
         pkg = mc.Package.make_empty()
-        
+        n1 = pkg.new_neuron(leak=1.0, peak=5.0, receivers=[])
+        i1 = pkg.new_tape_input("i1", [])
+        o1 = pkg.new_output("o1")
+
+        l1 = pkg.new_link_between(apt=0.0, length=1, src=i1, dst=n1)
+        l2 = pkg.new_link_between(apt=0.0, length=1, src=n1, dst=o1)
+        ce = mc.Engine()
+        ce.core = mc.Core()
+        ce.core.load(pkg)
+        ce.tick_offset = 0
+        spkg = ce.core.dump()
+        sdata = spkg.dumpJsonStr()
+
+
+        df_expected = pd.DataFrame([0.0]*7 + [5.0] + [0.0]*4, columns=['o1_exp'])
+        df_in = pd.DataFrame([3,0] * 6, columns=['i1'])
+        ticks = 12
+        df_out = pd.DataFrame()
+        for t in range(ticks):
+            df_out = pd.concat([df_out, ce.run_once(df_in)], ignore_index=True)
+
+        io = pd.concat([df_in, df_out, df_expected], axis=1)
+        io['error'] = io['o1'].astype(float) - io['o1_exp'].astype(float)
+        for index, row in io.iterrows():
+            self.assertEqual(row["o1"], row["o1_exp"])
+            self.assertEqual(row["error"], 0.0)
+        # cleanup
+        ce.core = None
+        ce = None
+        pkg = None
+        df_out = None
+        io = None
+        # save - restore - retest
+        rpkg = mc.Package()
+        rpkg.loadJsonStr(sdata)
+        self.assertTrue(rpkg.isValid())
+        self.assertEqual(len(rpkg.inputs), 1)
+        self.assertEqual(len(rpkg.neurons), 1)
+        self.assertEqual(len(rpkg.outputs), 1)
+        r_engine = mc.Engine()
+        r_engine.core = mc.Core()
+        r_engine.core.load(rpkg)
+        r_engine.tick_offset = 0
+        df_out = pd.DataFrame()
+        df_expected = pd.DataFrame([0.0]*7 + [5.0] + [0.0]*4, columns=['o1_exp'])
+        df_in = pd.DataFrame([3,0] * 6, columns=['i1'])
+        print(sdata)
+        for t in range(ticks):
+            df_out = pd.concat([df_out, r_engine.run_once(df_in)], ignore_index=True)
+
+        io = pd.concat([df_in, df_out, df_expected], axis=1)
+        io['error'] = io['o1'].astype(float) - io['o1_exp'].astype(float)
+        for index, row in io.iterrows():
+            self.assertEqual(row["o1"], row["o1_exp"])
+            self.assertEqual(row["error"], 0.0)
+

@@ -28,13 +28,11 @@ class CoreObject:
 
     def onRobotsEvent(self, msg:str, args:dict):
         src = f"{type(self).__name__}.{self.id()}.{self.__hash__():x}"
+        F.print(f"@ {src} {msg} : {str(args)}")
         if RobotsLogger.default:
             args["oid"] = self.id()
             args["ohash"] = f"{self.id()}.{self.__hash__():}"
             RobotsLogger.default.onEvent(msg, args, src)
-        #else:
-        #    print(f"@ {src} {msg} : {json.dumps(args)}")
-
 
 class RunnableObject(CoreObject):
     def __init__(self) -> None:

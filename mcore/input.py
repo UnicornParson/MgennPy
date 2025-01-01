@@ -44,8 +44,11 @@ class TapeInputsRow():
             raise ValueError(f"invalid row size {size}")
         self.data = np.zeros(size, dtype=dtype)
         self.headers = []
+
     def from_frame(self, df:pd.DataFrame, row_index = 0):
-        if not df or len(df) <= row_index:
+        if not isinstance(df, pd.DataFrame):
+            raise ValueError("input not a df")
+        if len(df) <= row_index:
             raise ValueError(f"no row {row_index} in data frame")
         self.headers = df.columns.tolist()
         self.data = df.iloc[row_index].to_numpy()
@@ -107,7 +110,7 @@ class TapeInputsBatch(Input):
         events = []
         for name in self.points:
             if name not in self.__row.headers:
-                raise IndexError(f"name {name} not found in row")
+                raise IndexError(f"name {name} not found in row {self.__row.headers}")
             receivers = self.points[name][0]
             F.print(f"proces point [{name}] : {self.points[name]}")
             val = self.__row.value(name)

@@ -81,7 +81,7 @@ class Link(RunnableObject):
         return f"Link[{self.id()}](apt:{self.apt}, l:{self.length} to:{self.receiverId} events:{len(self.events)})"
 
     def __hash__(self):
-        return F.uhash((self.apt, self.length, self.receiverId, frozenset(self.events)))
+        return F.uhash((self.apt, self.length, self.receiverId) + tuple(self.events))
 
     def __lt__(self, other):
         return self.__hash__() < other.__hash__()

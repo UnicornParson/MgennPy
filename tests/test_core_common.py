@@ -73,6 +73,24 @@ class TestCore(unittest.TestCase):
         self.assertTrue(bool(pkg_data))
 
 
+        #content["inputs"] = self.inputs
+        #content["outputs"] = self.outputs
+
+        #content["storage"] = {}
+        #content["storage"]["links"] = self.links
+        #content["storage"]["neurons"] = self.neurons
+        self.assertTrue("inputs" in pkg_data)
+        self.assertTrue("outputs" in pkg_data)
+        self.assertTrue("storage" in pkg_data)
+
+        self.assertTrue("links" in pkg_data["storage"])
+        self.assertTrue("neurons" in pkg_data["storage"])
+
+        self.assertEqual(len(pkg_data["inputs"]), len(orig.inputs))
+        self.assertEqual(len(pkg_data["outputs"]), len(orig.outputs))
+        self.assertEqual(len(pkg_data["storage"]["links"]), len(orig.links))
+        self.assertEqual(len(pkg_data["storage"]["neurons"]), len(orig.neurons))
+
         self.assertTrue(PackageUtils.checkRawPkg_b(pkg_data))
 
         self.assertTrue(new_pkg.meta)
@@ -83,5 +101,11 @@ class TestCore(unittest.TestCase):
         self.assertEqual(new_pkg.meta["parentSnapshot"], orig.meta["name"])
         self.assertEqual(new_pkg.meta["rev"], orig.meta["rev"])
         self.assertEqual(new_pkg.meta["tick"], orig.meta["tick"]) ## not executed yet
+
+        # all objects restored
+        self.assertEqual(len(new_pkg.inputs), len(orig.inputs))
+        self.assertEqual(len(new_pkg.outputs), len(orig.outputs))
+        self.assertEqual(len(new_pkg.links), len(orig.links))
+        self.assertEqual(len(new_pkg.neurons), len(orig.neurons))
 
 
