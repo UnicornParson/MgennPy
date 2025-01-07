@@ -66,11 +66,16 @@ class TestCore(unittest.TestCase):
 
         new_pkg = core.dump()
         self.assertTrue(new_pkg.isValid())
-
+        self.assertTrue(bool(new_pkg.inputs))
+        self.assertTrue(bool(new_pkg.outputs))
+        self.assertTrue(bool(new_pkg.links))
+        self.assertTrue(bool(new_pkg.neurons))
         pkgName, pkg_data = new_pkg.dump()
 
         self.assertTrue(bool(pkgName))
         self.assertTrue(bool(pkg_data))
+        self.assertTrue("content" in pkg_data)
+        pkg_content = pkg_data["content"]
 
 
         #content["inputs"] = self.inputs
@@ -79,17 +84,17 @@ class TestCore(unittest.TestCase):
         #content["storage"] = {}
         #content["storage"]["links"] = self.links
         #content["storage"]["neurons"] = self.neurons
-        self.assertTrue("inputs" in pkg_data)
-        self.assertTrue("outputs" in pkg_data)
-        self.assertTrue("storage" in pkg_data)
+        self.assertTrue("inputs" in pkg_content)
+        self.assertTrue("outputs" in pkg_content)
+        self.assertTrue("storage" in pkg_content)
 
-        self.assertTrue("links" in pkg_data["storage"])
-        self.assertTrue("neurons" in pkg_data["storage"])
+        self.assertTrue("links" in pkg_content["storage"])
+        self.assertTrue("neurons" in pkg_content["storage"])
 
-        self.assertEqual(len(pkg_data["inputs"]), len(orig.inputs))
-        self.assertEqual(len(pkg_data["outputs"]), len(orig.outputs))
-        self.assertEqual(len(pkg_data["storage"]["links"]), len(orig.links))
-        self.assertEqual(len(pkg_data["storage"]["neurons"]), len(orig.neurons))
+        self.assertEqual(len(pkg_content["inputs"]), len(orig.inputs))
+        self.assertEqual(len(pkg_content["outputs"]), len(orig.outputs))
+        self.assertEqual(len(pkg_content["storage"]["links"]), len(orig.links))
+        self.assertEqual(len(pkg_content["storage"]["neurons"]), len(orig.neurons))
 
         self.assertTrue(PackageUtils.checkRawPkg_b(pkg_data))
 

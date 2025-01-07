@@ -3,6 +3,39 @@ import mcore as mc
 
 from common import *
 
+
+class TestTapeInputsBatch(unittest.TestCase):
+    def test_serialize(self):
+        tape = mc.TapeInputsBatch()
+        points = {
+            "Alias1":{"type":"tape","name":"Alias1","receivers":[11],"args":{"components":[]}},
+            "Alias2":{"type":"tape","name":"Alias2","receivers":[12],"args":{"components":[]}},
+            "Alias3":{"type":"tape","name":"Alias3","receivers":[13],"args":{"components":[]}},
+            "Alias4":{"type":"tape","name":"Alias4","receivers":[14],"args":{"components":[]}},
+            "Alias5":{"type":"tape","name":"Alias5","receivers":[15],"args":{"components":[]}},
+            "Alias6":{"type":"tape","name":"Alias6","receivers":[16],"args":{"components":[]}},
+            "Alias7":{"type":"tape","name":"Alias7","receivers":[17],"args":{"components":[]}},
+            "Alias8":{"type":"tape","name":"Alias8","receivers":[18],"args":{"components":[]}},
+            "Alias9":{"type":"tape","name":"Alias9","receivers":[19],"args":{"components":[]}}
+        }
+        for name, p in points.items():
+            self.assertFalse(name in tape)
+            self.assertFalse(name in tape.point_names())
+            tape.addPoint(p)
+            self.assertTrue(name in tape)
+            self.assertTrue(name in tape.point_names())
+        
+        self.assertEqual(len(points), len(tape))
+        dump = tape.dump()
+        self.assertEqual(len(points), len(dump))
+        for p in dump:
+            self.assertTrue(bool(p))
+            self.assertTrue("name" in p)
+            name = p["name"]
+            self.assertTrue(bool(name))
+            self.assertTrue(F.d_eq(points[name], p))
+        
+
 class TestInputComponent(unittest.TestCase):
     def test_signals(self):
         ic = mc.InputComponent()

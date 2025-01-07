@@ -133,7 +133,15 @@ class Core(CoreObject):
             elif isinstance(elem, Link):
                 F.print(f"save link {id}")
                 pkg.links.append(data)
-
+            elif isinstance(elem, Output):
+                F.print(f"save output {id}")
+                pkg.outputs.append(data)
+        for ai in self.autoinputs.values():
+            pkg.inputs.append(ai.serialize())
+        F.print(f"p1 inputs len {len(pkg.inputs)}")
+        if self.itape:
+            pkg.inputs.extend(self.itape.dump())
+        F.print(f"p2 inputs len {len(pkg.inputs)}")
         self.pkg = pkg
         return pkg
 

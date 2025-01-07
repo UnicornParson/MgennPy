@@ -121,6 +121,19 @@ class TapeInputsBatch(Input):
     def point_names(self) -> list:
         return list(self.points.keys())
 
+    def dump(self) -> list:
+        l = []
+        for name, point in self.points.items():
+            receivers, ex_args = point
+            i_data = {
+                "name": name,
+                "type": self.type,
+                "receivers": receivers,
+                "args": ex_args
+            }
+            l.append(i_data)
+        return l
+
 
         
     def __contains__(self, key):

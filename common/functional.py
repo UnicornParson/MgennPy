@@ -34,7 +34,7 @@ class F():
         cf = inspect.stack()[1]
         current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         sys.stdout.write(f"[{current_time}]in[{cf.function}.{cf.lineno}] ")
-        return print(*args, **kwargs)
+        return print(*args, **kwargs, flush=True)
 
     @staticmethod
     def uhash(data):

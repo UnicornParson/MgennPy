@@ -1,0 +1,851 @@
+.[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias1 : r:[11] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias1', 'receivers': [11], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias2 : r:[12] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias2', 'receivers': [12], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias3 : r:[13] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias3', 'receivers': [13], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias4 : r:[14] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias4', 'receivers': [14], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias5 : r:[15] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias5', 'receivers': [15], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias6 : r:[16] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias6', 'receivers': [16], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias7 : r:[17] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias7', 'receivers': [17], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias8 : r:[18] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias8', 'receivers': [18], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias9 : r:[19] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias9', 'receivers': [19], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[dump.131] save neuron 64
+[2025-01-07 18:23:45]in[dump.131] save neuron 65
+[2025-01-07 18:23:45]in[dump.131] save neuron 66
+[2025-01-07 18:23:45]in[dump.131] save neuron 67
+[2025-01-07 18:23:45]in[dump.131] save neuron 68
+[2025-01-07 18:23:45]in[dump.131] save neuron 69
+[2025-01-07 18:23:45]in[dump.131] save neuron 70
+[2025-01-07 18:23:45]in[dump.131] save neuron 71
+[2025-01-07 18:23:45]in[dump.131] save neuron 72
+[2025-01-07 18:23:45]in[dump.131] save neuron 73
+[2025-01-07 18:23:45]in[dump.134] save link 10
+[2025-01-07 18:23:45]in[dump.134] save link 11
+[2025-01-07 18:23:45]in[dump.134] save link 12
+[2025-01-07 18:23:45]in[dump.134] save link 13
+[2025-01-07 18:23:45]in[dump.134] save link 14
+[2025-01-07 18:23:45]in[dump.134] save link 15
+[2025-01-07 18:23:45]in[dump.134] save link 16
+[2025-01-07 18:23:45]in[dump.134] save link 17
+[2025-01-07 18:23:45]in[dump.134] save link 18
+[2025-01-07 18:23:45]in[dump.134] save link 19
+[2025-01-07 18:23:45]in[dump.137] save output 100
+[2025-01-07 18:23:45]in[dump.137] save output 101
+[2025-01-07 18:23:45]in[dump.137] save output 102
+[2025-01-07 18:23:45]in[dump.137] save output 103
+[2025-01-07 18:23:45]in[dump.137] save output 104
+[2025-01-07 18:23:45]in[dump.137] save output 105
+[2025-01-07 18:23:45]in[dump.137] save output 106
+[2025-01-07 18:23:45]in[dump.137] save output 107
+[2025-01-07 18:23:45]in[dump.137] save output 108
+[2025-01-07 18:23:45]in[dump.137] save output 109
+[2025-01-07 18:23:45]in[dump.141] p1 inputs len 0
+[2025-01-07 18:23:45]in[dump.144] p2 inputs len 9
+.[2025-01-07 18:23:45]in[dump.141] p1 inputs len 0
+[2025-01-07 18:23:45]in[dump.144] p2 inputs len 0
+.[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias1 : r:[11] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias1', 'receivers': [11], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias2 : r:[12] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias2', 'receivers': [12], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias3 : r:[13] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias3', 'receivers': [13], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias4 : r:[14] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias4', 'receivers': [14], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias5 : r:[15] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias5', 'receivers': [15], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias6 : r:[16] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias6', 'receivers': [16], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias7 : r:[17] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias7', 'receivers': [17], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias8 : r:[18] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias8', 'receivers': [18], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias9 : r:[19] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias9', 'receivers': [19], 'args': {'components': []}}
+.[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'a': 1, 'b': 2, 'c': 1, 'd': 2} b:{'a': 1, 'b': 2, 'c': 1, 'd': 2}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'a': 1, 'b': 2, 'c': 1, 'd': 2} b:{'a': 1, 'b': 2, 'c': 1, 'd': 2}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'a': 1, 'b': 2, 'c': 3, 'd': 2, 'e': {'a': 1, 'b': 2, 'c': 1, 'd': 2}} b:{'a': 1, 'b': 2, 'c': 3, 'd': 2, 'e': {'a': 1, 'b': 2, 'c': 1, 'd': 2}}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'a': 1, 'b': 2, 'c': 2, 'd': 2} b:{'a': 1, 'b': 2, 'c': 2, 'd': 2}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'a': 1, 'b': 2, 'c': 3, 'd': 2, 'e': {'a': 1, 'b': 2, 'c': 2, 'd': 2}} b:{'a': 1, 'b': 2, 'c': 3, 'd': 2, 'e': {'a': 1, 'b': 2, 'c': 2, 'd': 2}}
+[2025-01-07 18:23:45]in[d_eq.64] p0 a:None b:None
+[2025-01-07 18:23:45]in[d_eq.69] p1 a:{a} b:{b}
+[2025-01-07 18:23:45]in[d_eq.64] p0 a:None b:None
+[2025-01-07 18:23:45]in[d_eq.69] p1 a:{a} b:{b}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'a': 1, 'b': 2, 'c': 1, 'd': 2} b:{'a': 1, 'b': 2, 'c': 1, 'd': 2}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'a': 1, 'b': 2, 'c': 1, 'd': 2} b:{'a': 1, 'b': 2, 'c': 1, 'd': 2}
+[2025-01-07 18:23:45]in[d_eq.92] p6 a:{'a': 1, 'b': 2, 'c': 1, 'd': 2} b:{'a': 1, 'b': 2, 'c': 3, 'd': 2}
+[2025-01-07 18:23:45]in[d_eq.92] p6 a:{'a': 1, 'b': 2, 'c': 1, 'd': 2} b:{'a': 1, 'b': 2, 'c': 3, 'd': 2}
+[2025-01-07 18:23:45]in[d_eq.92] p6 a:{'a': 1, 'b': 2, 'c': 3, 'd': 2} b:{'a': 1, 'b': 2, 'c': 1, 'd': 2}
+[2025-01-07 18:23:45]in[d_eq.92] p6 a:{'a': 1, 'b': 2, 'c': 3, 'd': 2} b:{'a': 1, 'b': 2, 'c': 1, 'd': 2}
+[2025-01-07 18:23:45]in[d_eq.74] p2 a:{'a': 1, 'b': 2, 'c': 3, 'd': 2} b:{'a': 1, 'b': 2, 'c': 3, 'd': 2, 'e': {'a': 1, 'b': 2, 'c': 1, 'd': 2}}
+[2025-01-07 18:23:45]in[d_eq.74] p2 a:{'a': 1, 'b': 2, 'c': 3, 'd': 2, 'e': {'a': 1, 'b': 2, 'c': 1, 'd': 2}} b:{'a': 1, 'b': 2, 'c': 3, 'd': 2}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'a': 1, 'b': 2, 'c': 1, 'd': 2} b:{'a': 1, 'b': 2, 'c': 1, 'd': 2}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'a': 1, 'b': 2, 'c': 3, 'd': 2, 'e': {'a': 1, 'b': 2, 'c': 1, 'd': 2}} b:{'a': 1, 'b': 2, 'c': 3, 'd': 2, 'e': {'a': 1, 'b': 2, 'c': 1, 'd': 2}}
+[2025-01-07 18:23:45]in[d_eq.92] p6 a:{'a': 1, 'b': 2, 'c': 1, 'd': 2} b:{'a': 1, 'b': 2, 'c': 2, 'd': 2}
+[2025-01-07 18:23:45]in[d_eq.89] p5 a:{'a': 1, 'b': 2, 'c': 3, 'd': 2, 'e': {'a': 1, 'b': 2, 'c': 1, 'd': 2}} b:{'a': 1, 'b': 2, 'c': 3, 'd': 2, 'e': {'a': 1, 'b': 2, 'c': 2, 'd': 2}}
+[2025-01-07 18:23:45]in[d_eq.92] p6 a:{'a': 1, 'b': 2, 'c': 1, 'd': 2} b:{'a': 1, 'b': 2, 'c': 2, 'd': 2}
+[2025-01-07 18:23:45]in[d_eq.89] p5 a:{'a': 1, 'b': 2, 'c': 3, 'd': 2, 'e': {'a': 1, 'b': 2, 'c': 1, 'd': 2}} b:{'a': 1, 'b': 2, 'c': 3, 'd': 2, 'e': {'a': 1, 'b': 2, 'c': 2, 'd': 2}}
+..[2025-01-07 18:23:45]in[onTick.41] InputComponent make amp 1.0
+[2025-01-07 18:23:45]in[onTick.41] InputComponent make amp 1.0
+[2025-01-07 18:23:45]in[onTick.41] InputComponent make amp 1.0
+[2025-01-07 18:23:45]in[makeEvents.132] 397873650033631287 created 7 events
+[2025-01-07 18:23:45]in[makeEvents.134] no events
+[2025-01-07 18:23:45]in[onTick.41] InputComponent make amp 1.0
+[2025-01-07 18:23:45]in[makeEvents.132] 397873650033631287 created 7 events
+[2025-01-07 18:23:45]in[onTick.41] InputComponent make amp 1.0
+[2025-01-07 18:23:45]in[makeEvents.132] 397873650033631287 created 7 events
+[2025-01-07 18:23:45]in[onTick.41] InputComponent make amp 1.0
+[2025-01-07 18:23:45]in[makeEvents.132] 397873650033631287 created 7 events
+[2025-01-07 18:23:45]in[onTick.41] InputComponent make amp 1.0
+[2025-01-07 18:23:45]in[makeEvents.132] 397873650033631287 created 7 events
+[2025-01-07 18:23:45]in[onTick.41] InputComponent make amp 1.0
+[2025-01-07 18:23:45]in[onTick.41] InputComponent make amp 1.0
+[2025-01-07 18:23:45]in[makeEvents.132] 397873650033631287 created 7 events
+[2025-01-07 18:23:45]in[makeEvents.134] no events
+[2025-01-07 18:23:45]in[onTick.41] InputComponent make amp 1.0
+[2025-01-07 18:23:45]in[makeEvents.132] 397873650033631287 created 7 events
+[2025-01-07 18:23:45]in[onTick.41] InputComponent make amp 1.0
+[2025-01-07 18:23:45]in[makeEvents.132] 397873650033631287 created 7 events
+[2025-01-07 18:23:45]in[onTick.41] InputComponent make amp 1.0
+[2025-01-07 18:23:45]in[onTick.41] InputComponent make amp 1.0
+[2025-01-07 18:23:45]in[makeEvents.132] 397873650033631287 created 7 events
+..[2025-01-07 18:23:45]in[onTick.38] ignore first
+[2025-01-07 18:23:45]in[onTick.41] InputComponent make amp 2.0
+[2025-01-07 18:23:45]in[onTick.41] InputComponent make amp 2.0
+[2025-01-07 18:23:45]in[onTick.41] InputComponent make amp 2.0
+[2025-01-07 18:23:45]in[onTick.41] InputComponent make amp 2.0
+[2025-01-07 18:23:45]in[onTick.41] InputComponent make amp 2.0
+[2025-01-07 18:23:45]in[onTick.41] InputComponent make amp 2.0
+[2025-01-07 18:23:45]in[onTick.41] InputComponent make amp 2.0
+[2025-01-07 18:23:45]in[onTick.41] InputComponent make amp 2.0
+.[2025-01-07 18:23:45]in[addPoint.99] store point Alias1 : r:[11] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias1', 'receivers': [11], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias2 : r:[12] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias2', 'receivers': [12], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias3 : r:[13] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias3', 'receivers': [13], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias4 : r:[14] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias4', 'receivers': [14], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias5 : r:[15] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias5', 'receivers': [15], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias6 : r:[16] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias6', 'receivers': [16], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias7 : r:[17] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias7', 'receivers': [17], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias8 : r:[18] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias8', 'receivers': [18], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias9 : r:[19] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias9', 'receivers': [19], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'components': []} b:{'components': []}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'type': 'tape', 'name': 'Alias1', 'receivers': [11], 'args': {'components': []}} b:{'name': 'Alias1', 'type': 'tape', 'receivers': [11], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'components': []} b:{'components': []}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'type': 'tape', 'name': 'Alias2', 'receivers': [12], 'args': {'components': []}} b:{'name': 'Alias2', 'type': 'tape', 'receivers': [12], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'components': []} b:{'components': []}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'type': 'tape', 'name': 'Alias3', 'receivers': [13], 'args': {'components': []}} b:{'name': 'Alias3', 'type': 'tape', 'receivers': [13], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'components': []} b:{'components': []}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'type': 'tape', 'name': 'Alias4', 'receivers': [14], 'args': {'components': []}} b:{'name': 'Alias4', 'type': 'tape', 'receivers': [14], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'components': []} b:{'components': []}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'type': 'tape', 'name': 'Alias5', 'receivers': [15], 'args': {'components': []}} b:{'name': 'Alias5', 'type': 'tape', 'receivers': [15], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'components': []} b:{'components': []}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'type': 'tape', 'name': 'Alias6', 'receivers': [16], 'args': {'components': []}} b:{'name': 'Alias6', 'type': 'tape', 'receivers': [16], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'components': []} b:{'components': []}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'type': 'tape', 'name': 'Alias7', 'receivers': [17], 'args': {'components': []}} b:{'name': 'Alias7', 'type': 'tape', 'receivers': [17], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'components': []} b:{'components': []}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'type': 'tape', 'name': 'Alias8', 'receivers': [18], 'args': {'components': []}} b:{'name': 'Alias8', 'type': 'tape', 'receivers': [18], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'components': []} b:{'components': []}
+[2025-01-07 18:23:45]in[d_eq.94] p7 a:{'type': 'tape', 'name': 'Alias9', 'receivers': [19], 'args': {'components': []}} b:{'name': 'Alias9', 'type': 'tape', 'receivers': [19], 'args': {'components': []}}
+.....[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.da1dda35447b5e45 LINK_APPLY_EVENT : {'tick': 110, 'amp': 1.0, 'from': 10}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.f0879a9582ad0690 LINK_APPLY_EVENT : {'tick': 111, 'amp': 2.0, 'from': 11}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.c3235832cac6599a LINK_APPLY_EVENT : {'tick': 112, 'amp': 3.0, 'from': 12}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.9986177c23827647 LINK_APPLY_EVENT : {'tick': 113, 'amp': 4.0, 'from': 13}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.3f8e09e3a0feeea0 LINK_APPLY_EVENT : {'tick': 114, 'amp': 5.0, 'from': 14}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.f739c2c45e353a05 LINK_APPLY_EVENT : {'tick': 115, 'amp': 6.0, 'from': 15}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.fab8a1597f2b24b3 LINK_APPLY_EVENT : {'tick': 116, 'amp': 7.0, 'from': 16}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.bc7f185bc5250687 LINK_APPLY_EVENT : {'tick': 117, 'amp': 8.0, 'from': 17}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.b48099d0441b7264 LINK_APPLY_EVENT : {'tick': 118, 'amp': 9.0, 'from': 18}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.a73e37939cffc433 LINK_APPLY_EVENT : {'tick': 119, 'amp': 10.0, 'from': 19}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.4778742198145011 LINK_APPLY_EVENT : {'tick': 120, 'amp': 11.0, 'from': 20}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.4f8dbd156e072b72 LINK_APPLY_EVENT : {'tick': 121, 'amp': 12.0, 'from': 21}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.2ce3461566274fff LINK_APPLY_EVENT : {'tick': 122, 'amp': 13.0, 'from': 22}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.c0060fbd4d89436 LINK_APPLY_EVENT : {'tick': 123, 'amp': 14.0, 'from': 23}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.ef7216a4bfcabaf4 LINK_APPLY_EVENT : {'tick': 124, 'amp': 15.0, 'from': 24}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.929c2d03814d2a27 LINK_APPLY_EVENT : {'tick': 125, 'amp': 16.0, 'from': 25}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.4f455fff1a2fb24a LINK_APPLY_EVENT : {'tick': 126, 'amp': 17.0, 'from': 26}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.17aab28cfca1d85 LINK_APPLY_EVENT : {'tick': 127, 'amp': 18.0, 'from': 27}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.f092b5f104edfef0 LINK_APPLY_EVENT : {'tick': 128, 'amp': 19.0, 'from': 28}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.76ca30bdd1046a14 LINK_APPLY_EVENT : {'tick': 129, 'amp': 20.0, 'from': 29}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.eb3438b98b4fe87d LINK_APPLY_EVENT : {'tick': 130, 'amp': 21.0, 'from': 30}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.982d505adb605788 LINK_APPLY_EVENT : {'tick': 131, 'amp': 22.0, 'from': 31}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.a1c78474ff3efaab LINK_APPLY_EVENT : {'tick': 132, 'amp': 23.0, 'from': 32}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.fe7c0da705c60b2c LINK_APPLY_EVENT : {'tick': 133, 'amp': 24.0, 'from': 33}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.e4771d95064d55a9 LINK_APPLY_EVENT : {'tick': 134, 'amp': 25.0, 'from': 34}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.2e024a679bf41148 LINK_APPLY_EVENT : {'tick': 135, 'amp': 26.0, 'from': 35}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.882381c05ddb409e LINK_APPLY_EVENT : {'tick': 136, 'amp': 27.0, 'from': 36}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.9cb9ddd35fd60e8 LINK_APPLY_EVENT : {'tick': 137, 'amp': 28.0, 'from': 37}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.5c2464c7bc5b6c1b LINK_APPLY_EVENT : {'tick': 138, 'amp': 29.0, 'from': 38}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.6358e117e9b73ff2 LINK_APPLY_EVENT : {'tick': 139, 'amp': 30.0, 'from': 39}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.93b05b7fc33d40ed LINK_APPLY_EVENT : {'tick': 140, 'amp': 31.0, 'from': 40}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.b099c2ea9a2e30d LINK_APPLY_EVENT : {'tick': 141, 'amp': 32.0, 'from': 41}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.653e16d9e7473e34 LINK_APPLY_EVENT : {'tick': 142, 'amp': 33.0, 'from': 42}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.94cb09de67acf504 LINK_APPLY_EVENT : {'tick': 143, 'amp': 34.0, 'from': 43}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.1860d45ed4a23b4c LINK_APPLY_EVENT : {'tick': 144, 'amp': 35.0, 'from': 44}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.8d47dbc585fa0e94 LINK_APPLY_EVENT : {'tick': 145, 'amp': 36.0, 'from': 45}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.1ba092f1c196c3e LINK_APPLY_EVENT : {'tick': 146, 'amp': 37.0, 'from': 46}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.933701cbab0abc0e LINK_APPLY_EVENT : {'tick': 147, 'amp': 38.0, 'from': 47}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.c2bfed0ea93060d0 LINK_APPLY_EVENT : {'tick': 148, 'amp': 39.0, 'from': 48}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.961caa1984296e53 LINK_APPLY_EVENT : {'tick': 149, 'amp': 40.0, 'from': 49}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.b01d0e2f9e1607f9 LINK_APPLY_EVENT : {'tick': 150, 'amp': 41.0, 'from': 50}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.4d65fd7863388433 LINK_APPLY_EVENT : {'tick': 151, 'amp': 42.0, 'from': 51}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.77e137dfa6fce5da LINK_APPLY_EVENT : {'tick': 152, 'amp': 43.0, 'from': 52}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.57f95e4d1cad8e9e LINK_APPLY_EVENT : {'tick': 153, 'amp': 44.0, 'from': 53}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.a5223f40ddf0837b LINK_APPLY_EVENT : {'tick': 154, 'amp': 45.0, 'from': 54}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.a93e22154183567c LINK_APPLY_EVENT : {'tick': 155, 'amp': 46.0, 'from': 55}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.291a465ad3bef912 LINK_APPLY_EVENT : {'tick': 156, 'amp': 47.0, 'from': 56}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.c706696bebde9bbc LINK_APPLY_EVENT : {'tick': 157, 'amp': 48.0, 'from': 57}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.37074a13f1b14b02 LINK_APPLY_EVENT : {'tick': 158, 'amp': 49.0, 'from': 58}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.24ad2267f8da68f1 LINK_APPLY_EVENT : {'tick': 159, 'amp': 50.0, 'from': 59}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.9a2097c56e57dd15 LINK_APPLY_EVENT : {'tick': 160, 'amp': 51.0, 'from': 60}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.677d2375e4f9943 LINK_APPLY_EVENT : {'tick': 161, 'amp': 52.0, 'from': 61}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.c6a54a30fb42392f LINK_APPLY_EVENT : {'tick': 162, 'amp': 53.0, 'from': 62}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.471e053170be43a9 LINK_APPLY_EVENT : {'tick': 163, 'amp': 54.0, 'from': 63}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.c043659f420edefd LINK_APPLY_EVENT : {'tick': 164, 'amp': 55.0, 'from': 64}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.2d23e1f5e64583a LINK_APPLY_EVENT : {'tick': 165, 'amp': 56.0, 'from': 65}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.47403c347d8f487e LINK_APPLY_EVENT : {'tick': 166, 'amp': 57.0, 'from': 66}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.7294970348985adc LINK_APPLY_EVENT : {'tick': 167, 'amp': 58.0, 'from': 67}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.e4e4205ce5789826 LINK_APPLY_EVENT : {'tick': 168, 'amp': 59.0, 'from': 68}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.e93376348f9c717f LINK_APPLY_EVENT : {'tick': 169, 'amp': 60.0, 'from': 69}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.78ad48ec0db613e5 LINK_APPLY_EVENT : {'tick': 170, 'amp': 61.0, 'from': 70}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.a0cb92421c1fe5da LINK_APPLY_EVENT : {'tick': 171, 'amp': 62.0, 'from': 71}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.142ff5528774d179 LINK_APPLY_EVENT : {'tick': 172, 'amp': 63.0, 'from': 72}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.d519066d42086337 LINK_APPLY_EVENT : {'tick': 173, 'amp': 64.0, 'from': 73}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.f6c288c6596421b3 LINK_APPLY_EVENT : {'tick': 174, 'amp': 65.0, 'from': 74}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.f6853431ae00b7e1 LINK_APPLY_EVENT : {'tick': 175, 'amp': 66.0, 'from': 75}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.fbdd0ab152b58227 LINK_APPLY_EVENT : {'tick': 176, 'amp': 67.0, 'from': 76}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.7db48328add87558 LINK_APPLY_EVENT : {'tick': 177, 'amp': 68.0, 'from': 77}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.a6e0c30481b2b215 LINK_APPLY_EVENT : {'tick': 178, 'amp': 69.0, 'from': 78}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.8e50a8e4a8481851 LINK_APPLY_EVENT : {'tick': 179, 'amp': 70.0, 'from': 79}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.d7bda04211d139ad LINK_APPLY_EVENT : {'tick': 180, 'amp': 71.0, 'from': 80}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.2e21956c4c7413fb LINK_APPLY_EVENT : {'tick': 181, 'amp': 72.0, 'from': 81}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.84ea880cceae4fb2 LINK_APPLY_EVENT : {'tick': 182, 'amp': 73.0, 'from': 82}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.3f07f01df9d7dacd LINK_APPLY_EVENT : {'tick': 183, 'amp': 74.0, 'from': 83}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.f53db8bf64e17e40 LINK_APPLY_EVENT : {'tick': 184, 'amp': 75.0, 'from': 84}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.c7c69d03cb6bcfc7 LINK_APPLY_EVENT : {'tick': 185, 'amp': 76.0, 'from': 85}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.9c948e5348888a3c LINK_APPLY_EVENT : {'tick': 186, 'amp': 77.0, 'from': 86}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.278746f1387fc8a8 LINK_APPLY_EVENT : {'tick': 187, 'amp': 78.0, 'from': 87}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.a3927e6d007f2ec5 LINK_APPLY_EVENT : {'tick': 188, 'amp': 79.0, 'from': 88}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.6993c1ecd490fcad LINK_APPLY_EVENT : {'tick': 189, 'amp': 80.0, 'from': 89}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.9d98c722832f059 LINK_APPLY_EVENT : {'tick': 190, 'amp': 81.0, 'from': 90}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.5e621293071c29ec LINK_APPLY_EVENT : {'tick': 191, 'amp': 82.0, 'from': 91}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.7ed33fd75b019976 LINK_APPLY_EVENT : {'tick': 192, 'amp': 83.0, 'from': 92}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.e0ae4b75e78b6e60 LINK_APPLY_EVENT : {'tick': 193, 'amp': 84.0, 'from': 93}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.c200904296e116e0 LINK_APPLY_EVENT : {'tick': 194, 'amp': 85.0, 'from': 94}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.616433d38905ad8e LINK_APPLY_EVENT : {'tick': 195, 'amp': 86.0, 'from': 95}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.e29d2f587cd5b609 LINK_APPLY_EVENT : {'tick': 196, 'amp': 87.0, 'from': 96}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.cd4e6b7b866bb4c7 LINK_APPLY_EVENT : {'tick': 197, 'amp': 88.0, 'from': 97}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.2.b5abb2a4fd1308cb LINK_APPLY_EVENT : {'tick': 198, 'amp': 89.0, 'from': 98}
+.[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 0}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 1}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 2}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 3}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 4}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 5}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 6}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 7}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 8}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 9}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 10}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 11}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 12}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 13}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 14}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 15}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 16}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 17}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 18}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 19}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 20}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 21}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 22}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 23}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 24}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 25}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 26}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 27}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 28}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 29}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 30}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 31}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 32}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 33}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 34}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 35}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 36}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 37}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 38}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 39}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 40}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 41}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 42}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 43}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 44}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 45}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 46}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 47}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 48}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 49}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 50}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 51}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 52}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 53}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 54}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 55}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 56}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 57}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 58}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 59}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 60}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 61}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 62}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 63}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 64}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 65}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 66}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 67}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 68}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 69}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 70}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 71}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 72}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 73}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 74}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 75}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 76}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 77}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 78}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 79}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 80}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 81}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 82}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 83}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 84}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 85}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 86}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 87}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 88}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 89}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 90}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 91}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 92}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 93}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 94}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 95}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 96}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 97}
+[2025-01-07 18:23:45]in[onRobotsEvent.31] @ Link.3.23315db7c3ddad04 LINK_IGNORE_SIGNAL : {'tick': 1, 'amp': 1.0, 'from': 98}
+..[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias1 : r:[11] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias1', 'receivers': [11], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias2 : r:[12] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias2', 'receivers': [12], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias3 : r:[13] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias3', 'receivers': [13], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias4 : r:[14] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias4', 'receivers': [14], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias5 : r:[15] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias5', 'receivers': [15], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias6 : r:[16] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias6', 'receivers': [16], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias7 : r:[17] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias7', 'receivers': [17], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias8 : r:[18] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias8', 'receivers': [18], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[load.72] found input tape
+[2025-01-07 18:23:45]in[addPoint.99] store point Alias9 : r:[19] ex: {'components': []} data:{'type': 'tape', 'name': 'Alias9', 'receivers': [19], 'args': {'components': []}}
+[2025-01-07 18:23:45]in[dprint.58] TapeInputsRow h[9], d[s9.dim1]
+[2025-01-07 18:23:45]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:45]in[dprint.58] TapeInputsRow h[9], d[s9.dim1]
+[2025-01-07 18:23:45]in[makeEvents.115] proces point [Alias1] : ([11], {'components': []})
+[2025-01-07 18:23:45]in[dprint.58] TapeInputsRow h[9], d[s9.dim1]
+[2025-01-07 18:23:45]in[makeEvents.115] proces point [Alias2] : ([12], {'components': []})
+[2025-01-07 18:23:45]in[dprint.58] TapeInputsRow h[9], d[s9.dim1]
+[2025-01-07 18:23:45]in[makeEvents.115] proces point [Alias3] : ([13], {'components': []})
+[2025-01-07 18:23:45]in[dprint.58] TapeInputsRow h[9], d[s9.dim1]
+[2025-01-07 18:23:45]in[makeEvents.115] proces point [Alias4] : ([14], {'components': []})
+[2025-01-07 18:23:45]in[dprint.58] TapeInputsRow h[9], d[s9.dim1]
+[2025-01-07 18:23:45]in[makeEvents.115] proces point [Alias5] : ([15], {'components': []})
+[2025-01-07 18:23:45]in[dprint.58] TapeInputsRow h[9], d[s9.dim1]
+[2025-01-07 18:23:45]in[makeEvents.115] proces point [Alias6] : ([16], {'components': []})
+[2025-01-07 18:23:45]in[dprint.58] TapeInputsRow h[9], d[s9.dim1]
+[2025-01-07 18:23:45]in[makeEvents.115] proces point [Alias7] : ([17], {'components': []})
+[2025-01-07 18:23:45]in[dprint.58] TapeInputsRow h[9], d[s9.dim1]
+[2025-01-07 18:23:45]in[makeEvents.115] proces point [Alias8] : ([18], {'components': []})
+[2025-01-07 18:23:45]in[dprint.58] TapeInputsRow h[9], d[s9.dim1]
+[2025-01-07 18:23:45]in[makeEvents.115] proces point [Alias9] : ([19], {'components': []})
+[2025-01-07 18:23:45]in[dprint.58] TapeInputsRow h[9], d[s9.dim1]
+[2025-01-07 18:23:45]in[__process_tapes.168] tape container made 9 new events
+[2025-01-07 18:23:45]in[__on_e_changed.85] N[64] changed 0.0 --> 0.0 in [onTick.82]
+[2025-01-07 18:23:45]in[__on_e_changed.85] N[65] changed 0.0 --> 0.0 in [onTick.82]
+[2025-01-07 18:23:45]in[__on_e_changed.85] N[66] changed 0.0 --> 0.0 in [onTick.82]
+[2025-01-07 18:23:45]in[__on_e_changed.85] N[67] changed 0.0 --> 0.0 in [onTick.82]
+[2025-01-07 18:23:45]in[__on_e_changed.85] N[68] changed 0.0 --> 0.0 in [onTick.82]
+[2025-01-07 18:23:45]in[__on_e_changed.85] N[69] changed 0.0 --> 0.0 in [onTick.82]
+[2025-01-07 18:23:45]in[__on_e_changed.85] N[70] changed 0.0 --> 0.0 in [onTick.82]
+[2025-01-07 18:23:45]in[__on_e_changed.85] N[71] changed 0.0 --> 0.0 in [onTick.82]
+[2025-01-07 18:23:45]in[__on_e_changed.85] N[72] changed 0.0 --> 0.0 in [onTick.82]
+[2025-01-07 18:23:45]in[__on_e_changed.85] N[73] changed 0.0 --> 0.0 in [onTick.82]
+[2025-01-07 18:23:45]in[__process_content.174] active content (30 objects) made 0 new events
+[2025-01-07 18:23:45]in[__process_events.185] process p.event Alias1->Link_11 amp:110.0
+[2025-01-07 18:23:45]in[__process_events.185] process p.event Alias2->Link_12 amp:10.0
+[2025-01-07 18:23:45]in[__process_events.185] process p.event Alias3->Link_13 amp:5.238095238095238
+[2025-01-07 18:23:45]in[__process_events.185] process p.event Alias4->Link_14 amp:3.5483870967741935
+[2025-01-07 18:23:45]in[__process_events.185] process p.event Alias5->Link_15 amp:2.682926829268293
+[2025-01-07 18:23:45]in[__process_events.185] process p.event Alias6->Link_16 amp:2.1568627450980395
+[2025-01-07 18:23:45]in[__process_events.185] process p.event Alias7->Link_17 amp:1.8032786885245902
+[2025-01-07 18:23:45]in[__process_events.185] process p.event Alias8->Link_18 amp:1.5492957746478875
+[2025-01-07 18:23:45]in[__process_events.185] process p.event Alias9->Link_19 amp:1.3580246913580247
+[2025-01-07 18:23:46]in[test_load_exec.35] o_record:    out0  out1  out2  out3  out4  out5  out6  out7  out8  out9
+1   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
+.[2025-01-07 18:23:46]in[connect.330] linked I[i1] to 3
+[2025-01-07 18:23:46]in[connect.322] linked N[1] to 4
+[2025-01-07 18:23:46]in[load.72] found input tape
+[2025-01-07 18:23:46]in[addPoint.99] store point i1 : r:[3] ex: {} data:{'type': 'tape', 'name': 'i1', 'receivers': [3], 'args': {}}
+[2025-01-07 18:23:46]in[dump.131] save neuron 1
+[2025-01-07 18:23:46]in[dump.134] save link 3
+[2025-01-07 18:23:46]in[dump.134] save link 4
+[2025-01-07 18:23:46]in[dump.137] save output 2
+[2025-01-07 18:23:46]in[dump.141] p1 inputs len 0
+[2025-01-07 18:23:46]in[dump.144] p2 inputs len 1
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 0.0 --> 0.0 in [onTick.82]
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 0 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:3
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 0.0 --> 0.0 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.b2f351a6d88722d9 LINK_APPLY_EVENT : {'tick': 2, 'amp': 3.0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 1 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.5a7c12c445f09430 LINK_IGNORE_SIGNAL : {'tick': 2, 'amp': 0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_events.185] process p.event 3->Neuron_1 amp:3.0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.1.99fd95cdf93a6c72 NEURON_IN : {'tick': 2, 'amp': 3.0, 'from': 3}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 0.0 --> 3.0 in [onSignal.90]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 3.0 --> 2.0 in [onTick.82]
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 0 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:3
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 2.0 --> 1.0 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.9464dbcd61eec644 LINK_APPLY_EVENT : {'tick': 4, 'amp': 3.0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 1 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.5a7c12c445f09430 LINK_IGNORE_SIGNAL : {'tick': 4, 'amp': 0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_events.185] process p.event 3->Neuron_1 amp:3.0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.1.49aedc60c1dadce1 NEURON_IN : {'tick': 4, 'amp': 3.0, 'from': 3}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 1.0 --> 4.0 in [onSignal.90]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 4.0 --> 3.0 in [onTick.82]
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 0 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:3
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 3.0 --> 2.0 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.3a74329367708e81 LINK_APPLY_EVENT : {'tick': 6, 'amp': 3.0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 1 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.5a7c12c445f09430 LINK_IGNORE_SIGNAL : {'tick': 6, 'amp': 0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_events.185] process p.event 3->Neuron_1 amp:3.0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.1.30fb9c72ae0b882a NEURON_IN : {'tick': 6, 'amp': 3.0, 'from': 3}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 2.0 --> 5.0 in [onSignal.90]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.1.99fd95cdf93a6c72 NEURON_SHOT : {'tick': 7, 'amp': 5.0}
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 1 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:3
+[2025-01-07 18:23:46]in[__process_events.185] process p.event 1->Link_4 amp:5.0
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 0.0 --> 0.0 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.6adbbd3a80a44f3f LINK_APPLY_EVENT : {'tick': 8, 'amp': 3.0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.4.da53047845c12007 LINK_APPLY_EVENT : {'tick': 8, 'amp': 5.0, 'from': 1}
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 2 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.5a7c12c445f09430 LINK_IGNORE_SIGNAL : {'tick': 8, 'amp': 0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_events.185] process p.event 3->Neuron_1 amp:3.0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.1.99fd95cdf93a6c72 NEURON_IN : {'tick': 8, 'amp': 3.0, 'from': 3}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 0.0 --> 3.0 in [onSignal.90]
+[2025-01-07 18:23:46]in[__process_events.185] process p.event 4->Output_2 amp:5.0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Output.2.1aada45865a545f8 OUTUT_IN : {'tick': 8, 'amp': 5.0, 'from': 4}
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 3.0 --> 2.0 in [onTick.82]
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 0 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:3
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 2.0 --> 1.0 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.d945b83fc3466684 LINK_APPLY_EVENT : {'tick': 10, 'amp': 3.0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 1 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.5a7c12c445f09430 LINK_IGNORE_SIGNAL : {'tick': 10, 'amp': 0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_events.185] process p.event 3->Neuron_1 amp:3.0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.1.49aedc60c1dadce1 NEURON_IN : {'tick': 10, 'amp': 3.0, 'from': 3}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 1.0 --> 4.0 in [onSignal.90]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 4.0 --> 3.0 in [onTick.82]
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 0 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:3
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 3.0 --> 2.0 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.70aa3b5ca92dbb93 LINK_APPLY_EVENT : {'tick': 12, 'amp': 3.0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 1 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.5a7c12c445f09430 LINK_IGNORE_SIGNAL : {'tick': 12, 'amp': 0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_events.185] process p.event 3->Neuron_1 amp:3.0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.1.30fb9c72ae0b882a NEURON_IN : {'tick': 12, 'amp': 3.0, 'from': 3}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 2.0 --> 5.0 in [onSignal.90]
+[2025-01-07 18:23:46]in[load.72] found input tape
+[2025-01-07 18:23:46]in[addPoint.99] store point i1 : r:[3] ex: {} data:{'name': 'i1', 'type': 'tape', 'receivers': [3], 'args': {}}
+b'{"meta": {"branch": "default", "branchSeq": 1, "generation": 0, "name": "LObjectIdType.Core_PYMGENN_6eb7e257fec59c885d53625fd504423652689284ed15bf3596e6140e48bd2a65.1736263426004.5", "parentDelta": "NONE", "parentSnapshot": "LObjectIdType.Core_PYMGENN_6eb7e257fec59c885d53625fd504423652689284ed15bf3596e6140e48bd2a65.1736263426002.4", "rev": 0, "tick": 0}, "state": "new", "contenttype": "json", "content": {"parent": "LObjectIdType.Core_PYMGENN_6eb7e257fec59c885d53625fd504423652689284ed15bf3596e6140e48bd2a65.1736263426002.4", "tick": 0, "id": "LObjectIdType.Core_PYMGENN_6eb7e257fec59c885d53625fd504423652689284ed15bf3596e6140e48bd2a65.1736263426004.5", "generation": 1, "seq": 0, "inputs": [{"name": "i1", "type": "tape", "receivers": ["3"], "args": {}}], "outputs": [{"id": "2", "name": "o1"}], "storage": {"links": [{"id": "3", "attenuationPerTick": 0.0, "length": 1, "receiverId": 1, "events": []}, {"id": "4", "attenuationPerTick": 0.0, "length": 1, "receiverId": 2, "events": []}], "neurons": [{"currentEnergy": 0.0, "energyLeak": 1.0, "mode": "shared", "peakEnergy": 5.0, "receivers": ["4"], "id": "1"}]}, "history": {"format": "robots", "format_ver": "0.1", "items": [{"t": 1736263425.8773205, "e": "LINK_APPLY_EVENT", "src": "Link.2.da1dda35447b5e45", "args": {"tick": 110, "amp": 1.0, "from": 10, "oid": 2, "ohash": "2.15716958196909956677"}}, {"t": 1736263425.8780792, "e": "LINK_APPLY_EVENT", "src": "Link.2.f0879a9582ad0690", "args": {"tick": 111, "amp": 2.0, "from": 11, "oid": 2, "ohash": "2.17331991657891825296"}}, {"t": 1736263425.878679, "e": "LINK_APPLY_EVENT", "src": "Link.2.c3235832cac6599a", "args": {"tick": 112, "amp": 3.0, "from": 12, "oid": 2, "ohash": "2.14061179436754426266"}}, {"t": 1736263425.8791406, "e": "LINK_APPLY_EVENT", "src": "Link.2.9986177c23827647", "args": {"tick": 113, "amp": 4.0, "from": 13, "oid": 2, "ohash": "2.11062555356621338183"}}, {"t": 1736263425.8796196, "e": "LINK_APPLY_EVENT", "src": "Link.2.3f8e09e3a0feeea0", "args": {"tick": 114, "amp": 5.0, "from": 14, "oid": 2, "ohash": "2.4579608744345661088"}}, {"t": 1736263425.8800838, "e": "LINK_APPLY_EVENT", "src": "Link.2.f739c2c45e353a05", "args": {"tick": 115, "amp": 6.0, "from": 15, "oid": 2, "ohash": "2.17814483949690632709"}}, {"t": 1736263425.8805332, "e": "LINK_APPLY_EVENT", "src": "Link.2.fab8a1597f2b24b3", "args": {"tick": 116, "amp": 7.0, "from": 16, "oid": 2, "ohash": "2.18066367310954439859"}}, {"t": 1736263425.880966, "e": "LINK_APPLY_EVENT", "src": "Link.2.bc7f185bc5250687", "args": {"tick": 117, "amp": 8.0, "from": 17, "oid": 2, "ohash": "2.13582601783601333895"}}, {"t": 1736263425.8814168, "e": "LINK_APPLY_EVENT", "src": "Link.2.b48099d0441b7264", "args": {"tick": 118, "amp": 9.0, "from": 18, "oid": 2, "ohash": "2.13006564843620889188"}}, {"t": 1736263425.8818648, "e": "LINK_APPLY_EVENT", "src": "Link.2.a73e37939cffc433", "args": {"tick": 119, "amp": 10.0, "from": 19, "oid": 2, "ohash": "2.12051130760023753779"}}, {"t": 1736263425.8824944, "e": "LINK_APPLY_EVENT", "src": "Link.2.4778742198145011", "args": {"tick": 120, "amp": 11.0, "from": 20, "oid": 2, "ohash": "2.5149993861532373009"}}, {"t": 1736263425.8831143, "e": "LINK_APPLY_EVENT", "src": "Link.2.4f8dbd156e072b72", "args": {"tick": 121, "amp": 12.0, "from": 21, "oid": 2, "ohash": "2.5732445800450435954"}}, {"t": 1736263425.8837452, "e": "LINK_APPLY_EVENT", "src": "Link.2.2ce3461566274fff", "args": {"tick": 122, "amp": 13.0, "from": 22, "oid": 2, "ohash": "2.3234506015104258047"}}, {"t": 1736263425.884348, "e": "LINK_APPLY_EVENT", "src": "Link.2.c0060fbd4d89436", "args": {"tick": 123, "amp": 14.0, "from": 23, "oid": 2, "ohash": "2.864797763179156534"}}, {"t": 1736263425.884798, "e": "LINK_APPLY_EVENT", "src": "Link.2.ef7216a4bfcabaf4", "args": {"tick": 124, "amp": 15.0, "from": 24, "oid": 2, "ohash": "2.17253878019257973492"}}, {"t": 1736263425.885255, "e": "LINK_APPLY_EVENT", "src": "Link.2.929c2d03814d2a27", "args": {"tick": 125, "amp": 16.0, "from": 25, "oid": 2, "ohash": "2.10564368318981810727"}}, {"t": 1736263425.8856995, "e": "LINK_APPLY_EVENT", "src": "Link.2.4f455fff1a2fb24a", "args": {"tick": 126, "amp": 17.0, "from": 26, "oid": 2, "ohash": "2.5712077251649974858"}}, {"t": 1736263425.886123, "e": "LINK_APPLY_EVENT", "src": "Link.2.17aab28cfca1d85", "args": {"tick": 127, "amp": 18.0, "from": 27, "oid": 2, "ohash": "2.106585732969799045"}}, {"t": 1736263425.8866293, "e": "LINK_APPLY_EVENT", "src": "Link.2.f092b5f104edfef0", "args": {"tick": 128, "amp": 19.0, "from": 28, "oid": 2, "ohash": "2.17335117962476912368"}}, {"t": 1736263425.8870642, "e": "LINK_APPLY_EVENT", "src": "Link.2.76ca30bdd1046a14", "args": {"tick": 129, "amp": 20.0, "from": 29, "oid": 2, "ohash": "2.8559707633584728596"}}, {"t": 1736263425.8875077, "e": "LINK_APPLY_EVENT", "src": "Link.2.eb3438b98b4fe87d", "args": {"tick": 130, "amp": 21.0, "from": 30, "oid": 2, "ohash": "2.16948233667259394173"}}, {"t": 1736263425.8879447, "e": "LINK_APPLY_EVENT", "src": "Link.2.982d505adb605788", "args": {"tick": 131, "amp": 22.0, "from": 31, "oid": 2, "ohash": "2.10965509018874828680"}}, {"t": 1736263425.8883774, "e": "LINK_APPLY_EVENT", "src": "Link.2.a1c78474ff3efaab", "args": {"tick": 132, "amp": 23.0, "from": 32, "oid": 2, "ohash": "2.11657431798505208491"}}, {"t": 1736263425.8888113, "e": "LINK_APPLY_EVENT", "src": "Link.2.fe7c0da705c60b2c", "args": {"tick": 133, "amp": 24.0, "from": 33, "oid": 2, "ohash": "2.18337546793753381676"}}, {"t": 1736263425.889241, "e": "LINK_APPLY_EVENT", "src": "Link.2.e4771d95064d55a9", "args": {"tick": 134, "amp": 25.0, "from": 34, "oid": 2, "ohash": "2.16462659488769201577"}}, {"t": 1736263425.8896656, "e": "LINK_APPLY_EVENT", "src": "Link.2.2e024a679bf41148", "args": {"tick": 135, "amp": 26.0, "from": 35, "oid": 2, "ohash": "2.3315294084556656968"}}, {"t": 1736263425.8900821, "e": "LINK_APPLY_EVENT", "src": "Link.2.882381c05ddb409e", "args": {"tick": 136, "amp": 27.0, "from": 36, "oid": 2, "ohash": "2.9809827076551426206"}}, {"t": 1736263425.890503, "e": "LINK_APPLY_EVENT", "src": "Link.2.9cb9ddd35fd60e8", "args": {"tick": 137, "amp": 28.0, "from": 37, "oid": 2, "ohash": "2.705831340032745704"}}, {"t": 1736263425.890916, "e": "LINK_APPLY_EVENT", "src": "Link.2.5c2464c7bc5b6c1b", "args": {"tick": 138, "amp": 29.0, "from": 38, "oid": 2, "ohash": "2.6639542559672331291"}}, {"t": 1736263425.8913467, "e": "LINK_APPLY_EVENT", "src": "Link.2.6358e117e9b73ff2", "args": {"tick": 139, "amp": 30.0, "from": 39, "oid": 2, "ohash": "2.7158719100527001586"}}, {"t": 1736263425.8919485, "e": "LINK_APPLY_EVENT", "src": "Link.2.93b05b7fc33d40ed", "args": {"tick": 140, "amp": 31.0, "from": 40, "oid": 2, "ohash": "2.10642106523771027693"}}, {"t": 1736263425.8925474, "e": "LINK_APPLY_EVENT", "src": "Link.2.b099c2ea9a2e30d", "args": {"tick": 141, "amp": 32.0, "from": 41, "oid": 2, "ohash": "2.795338533436056333"}}, {"t": 1736263425.8930025, "e": "LINK_APPLY_EVENT", "src": "Link.2.653e16d9e7473e34", "args": {"tick": 142, "amp": 33.0, "from": 42, "oid": 2, "ohash": "2.7295293571530702388"}}, {"t": 1736263425.8934221, "e": "LINK_APPLY_EVENT", "src": "Link.2.94cb09de67acf504", "args": {"tick": 143, "amp": 34.0, "from": 43, "oid": 2, "ohash": "2.10721674188712375556"}}, {"t": 1736263425.8938105, "e": "LINK_APPLY_EVENT", "src": "Link.2.1860d45ed4a23b4c", "args": {"tick": 144, "amp": 35.0, "from": 44, "oid": 2, "ohash": "2.1756637358433909580"}}, {"t": 1736263425.894194, "e": "LINK_APPLY_EVENT", "src": "Link.2.8d47dbc585fa0e94", "args": {"tick": 145, "amp": 36.0, "from": 45, "oid": 2, "ohash": "2.10180347124097093268"}}, {"t": 1736263425.8948076, "e": "LINK_APPLY_EVENT", "src": "Link.2.1ba092f1c196c3e", "args": {"tick": 146, "amp": 37.0, "from": 46, "oid": 2, "ohash": "2.124422037645651006"}}, {"t": 1736263425.8954015, "e": "LINK_APPLY_EVENT", "src": "Link.2.933701cbab0abc0e", "args": {"tick": 147, "amp": 38.0, "from": 47, "oid": 2, "ohash": "2.10607949421554088974"}}, {"t": 1736263425.8959782, "e": "LINK_APPLY_EVENT", "src": "Link.2.c2bfed0ea93060d0", "args": {"tick": 148, "amp": 39.0, "from": 48, "oid": 2, "ohash": "2.14033195611133599952"}}, {"t": 1736263425.8965533, "e": "LINK_APPLY_EVENT", "src": "Link.2.961caa1984296e53", "args": {"tick": 149, "amp": 40.0, "from": 49, "oid": 2, "ohash": "2.10816707431605300819"}}, {"t": 1736263425.8971188, "e": "LINK_APPLY_EVENT", "src": "Link.2.b01d0e2f9e1607f9", "args": {"tick": 150, "amp": 41.0, "from": 50, "oid": 2, "ohash": "2.12690314922678421497"}}, {"t": 1736263425.8975627, "e": "LINK_APPLY_EVENT", "src": "Link.2.4d65fd7863388433", "args": {"tick": 151, "amp": 42.0, "from": 51, "oid": 2, "ohash": "2.5577142407070778419"}}, {"t": 1736263425.8979712, "e": "LINK_APPLY_EVENT", "src": "Link.2.77e137dfa6fce5da", "args": {"tick": 152, "amp": 43.0, "from": 52, "oid": 2, "ohash": "2.8638246993992148442"}}, {"t": 1736263425.8985472, "e": "LINK_APPLY_EVENT", "src": "Link.2.57f95e4d1cad8e9e", "args": {"tick": 153, "amp": 44.0, "from": 53, "oid": 2, "ohash": "2.6339201635787312798"}}, {"t": 1736263425.8991172, "e": "LINK_APPLY_EVENT", "src": "Link.2.a5223f40ddf0837b", "args": {"tick": 154, "amp": 45.0, "from": 54, "oid": 2, "ohash": "2.11899142713300255611"}}, {"t": 1736263425.8996973, "e": "LINK_APPLY_EVENT", "src": "Link.2.a93e22154183567c", "args": {"tick": 155, "amp": 46.0, "from": 55, "oid": 2, "ohash": "2.12195222315654665852"}}, {"t": 1736263425.9002612, "e": "LINK_APPLY_EVENT", "src": "Link.2.291a465ad3bef912", "args": {"tick": 156, "amp": 47.0, "from": 56, "oid": 2, "ohash": "2.2961757060863031570"}}, {"t": 1736263425.9008281, "e": "LINK_APPLY_EVENT", "src": "Link.2.c706696bebde9bbc", "args": {"tick": 157, "amp": 48.0, "from": 57, "oid": 2, "ohash": "2.14341265975647574972"}}, {"t": 1736263425.9014049, "e": "LINK_APPLY_EVENT", "src": "Link.2.37074a13f1b14b02", "args": {"tick": 158, "amp": 49.0, "from": 58, "oid": 2, "ohash": "2.3965219446442773250"}}, {"t": 1736263425.9017966, "e": "LINK_APPLY_EVENT", "src": "Link.2.24ad2267f8da68f1", "args": {"tick": 159, "amp": 50.0, "from": 59, "oid": 2, "ohash": "2.2642806386288388337"}}, {"t": 1736263425.9021733, "e": "LINK_APPLY_EVENT", "src": "Link.2.9a2097c56e57dd15", "args": {"tick": 160, "amp": 51.0, "from": 60, "oid": 2, "ohash": "2.11106043555311246613"}}, {"t": 1736263425.9025595, "e": "LINK_APPLY_EVENT", "src": "Link.2.677d2375e4f9943", "args": {"tick": 161, "amp": 52.0, "from": 61, "oid": 2, "ohash": "2.466072221703444803"}}, {"t": 1736263425.9029784, "e": "LINK_APPLY_EVENT", "src": "Link.2.c6a54a30fb42392f", "args": {"tick": 162, "amp": 53.0, "from": 62, "oid": 2, "ohash": "2.14313928564901296431"}}, {"t": 1736263425.9034135, "e": "LINK_APPLY_EVENT", "src": "Link.2.471e053170be43a9", "args": {"tick": 163, "amp": 54.0, "from": 63, "oid": 2, "ohash": "2.5124539135897256873"}}, {"t": 1736263425.9038107, "e": "LINK_APPLY_EVENT", "src": "Link.2.c043659f420edefd", "args": {"tick": 164, "amp": 55.0, "from": 64, "oid": 2, "ohash": "2.13854028613404253949"}}, {"t": 1736263425.9041924, "e": "LINK_APPLY_EVENT", "src": "Link.2.2d23e1f5e64583a", "args": {"tick": 165, "amp": 56.0, "from": 65, "oid": 2, "ohash": "2.203293237633636410"}}, {"t": 1736263425.9046538, "e": "LINK_APPLY_EVENT", "src": "Link.2.47403c347d8f487e", "args": {"tick": 166, "amp": 57.0, "from": 66, "oid": 2, "ohash": "2.5134169771344873598"}}, {"t": 1736263425.9050584, "e": "LINK_APPLY_EVENT", "src": "Link.2.7294970348985adc", "args": {"tick": 167, "amp": 58.0, "from": 67, "oid": 2, "ohash": "2.8256390057235602140"}}, {"t": 1736263425.9054697, "e": "LINK_APPLY_EVENT", "src": "Link.2.e4e4205ce5789826", "args": {"tick": 168, "amp": 59.0, "from": 68, "oid": 2, "ohash": "2.16493343318696564774"}}, {"t": 1736263425.9060378, "e": "LINK_APPLY_EVENT", "src": "Link.2.e93376348f9c717f", "args": {"tick": 169, "amp": 60.0, "from": 69, "oid": 2, "ohash": "2.16803904602769224063"}}, {"t": 1736263425.9066112, "e": "LINK_APPLY_EVENT", "src": "Link.2.78ad48ec0db613e5", "args": {"tick": 170, "amp": 61.0, "from": 70, "oid": 2, "ohash": "2.8695686634201813989"}}, {"t": 1736263425.9071703, "e": "LINK_APPLY_EVENT", "src": "Link.2.a0cb92421c1fe5da", "args": {"tick": 171, "amp": 62.0, "from": 71, "oid": 2, "ohash": "2.11586515278978082266"}}, {"t": 1736263425.9077334, "e": "LINK_APPLY_EVENT", "src": "Link.2.142ff5528774d179", "args": {"tick": 172, "amp": 63.0, "from": 72, "oid": 2, "ohash": "2.1454650939472662905"}}, {"t": 1736263425.9082935, "e": "LINK_APPLY_EVENT", "src": "Link.2.d519066d42086337", "args": {"tick": 173, "amp": 64.0, "from": 73, "oid": 2, "ohash": "2.15355311470825464631"}}, {"t": 1736263425.908847, "e": "LINK_APPLY_EVENT", "src": "Link.2.f6c288c6596421b3", "args": {"tick": 174, "amp": 65.0, "from": 74, "oid": 2, "ohash": "2.17780924664296776115"}}, {"t": 1736263425.909406, "e": "LINK_APPLY_EVENT", "src": "Link.2.f6853431ae00b7e1", "args": {"tick": 175, "amp": 66.0, "from": 75, "oid": 2, "ohash": "2.17763661693210114017"}}, {"t": 1736263425.9099576, "e": "LINK_APPLY_EVENT", "src": "Link.2.fbdd0ab152b58227", "args": {"tick": 176, "amp": 67.0, "from": 76, "oid": 2, "ohash": "2.18148673830086083111"}}, {"t": 1736263425.910509, "e": "LINK_APPLY_EVENT", "src": "Link.2.7db48328add87558", "args": {"tick": 177, "amp": 68.0, "from": 77, "oid": 2, "ohash": "2.9058008961287484760"}}, {"t": 1736263425.9110508, "e": "LINK_APPLY_EVENT", "src": "Link.2.a6e0c30481b2b215", "args": {"tick": 178, "amp": 69.0, "from": 78, "oid": 2, "ohash": "2.12024825429202481685"}}, {"t": 1736263425.9116035, "e": "LINK_APPLY_EVENT", "src": "Link.2.8e50a8e4a8481851", "args": {"tick": 179, "amp": 70.0, "from": 79, "oid": 2, "ohash": "2.10254882051551926353"}}, {"t": 1736263425.9121406, "e": "LINK_APPLY_EVENT", "src": "Link.2.d7bda04211d139ad", "args": {"tick": 180, "amp": 71.0, "from": 80, "oid": 2, "ohash": "2.15545757694380030381"}}, {"t": 1736263425.9126856, "e": "LINK_APPLY_EVENT", "src": "Link.2.2e21956c4c7413fb", "args": {"tick": 181, "amp": 72.0, "from": 81, "oid": 2, "ohash": "2.3324102292347819003"}}, {"t": 1736263425.913219, "e": "LINK_APPLY_EVENT", "src": "Link.2.84ea880cceae4fb2", "args": {"tick": 182, "amp": 73.0, "from": 82, "oid": 2, "ohash": "2.9577617146145296306"}}, {"t": 1736263425.9137573, "e": "LINK_APPLY_EVENT", "src": "Link.2.3f07f01df9d7dacd", "args": {"tick": 183, "amp": 74.0, "from": 83, "oid": 2, "ohash": "2.4541862760762825421"}}, {"t": 1736263425.9142969, "e": "LINK_APPLY_EVENT", "src": "Link.2.f53db8bf64e17e40", "args": {"tick": 184, "amp": 75.0, "from": 84, "oid": 2, "ohash": "2.17671483645042458176"}}, {"t": 1736263425.9148374, "e": "LINK_APPLY_EVENT", "src": "Link.2.c7c69d03cb6bcfc7", "args": {"tick": 185, "amp": 76.0, "from": 85, "oid": 2, "ohash": "2.14395365898559672263"}}, {"t": 1736263425.915387, "e": "LINK_APPLY_EVENT", "src": "Link.2.9c948e5348888a3c", "args": {"tick": 186, "amp": 77.0, "from": 86, "oid": 2, "ohash": "2.11282799454820272700"}}, {"t": 1736263425.9159338, "e": "LINK_APPLY_EVENT", "src": "Link.2.278746f1387fc8a8", "args": {"tick": 187, "amp": 78.0, "from": 87, "oid": 2, "ohash": "2.2848323291184089256"}}, {"t": 1736263425.91648, "e": "LINK_APPLY_EVENT", "src": "Link.2.a3927e6d007f2ec5", "args": {"tick": 188, "amp": 79.0, "from": 88, "oid": 2, "ohash": "2.11786622181406879429"}}, {"t": 1736263425.91701, "e": "LINK_APPLY_EVENT", "src": "Link.2.6993c1ecd490fcad", "args": {"tick": 189, "amp": 80.0, "from": 89, "oid": 2, "ohash": "2.7607637418481613997"}}, {"t": 1736263425.917542, "e": "LINK_APPLY_EVENT", "src": "Link.2.9d98c722832f059", "args": {"tick": 190, "amp": 81.0, "from": 90, "oid": 2, "ohash": "2.709752838216151129"}}, {"t": 1736263425.9180663, "e": "LINK_APPLY_EVENT", "src": "Link.2.5e621293071c29ec", "args": {"tick": 191, "amp": 82.0, "from": 91, "oid": 2, "ohash": "2.6801018809971649004"}}, {"t": 1736263425.9185872, "e": "LINK_APPLY_EVENT", "src": "Link.2.7ed33fd75b019976", "args": {"tick": 192, "amp": 83.0, "from": 92, "oid": 2, "ohash": "2.9138718263042218358"}}, {"t": 1736263425.9190981, "e": "LINK_APPLY_EVENT", "src": "Link.2.e0ae4b75e78b6e60", "args": {"tick": 193, "amp": 84.0, "from": 93, "oid": 2, "ohash": "2.16189960680211443296"}}, {"t": 1736263425.9196124, "e": "LINK_APPLY_EVENT", "src": "Link.2.c200904296e116e0", "args": {"tick": 194, "amp": 85.0, "from": 94, "oid": 2, "ohash": "2.13979331859031594720"}}, {"t": 1736263425.9201202, "e": "LINK_APPLY_EVENT", "src": "Link.2.616433d38905ad8e", "args": {"tick": 195, "amp": 86.0, "from": 95, "oid": 2, "ohash": "2.7017791102980042126"}}, {"t": 1736263425.9206338, "e": "LINK_APPLY_EVENT", "src": "Link.2.e29d2f587cd5b609", "args": {"tick": 196, "amp": 87.0, "from": 96, "oid": 2, "ohash": "2.16329259881013294601"}}, {"t": 1736263425.9211483, "e": "LINK_APPLY_EVENT", "src": "Link.2.cd4e6b7b866bb4c7", "args": {"tick": 197, "amp": 88.0, "from": 97, "oid": 2, "ohash": "2.14793880004239013063"}}, {"t": 1736263425.9216654, "e": "LINK_APPLY_EVENT", "src": "Link.2.b5abb2a4fd1308cb", "args": {"tick": 198, "amp": 89.0, "from": 98, "oid": 2, "ohash": "2.13090753163572742347"}}, {"t": 1736263425.9223344, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 0, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9228315, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 1, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.923349, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 2, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9238708, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 3, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9243927, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 4, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9249065, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 5, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9254282, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 6, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9259489, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 7, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9264624, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 8, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9269745, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 9, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9273381, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 10, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9276898, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 11, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9280417, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 12, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9284024, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 13, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9287605, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 14, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9291086, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 15, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.929468, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 16, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9298599, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 17, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9302118, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 18, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9305727, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 19, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9309232, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 20, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9312532, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 21, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9316168, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 22, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9319787, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 23, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9323347, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 24, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.932683, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 25, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9330184, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 26, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9333813, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 27, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9337325, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 28, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9340634, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 29, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9344227, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 30, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9347801, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 31, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9351084, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 32, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9354644, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 33, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9358127, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 34, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9361398, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 35, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9365036, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 36, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9368553, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 37, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9371865, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 38, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9375496, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 39, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9379013, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 40, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.938233, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 41, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9385962, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 42, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.938943, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 43, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9392693, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 44, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9396245, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 45, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.939968, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 46, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9403212, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 47, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9407156, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 48, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9410737, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 49, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9414408, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 50, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.941792, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 51, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9421213, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 52, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9424646, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 53, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9428692, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 54, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9432402, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 55, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.943752, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 56, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9442487, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 57, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.944746, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 58, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9452302, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 59, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9457235, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 60, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9462082, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 61, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9466996, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 62, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9471781, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 63, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9476635, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 64, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.948147, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 65, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9486356, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 66, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.949119, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 67, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9496062, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 68, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9500914, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 69, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9505906, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 70, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9510727, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 71, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9515905, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 72, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9520962, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 73, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9526165, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 74, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9531271, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 75, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.95366, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 76, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9540327, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 77, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9543777, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 78, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9547083, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 79, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.955038, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 80, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9553728, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 81, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9557064, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 82, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9560804, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 83, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9564917, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 84, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9568462, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 85, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9573667, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 86, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9578698, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 87, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9583797, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 88, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.958908, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 89, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.959439, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 90, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9599621, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 91, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9604888, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 92, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9610054, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 93, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.961522, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 94, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9620335, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 95, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9629161, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 96, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9635818, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 97, "oid": 3, "ohash": "3.2535911109032783108"}}, {"t": 1736263425.9642053, "e": "LINK_IGNORE_SIGNAL", "src": "Link.3.23315db7c3ddad04", "args": {"tick": 1, "amp": 1.0, "from": 98, "oid": 3, "ohash": "3.2535911109032783108"}}]}, "external": {}}}'
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 0.0 --> 0.0 in [onTick.82]
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 0 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:3
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 0.0 --> 0.0 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.b2f351a6d88722d9 LINK_APPLY_EVENT : {'tick': 2, 'amp': 3.0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 1 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.5a7c12c445f09430 LINK_IGNORE_SIGNAL : {'tick': 2, 'amp': 0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_events.185] process p.event 3->Neuron_1 amp:3.0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.1.99fd95cdf93a6c72 NEURON_IN : {'tick': 2, 'amp': 3.0, 'from': 3}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 0.0 --> 3.0 in [onSignal.90]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 3.0 --> 2.0 in [onTick.82]
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 0 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:3
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 2.0 --> 1.0 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.9464dbcd61eec644 LINK_APPLY_EVENT : {'tick': 4, 'amp': 3.0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 1 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.5a7c12c445f09430 LINK_IGNORE_SIGNAL : {'tick': 4, 'amp': 0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_events.185] process p.event 3->Neuron_1 amp:3.0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.1.49aedc60c1dadce1 NEURON_IN : {'tick': 4, 'amp': 3.0, 'from': 3}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 1.0 --> 4.0 in [onSignal.90]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 4.0 --> 3.0 in [onTick.82]
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 0 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:3
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 3.0 --> 2.0 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.3a74329367708e81 LINK_APPLY_EVENT : {'tick': 6, 'amp': 3.0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 1 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.5a7c12c445f09430 LINK_IGNORE_SIGNAL : {'tick': 6, 'amp': 0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_events.185] process p.event 3->Neuron_1 amp:3.0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.1.30fb9c72ae0b882a NEURON_IN : {'tick': 6, 'amp': 3.0, 'from': 3}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 2.0 --> 5.0 in [onSignal.90]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.1.99fd95cdf93a6c72 NEURON_SHOT : {'tick': 7, 'amp': 5.0}
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 1 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:3
+[2025-01-07 18:23:46]in[__process_events.185] process p.event 1->Link_4 amp:5.0
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 0.0 --> 0.0 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.6adbbd3a80a44f3f LINK_APPLY_EVENT : {'tick': 8, 'amp': 3.0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.4.da53047845c12007 LINK_APPLY_EVENT : {'tick': 8, 'amp': 5.0, 'from': 1}
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 2 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.5a7c12c445f09430 LINK_IGNORE_SIGNAL : {'tick': 8, 'amp': 0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_events.185] process p.event 3->Neuron_1 amp:3.0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.1.99fd95cdf93a6c72 NEURON_IN : {'tick': 8, 'amp': 3.0, 'from': 3}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 0.0 --> 3.0 in [onSignal.90]
+[2025-01-07 18:23:46]in[__process_events.185] process p.event 4->Output_2 amp:5.0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Output.2.1aada45865a545f8 OUTUT_IN : {'tick': 8, 'amp': 5.0, 'from': 4}
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 3.0 --> 2.0 in [onTick.82]
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 0 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:3
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 2.0 --> 1.0 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.d945b83fc3466684 LINK_APPLY_EVENT : {'tick': 10, 'amp': 3.0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 1 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.5a7c12c445f09430 LINK_IGNORE_SIGNAL : {'tick': 10, 'amp': 0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_events.185] process p.event 3->Neuron_1 amp:3.0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.1.49aedc60c1dadce1 NEURON_IN : {'tick': 10, 'amp': 3.0, 'from': 3}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 1.0 --> 4.0 in [onSignal.90]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 4.0 --> 3.0 in [onTick.82]
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 0 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:3
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_autoinputs.161] autoinputs made 0 new events
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[makeEvents.115] proces point [i1] : ([3], {})
+[2025-01-07 18:23:46]in[dprint.58] TapeInputsRow h[1], d[s1.dim1]
+[2025-01-07 18:23:46]in[__process_tapes.168] tape container made 1 new events
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 3.0 --> 2.0 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.70aa3b5ca92dbb93 LINK_APPLY_EVENT : {'tick': 12, 'amp': 3.0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_content.174] active content (4 objects) made 1 new events
+[2025-01-07 18:23:46]in[__process_events.185] process p.event i1->Link_3 amp:0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Link.3.5a7c12c445f09430 LINK_IGNORE_SIGNAL : {'tick': 12, 'amp': 0, 'from': 'i1'}
+[2025-01-07 18:23:46]in[__process_events.185] process p.event 3->Neuron_1 amp:3.0
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.1.30fb9c72ae0b882a NEURON_IN : {'tick': 12, 'amp': 3.0, 'from': 3}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[1] changed 2.0 --> 5.0 in [onSignal.90]
+....[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.f2b4334a431e5335 NEURON_IN : {'tick': 0, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.0 --> 0.2 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.2 --> 0.1 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.db467867ecd26c56 NEURON_IN : {'tick': 1, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.1 --> 0.30000000000000004 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.30000000000000004 --> 0.20000000000000004 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.a4209a411f085198 NEURON_IN : {'tick': 2, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.20000000000000004 --> 0.4 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.4 --> 0.30000000000000004 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.b274a81e06c842d NEURON_IN : {'tick': 3, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.30000000000000004 --> 0.5 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.5 --> 0.4 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.3a87dae05ad7a5aa NEURON_IN : {'tick': 4, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.4 --> 0.6000000000000001 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.6000000000000001 --> 0.5000000000000001 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.fda0aa844408eb83 NEURON_IN : {'tick': 5, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.5000000000000001 --> 0.7000000000000002 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.7000000000000002 --> 0.6000000000000002 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.f7916a5f51163a04 NEURON_IN : {'tick': 6, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.6000000000000002 --> 0.8000000000000003 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.8000000000000003 --> 0.7000000000000003 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.46a49982f1015391 NEURON_IN : {'tick': 7, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.7000000000000003 --> 0.9000000000000004 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.9000000000000004 --> 0.8000000000000004 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.1de21d69e6903767 NEURON_IN : {'tick': 8, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.8000000000000004 --> 1.0000000000000004 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.0000000000000004 --> 0.9000000000000005 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.aaa582b6229c82c2 NEURON_IN : {'tick': 9, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.9000000000000005 --> 1.1000000000000005 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.1000000000000005 --> 1.0000000000000004 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.d8ec713fc39b7ff NEURON_IN : {'tick': 10, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.0000000000000004 --> 1.2000000000000004 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.2000000000000004 --> 1.1000000000000003 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.a8fea9cb48a60a72 NEURON_IN : {'tick': 11, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.1000000000000003 --> 1.3000000000000003 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.3000000000000003 --> 1.2000000000000002 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.d1d7f8d52433d8b0 NEURON_IN : {'tick': 12, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.2000000000000002 --> 1.4000000000000001 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.4000000000000001 --> 1.3 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.29345dbb61aea37c NEURON_IN : {'tick': 13, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.3 --> 1.5 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.5 --> 1.4 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.e752422d0877f2c1 NEURON_IN : {'tick': 14, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.4 --> 1.5999999999999999 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.5999999999999999 --> 1.4999999999999998 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.298d4e676bf143e9 NEURON_IN : {'tick': 15, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.4999999999999998 --> 1.6999999999999997 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.6999999999999997 --> 1.5999999999999996 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.1d701ee9e1cf3f61 NEURON_IN : {'tick': 16, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.5999999999999996 --> 1.7999999999999996 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.7999999999999996 --> 1.6999999999999995 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.99b0f80ad7233820 NEURON_IN : {'tick': 17, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.6999999999999995 --> 1.8999999999999995 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.8999999999999995 --> 1.7999999999999994 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.e8190714abc2df6a NEURON_IN : {'tick': 18, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.7999999999999994 --> 1.9999999999999993 in [onSignal.90]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.f2b4334a431e5335 NEURON_SHOT : {'tick': 18, 'amp': 1.9999999999999993}
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.f2b4334a431e5335 NEURON_IN : {'tick': 19, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.0 --> 0.2 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.2 --> 0.1 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.db467867ecd26c56 NEURON_IN : {'tick': 20, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.1 --> 0.30000000000000004 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.30000000000000004 --> 0.20000000000000004 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.a4209a411f085198 NEURON_IN : {'tick': 21, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.20000000000000004 --> 0.4 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.4 --> 0.30000000000000004 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.b274a81e06c842d NEURON_IN : {'tick': 22, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.30000000000000004 --> 0.5 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.5 --> 0.4 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.3a87dae05ad7a5aa NEURON_IN : {'tick': 23, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.4 --> 0.6000000000000001 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.6000000000000001 --> 0.5000000000000001 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.fda0aa844408eb83 NEURON_IN : {'tick': 24, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.5000000000000001 --> 0.7000000000000002 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.7000000000000002 --> 0.6000000000000002 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.f7916a5f51163a04 NEURON_IN : {'tick': 25, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.6000000000000002 --> 0.8000000000000003 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.8000000000000003 --> 0.7000000000000003 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.46a49982f1015391 NEURON_IN : {'tick': 26, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.7000000000000003 --> 0.9000000000000004 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.9000000000000004 --> 0.8000000000000004 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.1de21d69e6903767 NEURON_IN : {'tick': 27, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.8000000000000004 --> 1.0000000000000004 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.0000000000000004 --> 0.9000000000000005 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.aaa582b6229c82c2 NEURON_IN : {'tick': 28, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 0.9000000000000005 --> 1.1000000000000005 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.1000000000000005 --> 1.0000000000000004 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.d8ec713fc39b7ff NEURON_IN : {'tick': 29, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.0000000000000004 --> 1.2000000000000004 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.2000000000000004 --> 1.1000000000000003 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.a8fea9cb48a60a72 NEURON_IN : {'tick': 30, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.1000000000000003 --> 1.3000000000000003 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.3000000000000003 --> 1.2000000000000002 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.d1d7f8d52433d8b0 NEURON_IN : {'tick': 31, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.2000000000000002 --> 1.4000000000000001 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.4000000000000001 --> 1.3 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.29345dbb61aea37c NEURON_IN : {'tick': 32, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.3 --> 1.5 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.5 --> 1.4 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.e752422d0877f2c1 NEURON_IN : {'tick': 33, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.4 --> 1.5999999999999999 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.5999999999999999 --> 1.4999999999999998 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.298d4e676bf143e9 NEURON_IN : {'tick': 34, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.4999999999999998 --> 1.6999999999999997 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.6999999999999997 --> 1.5999999999999996 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.1d701ee9e1cf3f61 NEURON_IN : {'tick': 35, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.5999999999999996 --> 1.7999999999999996 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.7999999999999996 --> 1.6999999999999995 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.99b0f80ad7233820 NEURON_IN : {'tick': 36, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.6999999999999995 --> 1.8999999999999995 in [onSignal.90]
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.8999999999999995 --> 1.7999999999999994 in [onTick.82]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.e8190714abc2df6a NEURON_IN : {'tick': 37, 'amp': 0.2, 'from': 0}
+[2025-01-07 18:23:46]in[__on_e_changed.85] N[7] changed 1.7999999999999994 --> 1.9999999999999993 in [onSignal.90]
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Neuron.7.f2b4334a431e5335 NEURON_SHOT : {'tick': 37, 'amp': 1.9999999999999993}
+......[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Output.0.10e7801b0766ee42 OUTUT_IN : {'tick': 3, 'amp': 0.1, 'from': 10}
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Output.0.10e7801b0766ee42 OUTUT_IN : {'tick': 3, 'amp': 0.3, 'from': 11}
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Output.0.10e7801b0766ee42 OUTUT_IN : {'tick': 3, 'amp': 0.5, 'from': 12}
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Output.0.10e7801b0766ee42 OUTUT_IN : {'tick': 3, 'amp': 99.0, 'from': 13}
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Output.0.10e7801b0766ee42 OUTUT_IN : {'tick': 3, 'amp': 12.0, 'from': 14}
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Output.0.10e7801b0766ee42 OUTUT_IN : {'tick': 3, 'amp': 12.3, 'from': 15}
+[2025-01-07 18:23:46]in[onRobotsEvent.31] @ Output.0.10e7801b0766ee42 OUTUT_IN : {'tick': 3, 'amp': 78945.33, 'from': 16}
+...[2025-01-07 18:23:46]in[test_load_from_file.19] load pkg ok
+..
+----------------------------------------------------------------------
+Ran 33 tests in 0.495s
+
+OK
