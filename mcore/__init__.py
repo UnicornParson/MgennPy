@@ -4,7 +4,7 @@ from .clock_input import *
 from .output import Output
 from .link import Link, LinkEvent
 from .errors import *
-
+from .structures import *
 from .core_object import CoreObject, RunnableObject
 from .core import *
 from .engine import *
@@ -17,5 +17,6 @@ __all__ = [
     "Output", "OutputRecord", 
     "InputType", "Input", "TapeInputsBatch", "InputComponent", "ClockInput", "TapeInputsRow",
     "DirtyObjectException", "ConnectivityError", "NoDataException", "BrokenObject",
-    "Engine", "EngineCoreError", "EngineIOError"
+    "Engine", "EngineCoreError", "EngineIOError",
+    "StructsBuilder"
     ]

@@ -283,6 +283,11 @@ class Package:
         pkg["content"] = content
         return (pkgName, pkg)
 
+    def addStructureHints(self, hint):
+        if "structs" not in self.external:
+            self.external["structs"] = []
+        self.external["structs"].append(hint)
+
     def dumpJsonStr(self):
         _, pkg = self.dump()
         return json.dumps(pkg, default=str).encode("utf-8")
