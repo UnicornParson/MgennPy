@@ -7,6 +7,7 @@ class TestCore(unittest.TestCase):
     def __init__(self, methodName: str = ...) -> None:
         super().__init__(methodName)
         self.__pkg_path = f"{os.getcwd()}/tests/test_data/namespacetest_rev0.pkg"
+        self.__powered_pkg_path = f"{os.getcwd()}/tests/test_data/namespacetest_rev1_powered.pkg"
         
     def test_check_examplee(self):
         self.assertTrue(os.path.isfile(self.__pkg_path))
@@ -15,8 +16,29 @@ class TestCore(unittest.TestCase):
         core = mc.Core()
         self.assertTrue(core.empty())
         pkg = core.dump()
+        e = core.total_energy()
+        self.assertEqual(e, 0.0)
+        e = pkg.total_energy()
+        self.assertEqual(e, 0.0)
         self.assertTrue(pkg.isValid())
         self.assertTrue(pkg.empty())
+
+    def test_measure_powered_core(self):
+        pkg = mc.Package()
+        pkg.loadFile(self.__powered_pkg_path)
+        self.assertEqual(pkg.total_energy(), 10.0)
+        core = mc.Core()
+        core.load(pkg)
+        self.assertFalse(core.empty())
+        self.assertEqual(core.total_energy(), 10.0)
+
+        cloned_pkg = pkg.clone()
+        self.assertEqual(cloned_pkg.total_energy(), 10.0)
+        cloned_pkg.removeDynamic()
+        self.assertEqual(cloned_pkg.total_energy(), 0.0)
+        core.removeDynamic()
+        self.assertEqual(core.total_energy(), 0.0)
+
 
     def test_load_from_file(self):
         pkg = mc.Package()
@@ -77,13 +99,6 @@ class TestCore(unittest.TestCase):
         self.assertTrue("content" in pkg_data)
         pkg_content = pkg_data["content"]
 
-
-        #content["inputs"] = self.inputs
-        #content["outputs"] = self.outputs
-
-        #content["storage"] = {}
-        #content["storage"]["links"] = self.links
-        #content["storage"]["neurons"] = self.neurons
         self.assertTrue("inputs" in pkg_content)
         self.assertTrue("outputs" in pkg_content)
         self.assertTrue("storage" in pkg_content)

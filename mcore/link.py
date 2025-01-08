@@ -28,6 +28,9 @@ class LinkEvent(CoreObject):
         self.tick = 0
         self.from_id = 0
 
+    def total_energy(self) -> float:
+        return self.finalAmplitude
+
     def __str__(self):
         return f"LinkEvent(from_{self.from_id}. {self.finalAmplitude} at {self.tick})"
 
@@ -97,6 +100,13 @@ class Link(RunnableObject):
                 self.receiverId == other.receiverId and
                 self.events.sort() == other.events.sort())
 
+    def total_energy(self) -> float:
+        e = 0.0
+        for event in self.events:
+            e += event.total_energy()
+        return e
+    def removeDynamic(self):
+        self.events = []
     def id(self):
         return self.localId
 

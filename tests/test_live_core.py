@@ -83,10 +83,11 @@ class TestLiveCore(unittest.TestCase):
         df_out = pd.DataFrame()
         df_expected = pd.DataFrame([0.0]*7 + [5.0] + [0.0]*4, columns=['o1_exp'])
         df_in = pd.DataFrame([3,0] * 6, columns=['i1'])
+        energy = []
         print(sdata)
         for t in range(ticks):
             df_out = pd.concat([df_out, r_engine.run_once(df_in)], ignore_index=True)
-
+            
         io = pd.concat([df_in, df_out, df_expected], axis=1)
         io['error'] = io['o1'].astype(float) - io['o1_exp'].astype(float)
         for index, row in io.iterrows():

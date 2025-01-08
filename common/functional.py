@@ -25,6 +25,14 @@ class F():
         return f"[{cf.function}.{cf.lineno}]"
 
     @staticmethod
+    def make_quiet():
+        os.environ[F.__debug_env] = "N"
+
+    @staticmethod
+    def make_verbose():
+        os.environ[F.__debug_env] = "Y"
+
+    @staticmethod
     def print(*args, **kwargs):
         if F.__debug_env not in os.environ:
             return

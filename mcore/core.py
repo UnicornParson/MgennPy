@@ -34,6 +34,14 @@ class Core(CoreObject):
     def __len__(self):
         return len(self.content)
 
+    def total_energy(self) -> float:
+        e = 0.0
+        for item in self.content.values():
+            e += item.total_energy()
+        return e
+    def removeDynamic(self):
+        for item in self.content.values():
+            item.removeDynamic()
     def load(self, pkg: Package):
         if not pkg:
             raise ValueError("empty pkg")
@@ -177,7 +185,7 @@ class Core(CoreObject):
         events = self.pending_events
         self.pending_events = []
         for target, amp, from_id in events:
-            
+
             if target not in self.content:
                 raise ConnectivityError(f"({target} is not a valid target)")
             if not self.content[target]:

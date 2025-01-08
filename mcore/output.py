@@ -11,7 +11,9 @@ class Output(RunnableObject):
     def __init__(self):
         super().__init__()
         self.reset()
-
+    def total_energy(self) -> float:
+        # don't store energy
+        return 0.0
     def clone(self):
         return copy.deepcopy(self)
     def id(self):
@@ -22,7 +24,8 @@ class Output(RunnableObject):
         self.localId = MgennConsts.NULL_ID
         self.name = ""
         self.value = 0.
-
+    def removeDynamic(self):
+        self.value = 0.0
     def __str__(self):
         return f"Output[{self.id()}]( name:{self.name}, value:{self.value} )"
 

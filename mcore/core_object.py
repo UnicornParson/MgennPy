@@ -18,10 +18,10 @@ class CoreObject:
         return []
     def deserialize(self, data: dict):
         raise NotImplementedError("implementation missed ")
-
+    def total_energy(self) -> float:
+        raise NotImplementedError("implementation missed ")
     def serialize(self) -> dict:
         raise NotImplementedError("implementation missed ")
-
     def reset(self):
         pass
     
@@ -42,4 +42,6 @@ class RunnableObject(CoreObject):
     def onSignal(self, tick_num, amplitude:float, from_id = 0):
         raise NotImplementedError("implementation missed ")
     def makeEvents(self, amp: float)->list:
+        raise NotImplementedError("implementation missed ")
+    def removeDynamic(self):
         raise NotImplementedError("implementation missed ")

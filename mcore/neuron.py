@@ -11,7 +11,10 @@ class Neuron(RunnableObject):
 
     def id(self):
         return self.localId
-
+    def total_energy(self) -> float:
+        return self.currentEnergy
+    def removeDynamic(self):
+        self.currentEnergy = 0.0
     def reset(self):
         self.localId = MgennConsts.NULL_ID
         self.currentEnergy = 0.0

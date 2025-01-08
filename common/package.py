@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import json
 import copy
 import os
@@ -118,6 +119,42 @@ class Package:
 
     def empty(self)->bool:
         return self.__len__() == 0
+
+    def removeDynamic(self):
+        for n in self.neurons:
+            n["currentEnergy"] = 0.0
+        for l in self.links:
+            l["events"] = []
+
+    def total_energy(self) -> float:
+        e = 0.0
+        for n in self.neurons:
+            e += float(n["currentEnergy"])
+        for l in self.links:
+            for event in l["events"]:
+                e += float(event["finalAmplitude"])
+        return e
+
+
+    def introspection(self) -> tuple:
+        ids = []
+        values = []
+        for n in self.neurons:
+            ids.append(str(n["id"]))
+            values.append(float(n["currentEnergy"]))
+        n_df = pd.DataFrame(values, columns=ids)
+        ids = []
+        values = []
+        for l in self.links:
+            ids.append(str(n["id"]))
+            for event in l["events"]:
+                values.append(float(event["finalAmplitude"]))
+        l_df = pd.DataFrame(values, columns=ids)
+        return (n_df, l_df)
+
+
+        
+        
 
     def findLink(self, id) -> int:
         if isinstance(id, str): ## skip "find by name"

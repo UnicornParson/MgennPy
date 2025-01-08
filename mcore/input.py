@@ -21,6 +21,9 @@ class Input(CoreObject):
         raise NotImplementedError("implementation missed ")
     def required_keys(self) -> list:
         return ["name",  "type", "receivers", "args"]
+    def total_energy(self) -> float:
+        # don't store energy
+        return 0.0
 
 '''
       {
