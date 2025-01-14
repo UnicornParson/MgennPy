@@ -21,5 +21,5 @@ __all__ = ["F",
     "ListFilterMod",
     "SnapshotState",
     "ObjectFactory",
-    "PackageUtils",
+    "PackageUtils", "Pkgz", "Package",
     "RobotsLogger"]

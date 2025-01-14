@@ -6,6 +6,9 @@ import os
 from .functional import F
 from .mgenn_comon import MgennComon, NumpyEncoder
 from .mgenn_consts import MgennConsts, ObjectIdType
+import lzma
+
+
 
 class PackageUtils:
     @staticmethod
@@ -42,7 +45,6 @@ class PackageUtils:
 
     def makeEmptyPkgData() -> dict:
         return {}
-
 
 class Package:
     @staticmethod
@@ -88,6 +90,19 @@ class Package:
 
     def __len__(self):
         return len(self.inputs) + len(self.outputs) + len(self.links) + len(self.neurons)
+
+    def __eq__(self, o) -> bool:
+        # dont compare parent. it changed by clone
+        return (F.l_eq(self.inputs, o.inputs)
+            and F.l_eq(self.outputs, o.outputs)
+            and F.l_eq(self.links, o.links)
+            and F.l_eq(self.neurons, o.neurons)
+            and F.d_eq(self.meta, o.meta)
+            and self.tick == o.tick
+            and self.generation == o.generation
+            and self.seq == o.seq
+            and self.snapshot_id == o.snapshot_id
+            and self.state == o.state)
 
     def isValid(self, explain = False):
         if not self.state or not self.snapshot_id or not self.parent:
@@ -153,8 +168,8 @@ class Package:
         return (n_df, l_df)
 
 
-        
-        
+
+
 
     def findLink(self, id) -> int:
         if isinstance(id, str): ## skip "find by name"
@@ -442,3 +457,31 @@ class Package:
         return self.new_input(name, "tape", receivers, {})
     def new_clock_input(self, name:str, receivers:list, args:dict):
         return self.new_input(name, "clockgenerator", receivers, args)
+
+
+
+class Pkgz:
+    @staticmethod
+    def pack(pkg:Package):
+        pkgName, d = pkg.dump()
+        F.print(f"Pkgz:pack {pkgName} initial {d}")
+        j = json.dumps(d, default=str).encode("utf-8")
+        j2 = json.dumps(d, default=str)
+        if not j:
+            raise ValueError("empty pkg data")
+        bsz = len(j)
+        F.print(f"Pkgz:pack {j}")
+        F.print(f"Pkgz:pack j2 {j2}")
+        compressed_data = lzma.compress(j)
+
+        F.print(f"Pkgz: compression ratio {(100. * (len(compressed_data) / bsz)):.3}%")
+        return compressed_data
+
+    @staticmethod
+    def unpack(pkgz_data):
+        F.print(f"Pkgz:unpack initial {pkgz_data}")
+        j = lzma.decompress(pkgz_data).decode('utf-8')
+        pkg = Package()
+        F.print(f"Pkgz:unpack {j}")
+        pkg.loadJsonStr(j)
+        return pkg

@@ -8,3 +8,5 @@ pyvis
 Requests
 pandas
 lazydocs
+pytest-xdist
+unittest-parallel

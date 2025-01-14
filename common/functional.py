@@ -65,6 +65,17 @@ class F():
         if not isinstance(x, dict):
             raise ValueError(f"dsort only for dicts, {type(x)} received")
         return dict(sorted(x.items(), key=lambda item: item[0]))
+    @staticmethod
+    def l_eq(list1, list2, maybe_none=False):
+        if list1 == None and list2 == None and maybe_none:
+            F.print(f"p0 a:{a} b:{b}")
+            return True
+        if len(list1) != len(list2):
+            return False
+        for obj1, obj2 in zip(list1, list2):
+            if obj1 != obj2 :
+                return False
+        return True
 
     @staticmethod
     def d_eq(a:dict, b:dict, maybe_none=False):
