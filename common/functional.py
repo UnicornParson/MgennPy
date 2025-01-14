@@ -78,39 +78,46 @@ class F():
         return True
 
     @staticmethod
-    def d_eq(a:dict, b:dict, maybe_none=False):
+    def d_eq(a:dict, b:dict, maybe_none=False, explain=False):
         if a == None and b == None and maybe_none:
-            F.print(f"p0 a:{a} b:{b}")
             return True
         if a == None or b == None:
             if not maybe_none:
                 raise ValueError("None value")
-            F.print("p1 a:{a} b:{b}")
+            if explain:
+                F.print("p1 None value a:{a} b:{b}")
             return False
         if not isinstance(a, dict) or not isinstance(b, dict):
             raise ValueError("function works only with dicts!")
         if len(a) != len(b):
-            F.print(f"p2 a:{a} b:{b}")
+            if explain:
+                F.print(f"different len  a({len(a)}):{a} b({len(b)}):{b}")
             return False
         for ak, av in a.items():
             try:
                 bv = b[ak]
             except Exception:
-                F.print(f"cannot extract {ak} from b")
+                if explain:
+                    F.print(f"cannot extract {ak} from b")
                 return False
             if type(av) != type(bv):
-                F.print(f"p3 a:{a} b:{b}")
+                if explain:
+                    F.print(f"different types a:{av} b:{bv}")
                 return False
             if ak not in b:
-                F.print(f"p4 a:{a} b:{b}")
+                if explain:
+                    F.print(f"a:{a}::{ak} not in b:{b}")
                 return False
             if isinstance(av, dict) and not F.d_eq(av, bv):
-                F.print(f"p5 a:{a} b:{b}")
+                if explain:
+                    F.print(f"dict and not dict a:{a} b:{b}")
                 return False
             if av != bv:
-                F.print(f"p6 a:{a} b:{b}")
+                if explain:
+                    F.print(f"{av} != {bv} in a:{a} b:{b}")
                 return False
-        F.print(f"p7 a:{a} b:{b}")
+        if explain:
+            F.print(f"same dicts a:{a} b:{b}")
         return True
 
     @staticmethod

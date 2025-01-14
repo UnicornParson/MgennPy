@@ -464,24 +464,17 @@ class Pkgz:
     @staticmethod
     def pack(pkg:Package):
         pkgName, d = pkg.dump()
-        F.print(f"Pkgz:pack {pkgName} initial {d}")
         j = json.dumps(d, default=str).encode("utf-8")
-        j2 = json.dumps(d, default=str)
         if not j:
             raise ValueError("empty pkg data")
         bsz = len(j)
-        F.print(f"Pkgz:pack {j}")
-        F.print(f"Pkgz:pack j2 {j2}")
         compressed_data = lzma.compress(j)
-
-        F.print(f"Pkgz: compression ratio {(100. * (len(compressed_data) / bsz)):.3}%")
+        F.print(f"Pkgz: {pkgName} compression ratio {(100. * (len(compressed_data) / bsz)):.3}%")
         return compressed_data
 
     @staticmethod
     def unpack(pkgz_data):
-        F.print(f"Pkgz:unpack initial {pkgz_data}")
         j = lzma.decompress(pkgz_data).decode('utf-8')
         pkg = Package()
-        F.print(f"Pkgz:unpack {j}")
         pkg.loadJsonStr(j)
         return pkg

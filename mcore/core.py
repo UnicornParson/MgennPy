@@ -118,7 +118,7 @@ class Core(CoreObject):
     def autoinputs(self):
         return copy.deepcopy(self.autoinputs.values())
 
-    def dump(self) -> Package:
+    def dump(self, explain = False) -> Package:
         if not self.pkg:
             self.pkg = Package.make_empty()
         pkg = Package()
@@ -136,20 +136,25 @@ class Core(CoreObject):
         for id, elem in self.content.items():
             data = elem.serialize()
             if isinstance(elem, Neuron):
-                F.print(f"save neuron {id}")
+                if explain:
+                    F.print(f"save neuron {id}")
                 pkg.neurons.append(data)
             elif isinstance(elem, Link):
-                F.print(f"save link {id}")
+                if explain:
+                    F.print(f"save link {id}")
                 pkg.links.append(data)
             elif isinstance(elem, Output):
-                F.print(f"save output {id}")
+                if explain:
+                    F.print(f"save output {id}")
                 pkg.outputs.append(data)
         for ai in self.autoinputs.values():
             pkg.inputs.append(ai.serialize())
-        F.print(f"p1 inputs len {len(pkg.inputs)}")
+        if explain:
+            F.print(f"p1 inputs len {len(pkg.inputs)}")
         if self.itape:
             pkg.inputs.extend(self.itape.dump())
-        F.print(f"p2 inputs len {len(pkg.inputs)}")
+        if explain:
+            F.print(f"p2 inputs len {len(pkg.inputs)}")
         self.pkg = pkg
         return pkg
 
