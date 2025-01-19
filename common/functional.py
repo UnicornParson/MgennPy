@@ -16,24 +16,46 @@ class F():
 
     @staticmethod
     def caller_str():
+        """
+        Returns the string representation of the current function call.
+
+        :return: str
+        """
         cf = inspect.stack()[2]
         return f"[{cf.function}.{cf.lineno}]"
 
     @staticmethod
     def here_str():
+        """
+        Returns the string representation of the current frame.
+
+        :return: str
+        """
         cf = inspect.stack()[1]
         return f"[{cf.function}.{cf.lineno}]"
 
     @staticmethod
     def make_quiet():
+        """
+        Disable debug print
+        """
         os.environ[F.__debug_env] = "N"
 
     @staticmethod
     def make_verbose():
+        """
+        Enable debug print
+        """
         os.environ[F.__debug_env] = "Y"
 
     @staticmethod
     def print(*args, **kwargs):
+        """
+        Prints a message with the current timestamp and function name.
+
+        :param args: Any arguments to be printed.
+        :param kwargs: Any keyword arguments to be printed.
+        """
         if F.__debug_env not in os.environ:
             return
         e_debug = os.environ[F.__debug_env]
@@ -46,29 +68,61 @@ class F():
 
     @staticmethod
     def uhash(data) -> int:
+        """
+        Hashes the input data using a custom implementation.
+
+        :param data: The input data to be hashed.
+        :return: An integer hash value.
+        """
         ## hash(str(data)) hack for types like list of tuples or tuples of lists
         return ctypes.c_size_t(hash(str(data))).value
 
     @staticmethod
     def random_id(length):
+        """
+        Generates a random ID string of the specified length.
+
+        :param length: The desired length of the ID string.
+        :return: A random ID string.
+        """
         letters = string.ascii_lowercase
         return ''.join(random.choice(letters) for i in range(length))
 
     @staticmethod
     def generateToken():
+        """
+        Generates a new token with the current timestamp.
+
+        :return: A new token with the current timestamp.
+        """
         token = F.random_id(16) + "." + str(time.monotonic())
         F.print(f"new token {token}")
         return token
 
     @staticmethod
     def dsort(x:dict) -> dict:
+        """
+        Sorts a dictionary by its keys.
+
+        :param x: The input dictionary to be sorted.
+        :return: A new dictionary with the same values but in sorted order by key.
+        """
         if not isinstance(x, dict):
             raise ValueError(f"dsort only for dicts, {type(x)} received")
         return dict(sorted(x.items(), key=lambda item: item[0]))
+
     @staticmethod
     def l_eq(list1, list2, maybe_none=False):
+        """
+        Compares two lists for equality.
+
+        :param list1: The first list to compare.
+        :param list2: The second list to compare.
+        :param maybe_none: If both lists are None, returns True.
+        :return: A boolean indicating whether the lists are equal.
+        """
         if list1 == None and list2 == None and maybe_none:
-            F.print(f"p0 a:{a} b:{b}")
+            F.print(f"p0 a:{list1} b:{list2}")
             return True
         if len(list1) != len(list2):
             return False
@@ -79,6 +133,15 @@ class F():
 
     @staticmethod
     def d_eq(a:dict, b:dict, maybe_none=False, explain=False):
+        """
+        Compares two dictionaries for equality.
+
+        :param a: The first dictionary to compare.
+        :param b: The second dictionary to compare.
+        :param maybe_none: If both dictionaries are None, returns True.
+        :param explain: If enabled, prints explanations for non-equal values.
+        :return: A boolean indicating whether the dictionaries are equal.
+        """
         if a == None and b == None and maybe_none:
             return True
         if a == None or b == None:
@@ -122,12 +185,23 @@ class F():
 
     @staticmethod
     def dsort_val(x:dict) -> dict:
+        """
+        Sorts a dictionary by its values.
+
+        :param x: The input dictionary to be sorted.
+        :return: A new dictionary with the same keys but in sorted order by value.
+        """
         if not isinstance(x, dict):
             raise ValueError(f"dsort_val only for dicts, {type(x)} received")
         return dict(sorted(x.items(), key=lambda item: item[1]))
 
     @staticmethod
     def getNodeName():
+        """
+        Returns a unique identifier for the current node.
+
+        :return: A string representing the node's name.
+        """
         strName = platform.machine() + platform.version() + str(platform.uname()) + platform.processor()
         m = hashlib.sha512()
         m.update(strName.encode('utf-8'))
@@ -137,16 +211,32 @@ class F():
 
     @staticmethod
     def generateOID() -> int:
+        """
+        Generates a new unique ID.
+
+        :return: An integer representing the new ID.
+        """
         id = F.__nextId
         F.__nextId += 1
         return id
 
     @staticmethod
     def generateMgennId() -> str:
+        """
+        Generates a unique identifier for MGenn.
+
+        :return: A string representing the new ID.
+        """
         id = "L%s.%s.%s" % (F.getNodeName() ,str(time.monotonic()).replace(".", ""), str(F.generateOID()))
         F.print(f"new id {id}")
         return id
 
     @staticmethod
     def df2str(df:pd.DataFrame)->str:
+        """
+        Converts a pandas DataFrame to a string representation.
+
+        :param df: The input DataFrame.
+        :return: A string representation of the DataFrame.
+        """
         return ' | '.join(df.apply(lambda x: ':'.join(x.astype(str)), axis=1))

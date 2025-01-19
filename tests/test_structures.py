@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import Mock, patch
 import math
 import numpy as np
 import mcore as mc
@@ -116,3 +117,9 @@ class TestNeuron(unittest.TestCase):
         pkgName, pkg_data = pkg.dump()
         self.assertTrue(bool(pkgName))
         self.assertTrue(bool(pkg_data))
+
+    def test_neuron_builder(self):
+        builder = mc.StructsBuilder()
+        leak, peak = builder.neuron_builder(0)
+        self.assertEqual(leak, 0.)
+        self.assertEqual(peak, 5.)

@@ -17,6 +17,12 @@ __all__ = [
     "Output", "OutputRecord", 
     "InputType", "Input", "TapeInputsBatch", "InputComponent", "ClockInput", "TapeInputsRow",
     "DirtyObjectException", "ConnectivityError", "NoDataException", "BrokenObject",
-    "Engine", "EngineCoreError", "EngineIOError",
+    #Engine:
+    ## errors
+    "EngineCoreError", "EngineIOError",
+    ## interfaces
+    "InputDataSelector", "Rater",
+    ## classes
+    "RunChain", "Engine",
     "StructsBuilder"
-    ]
+]
