@@ -45,7 +45,7 @@ class F():
         return print(*args, **kwargs, flush=True)
 
     @staticmethod
-    def uhash(data):
+    def uhash(data) -> int:
         ## hash(str(data)) hack for types like list of tuples or tuples of lists
         return ctypes.c_size_t(hash(str(data))).value
 
