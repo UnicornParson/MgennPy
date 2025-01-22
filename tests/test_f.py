@@ -1,11 +1,40 @@
 import unittest
 import os
-import mcore as mc
 import unittest
-import pandas as pd
+import numpy as np
 from common import F
+import torch
+import hypothesis.strategies as st
+from hypothesis import given, settings
+
 
 class TestF(unittest.TestCase):
+    @given(st.text())
+    @settings(max_examples=10)
+    def test_caller_str(self, text):
+        result = F.caller_str()
+        self.assertTrue(isinstance(result, str))
+
+    @given(st.text(), st.integers())
+    def test_uhash(self, s: str, i: int):
+        self.assertIsInstance(F.uhash(s), int)
+        self.assertIsInstance(F.uhash(i), int)
+
+    @given(st.text(), st.integers())
+    def test_random_id(self, s: str, i: int):
+        id = F.random_id(10)
+        self.assertIsInstance(id, str)
+        self.assertEqual(len(id), 10)
+
+    @given(st.lists(st.text()))
+    def test_l_eq(self, ls1: list[str]):
+        self.assertTrue(F.l_eq(ls1, ls1))
+
+    @given(st.dictionaries(st.text(), st.integers()))
+    def test_d_eq(self, d1: dict[str, int]):
+        self.assertTrue(F.d_eq(d1, d1))
+
+    # и т. д.
     def test_d_eq(self):
         a = {"a":1,"b":2,"c":1,"d":2}
         b = {"a":1,"b":2,"c":1,"d":2}
@@ -101,3 +130,25 @@ class TestF(unittest.TestCase):
         id2 = F.generateOID()
         # Check that the IDs are not equal
         self.assertNotEqual(id1, id2)
+
+    def test_tensor_to_float(self):
+        t = F.tensor_to_float(torch.tensor(0.5))
+        self.assertAlmostEqual(t, 0.5)
+
+    def test_sizeof_str(self):
+        self.assertEqual(F.sizeof_str(10), '32 Bytes (32b)')
+
+    def test_approximate(self):
+        lower_bound = 0.5
+        upper_bound = 1.5
+        n = 10 # middle count
+        result = F.approximate(lower_bound, upper_bound, n)
+        self.assertEqual(len(result), n + 2)
+        
+    def test_i_approximate(self):
+        lower_bound = 0.5
+        upper_bound = 1.5
+        n = 10 # middle count
+        result = F.i_approximate(lower_bound, upper_bound, n)
+        self.assertEqual(len(result), n + 2)
+

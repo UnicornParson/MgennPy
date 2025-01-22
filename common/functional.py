@@ -9,10 +9,21 @@ import sys
 import inspect
 import os
 import pandas as pd
+import numpy as np
+import torch
+import datetime
+import humanize
+import statistics
+from pympler.asizeof import asizeof
+
 
 class F():
     __nextId = 0
     __debug_env = "MGENN_DEBUG"
+
+    @staticmethod
+    def median(data):
+        return statistics.median(data)
 
     @staticmethod
     def caller_str():
@@ -240,3 +251,47 @@ class F():
         :return: A string representation of the DataFrame.
         """
         return ' | '.join(df.apply(lambda x: ':'.join(x.astype(str)), axis=1))
+
+
+    @staticmethod
+    def hit(output, labels):
+        if output.shape != labels.shape:
+            raise ValueError(f"shapes missmatch {output.shape} != {labels.shape}")
+        return int(torch.argmax(output, dim=1)) == int(torch.argmax(labels, dim=1))
+
+    @staticmethod
+    def hit_int(output, labels):
+        return 1 if F.hit(output, labels) else 0
+
+    @staticmethod
+    def tensor_to_float(t):
+        npv = t.detach().numpy()
+        if npv.shape == () and npv.size == 1:
+                return float(npv)
+        raise ValueError(" not a single-float type %s" % str(t))
+
+    @staticmethod
+    def sizeof_str(o):
+        b = asizeof(o)
+        return f"{humanize.naturalsize(b)} ({b}b)"
+
+    @staticmethod
+    def np_array_stat(arr)->str:
+        return f"arr({arr.dtype}) [{np.min(arr)} -> {np.mean(arr)} -> {np.max(arr)}"
+
+    @staticmethod
+    def approximate(lower_bound, upper_bound, n, keep_bounds = True):
+        assert n > 0
+        l = []
+        if keep_bounds:
+            l.append(lower_bound)
+        step = (upper_bound - lower_bound) / (n + 1)
+        l.extend([lower_bound + i * step for i in range(1, n + 1)])
+        if keep_bounds:
+            l.append(upper_bound)
+        return l
+
+    @staticmethod
+    def i_approximate(lower_bound, upper_bound, n, keep_bounds = True):
+        l = F.approximate(lower_bound, upper_bound, n, keep_bounds)
+        return [ int(x) for x in l ]

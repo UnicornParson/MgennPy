@@ -10,3 +10,6 @@ pandas
 lazydocs
 pytest-xdist
 unittest-parallel
+humanize
+jsonpickle
+hypothesis

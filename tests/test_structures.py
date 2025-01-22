@@ -4,13 +4,15 @@ import math
 import numpy as np
 import mcore as mc
 from common import *
+from numba import jit
+
 
 class TestNeuron(unittest.TestCase):
     def test_make_layer(self):
         pkg = mc.Package.make_empty()
         builder = mc.StructsBuilder()
         layer_size = 1000
-
+    
         def neuron_builder(l_index:int):
             leak = 0.1
             peak = 5.
@@ -88,11 +90,11 @@ class TestNeuron(unittest.TestCase):
         builder = mc.StructsBuilder()
         grid_shape_l = (3, 4, 5)
         grid_shape_r = (6, 7, 8)
-        def neuron_builder(l_index):
+        def neuron_builder(l_index:int):
             leak = 0.1
             peak = 5.
             return (leak, peak)
-        def link_builder(from_id, to_id):
+        def link_builder(from_id:int, to_id:int):
             apt = 1.
             length = 1
             return (apt, length)

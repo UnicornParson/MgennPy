@@ -10,9 +10,25 @@ from .input import *
 from .clock_input import *
 from .errors import *
 
-
 class Core(CoreObject):
+    """
+    Represents a core in the MGenn framework, which is responsible for managing 
+    neurons, links and outputs. It also handles auto-inputs and tape inputs.
+    
+    Attributes:
+    pkg (Package): The package associated with this core.
+    content (dict): A dictionary of objects in this core, including neurons, links and outputs.
+    itape (TapeInputsBatch or None): A batch container for tape inputs.
+    autoinputs (dict): A dictionary of auto-inputs.
+    pending_events (list): A list of events that need to be processed.
+    """
+
     def __init__(self) -> None:
+        """
+        Initializes a new Core object.
+        
+        Creates a default package and sets up the core's content, itape and autoinputs.
+        """
         super().__init__()
         self.pkg = None
         self.content = {}
@@ -23,26 +39,73 @@ class Core(CoreObject):
         self.pending_events = []
 
     def empty(self) -> bool:
+        """
+        Checks if this core is empty.
+        
+        Returns:
+        bool: True if the core is empty, False otherwise.
+        """
         return not (bool(self.content) or bool(self.autoinputs) or (self.itape != None))
 
     def is_dirty(self)->bool:
+        """
+        Checks if there are any dirty events in this core.
+        
+        Returns:
+        bool: True if there are dirty events, False otherwise.
+        """
         return bool(self.pending_events)
 
     def __contains__(self, key):
+        """
+        Checks if a key is present in the core's content or autoinputs.
+        
+        Args:
+        key (str): The key to check for.
+        
+        Returns:
+        bool: True if the key is found, False otherwise.
+        """
         return (key in self.content) or (key in self.autoinputs) or (self.itape != None and (key in self.itape))
 
     def __len__(self):
+        """
+        Gets the number of objects in this core's content.
+        
+        Returns:
+        int: The number of objects.
+        """
         return len(self.content)
 
     def total_energy(self) -> float:
+        """
+        Calculates the total energy of all objects in this core.
+        
+        Returns:
+        float: The total energy.
+        """
         e = 0.0
         for item in self.content.values():
             e += item.total_energy()
         return e
+
     def removeDynamic(self):
+        """
+        Removes dynamic items from the core's content.
+        """
         for item in self.content.values():
             item.removeDynamic()
+
     def load(self, pkg: Package):
+        """
+        Loads a package into this core.
+        
+        Args:
+        pkg (Package): The package to load.
+        
+        Raises:
+        ValueError: If the package is empty.
+        """
         if not pkg:
             raise ValueError("empty pkg")
         self.pkg = pkg
@@ -96,6 +159,12 @@ class Core(CoreObject):
                 raise ValueError(f"input type {i['type']} is not supported")
 
     def neurons(self):
+        """
+        Gets the list of neurons in this core.
+        
+        Returns:
+        list: The list of neurons.
+        """
         rc = []
         for obj in self.content.values():
             if isinstance(obj, Neuron):
@@ -103,6 +172,12 @@ class Core(CoreObject):
         return rc
 
     def links(self):
+        """
+        Gets the list of links in this core.
+        
+        Returns:
+        list: The list of links.
+        """
         rc = []
         for obj in self.content.values():
             if isinstance(obj, Link):
@@ -110,15 +185,37 @@ class Core(CoreObject):
         return rc
 
     def outputs(self):
+        """
+        Gets the list of outputs in this core.
+        
+        Returns:
+        list: The list of outputs.
+        """
         rc = []
         for obj in self.content.values():
             if isinstance(obj, Output):
                 rc.append(obj)
         return rc
+    
     def autoinputs(self):
+        """
+        Gets the dictionary of auto-inputs.
+        
+        Returns:
+        dict: The dictionary of auto-inputs.
+        """
         return copy.deepcopy(self.autoinputs.values())
 
     def dump(self, explain = False) -> Package:
+        """
+        Dumps the state of this core into a package.
+        
+        Args:
+        explain (bool): If True, prints explanations for each object being dumped. Defaults to False.
+        
+        Returns:
+        Package: The package containing the state of this core.
+        """
         if not self.pkg:
             self.pkg = Package.make_empty()
         pkg = Package()
@@ -159,11 +256,23 @@ class Core(CoreObject):
         return pkg
 
     def input_names(self) -> list:
+        """
+        Gets the list of input names in this core.
+        
+        Returns:
+        list: The list of input names.
+        """
         if self.itape:
             return self.itape.point_names()
         return []
 
     def update_inputs(self, row):
+        """
+        Updates the input at the specified row index.
+        
+        Args:
+        row (int): The row index to update.
+        """
         if self.itape:
             self.itape.updateRow(row)
 
@@ -207,11 +316,25 @@ class Core(CoreObject):
             values.append(o.value)
         record.data = pd.DataFrame(data = [values,], index = [str(self.pkg.tick)], columns=headers)
         return record
+
     def tick(self):
+        """
+        Gets the current tick value.
+        
+        Returns:
+        int: The current tick value.
+        """
         if self.pkg:
             return self.pkg.tick
         return 0
+
     def exec(self) -> OutputRecord:
+        """
+        Executes this core and returns an OutputRecord.
+        
+        Returns:
+        OutputRecord: The executed output record.
+        """
         if self.empty():
             raise ValueError("empty core")
         if self.is_dirty():
@@ -229,6 +352,19 @@ class Core(CoreObject):
         return record
 
     def max_id(self):
+        """
+        Gets the maximum ID in this core.
+        
+        Returns:
+        int: The maximum ID.
+        """
         return max(self.content.keys())
+
     def next_id(self):
+        """
+        Generates the next available ID for a new object in this core.
+        
+        Returns:
+        int: The next available ID.
+        """
         return self.max_id() + 1
