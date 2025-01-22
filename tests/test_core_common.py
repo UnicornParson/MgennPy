@@ -8,7 +8,86 @@ class TestCore(unittest.TestCase):
         super().__init__(methodName)
         self.__pkg_path = f"{os.getcwd()}/tests/test_data/namespacetest_rev0.pkg"
         self.__powered_pkg_path = f"{os.getcwd()}/tests/test_data/namespacetest_rev1_powered.pkg"
-        
+
+    def test_init(self):
+        core = mc.Core()
+        self.assertIsNone(core.pkg)
+        self.assertEqual(core.content, {})
+        self.assertIsNone(core.itape)
+        self.assertEqual(core.autoinputs, {})
+
+    def test_empty(self):
+        core = mc.Core()
+        self.assertTrue(core.empty())
+
+    def test_is_dirty(self):
+        core = mc.Core()
+        self.assertFalse(core.is_dirty())
+
+    def test_len(self):
+        core = mc.Core()
+        self.assertEqual(len(core), 0)
+
+    def test_total_energy(self):
+        core = mc.Core()
+        self.assertAlmostEqual(core.total_energy(), 0.0)
+
+    def test_load_empty_pkg(self):
+        core = mc.Core()
+        pkg = mc.Package.make_empty()
+        with self.assertRaises(ValueError):
+            core.load(pkg) ## empty pkg error
+
+    def test_neurons(self):
+        core = mc.Core()
+        neurons = core.neurons()
+        self.assertEqual(neurons, [])
+
+    def test_links(self):
+        core = mc.Core()
+        links = core.links()
+        self.assertEqual(links, [])
+
+    def test_outputs(self):
+        core = mc.Core()
+        outputs = core.outputs()
+        self.assertEqual(outputs, [])
+
+    def test_autoinputs(self):
+        core = mc.Core()
+        autoinputs = core.get_autoinputs()
+        self.assertEqual(autoinputs, {})
+
+    def test_dump(self):
+        core = mc.Core()
+        pkg = core.dump()
+        self.assertIsInstance(pkg, mc.Package)
+
+    def test_input_names(self):
+        core = mc.Core()
+        names = core.input_names()
+        self.assertEqual(names, [])
+
+    def test_tick(self):
+        core = mc.Core()
+        tick = core.tick()
+        self.assertEqual(tick, 0)
+
+    def test_exec_empty(self):
+        core = mc.Core()
+        with self.assertRaises(ValueError):
+            record = core.exec()
+
+    def test_max_id(self):
+        core = mc.Core()
+        max_id = core.max_id()
+        self.assertEqual(max_id, 0)
+
+    def test_next_id(self):
+        core = mc.Core()
+        next_id = core.next_id()
+        self.assertEqual(next_id, 1)
+
     def test_check_examplee(self):
         self.assertTrue(os.path.isfile(self.__pkg_path))
 
@@ -24,7 +103,7 @@ class TestCore(unittest.TestCase):
         self.assertTrue(pkg.empty())
 
     def test_measure_powered_core(self):
-        pkg = mc.Package()
+        pkg = mc.Package.make_empty()
         pkg.loadFile(self.__powered_pkg_path)
         self.assertEqual(pkg.total_energy(), 10.0)
         core = mc.Core()

@@ -165,6 +165,8 @@ class Core(CoreObject):
         Returns:
         list: The list of neurons.
         """
+        if not self.content:
+            return []
         rc = []
         for obj in self.content.values():
             if isinstance(obj, Neuron):
@@ -178,6 +180,8 @@ class Core(CoreObject):
         Returns:
         list: The list of links.
         """
+        if not self.content:
+            return []
         rc = []
         for obj in self.content.values():
             if isinstance(obj, Link):
@@ -191,19 +195,23 @@ class Core(CoreObject):
         Returns:
         list: The list of outputs.
         """
+        if not self.content:
+            return []
         rc = []
         for obj in self.content.values():
             if isinstance(obj, Output):
                 rc.append(obj)
         return rc
     
-    def autoinputs(self):
+    def get_autoinputs(self):
         """
         Gets the dictionary of auto-inputs.
         
         Returns:
         dict: The dictionary of auto-inputs.
         """
+        if not self.autoinputs:
+            return {}
         return copy.deepcopy(self.autoinputs.values())
 
     def dump(self, explain = False) -> Package:
@@ -358,6 +366,8 @@ class Core(CoreObject):
         Returns:
         int: The maximum ID.
         """
+        if not self.content:
+            return 0
         return max(self.content.keys())
 
     def next_id(self):

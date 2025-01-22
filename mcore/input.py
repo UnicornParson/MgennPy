@@ -5,6 +5,7 @@ import pandas as pd
 
 from .core_object import RunnableObject, CoreObject, CoreRobotKeys
 from common import MgennConsts, MgennComon, F
+from .errors import *
 
 class InputType():
     Passive = "passive"
@@ -25,19 +26,6 @@ class Input(CoreObject):
         # don't store energy
         return 0.0
 
-'''
-      {
-        "type": "tape",
-        "name": "Alias1",
-        "receivers": [11],
-        "args": {
-          "components": []
-        }
-      },
-
-      namespace InputTypeStr
-
-'''
 
 ## point format {name: (receivers, args)}
 ## args not used but should be restored asis
@@ -103,6 +91,8 @@ class TapeInputsBatch(Input):
         self.points[name] = (receivers, ex_args)
     
     def updateRow(self, row):
+        if not isinstance(row, TapeInputsRow):
+            raise AttributeError("row should be an TapeInputsRow")
         if not row.is_valid():
             raise ValueError("invalid row")
         self.__row = row
@@ -137,8 +127,6 @@ class TapeInputsBatch(Input):
             l.append(i_data)
         return l
 
-
-        
     def __contains__(self, key):
         return (key in self.points)
 
