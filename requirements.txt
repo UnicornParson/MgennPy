@@ -1,5 +1,4 @@
 ipython
-ipython
 jycm
 matplotlib
 networkx
@@ -14,3 +13,10 @@ humanize
 jsonpickle
 hypothesis
 psycopg2-binary
+python-dotenv
+torch
+torchvision
+torchaudio
+tensorflow
+pympler
+numba

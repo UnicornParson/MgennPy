@@ -19,6 +19,28 @@ class PG_Pool:
             port=5432,
             database=dbname
         )
+    def __del__(self):
+        if self.connection_pool:
+            self.connection_pool.closeall()
+            self.connection_pool = None
+
+    def __exit__(self):
+        if self.connection_pool:
+            self.connection_pool.closeall()
+            self.connection_pool = None
+
+    @staticmethod
+    def db_conf_from_env():
+        # return db_host, db_user, db_password, db_name
+        env = F.get_env(['DB_HOST', 'DB_USER', 'DB_PASSWORD', 'DB_NAME'])
+        db_host = env['DB_HOST']
+        db_user = env['DB_USER']
+        db_password = env['DB_PASSWORD']
+        db_name = env['DB_NAME']
+        return db_host, db_user, db_password, db_name
+    def connected(self) -> bool:
+        return bool(self.connection_pool) and self.connection_pool.check_connected()
+
     def get_conn(self):
         return self.connection_pool.getconn()
 
@@ -41,28 +63,17 @@ class PGUtils():
 
 class ObjectStorage():
     def __init__(self, pool:PGUtils):
-        self.db_conf = db_conf
-        host, user, password, dbname = db_conf
-        self.conn = psycopg2.connect(dbname=dbname, user=user, password=password, host=host, port="5432", application_name="PyObjectStorage")
-        self.cur = self.conn.cursor()
+        if not pool:
+            raise ValueError("no pg pool")
+        self.pool = pool
         self.timeline = Timeline()
         self.pgutils = PGUtils()
 
         if not self.check_db():
             self.make_db()
 
-    @staticmethod
-    def db_conf_from_env():
-        # return db_host, db_user, db_password, db_name
-        env = F.get_env(['DB_HOST', 'DB_USER', 'DB_PASSWORD', 'DB_NAME'])
-        db_host = env['DB_HOST']
-        db_user = env['DB_USER']
-        db_password = env['DB_PASSWORD']
-        db_name = env['DB_NAME']
-        return db_host, db_user, db_password, db_name
-
     def connected(self) -> bool:
-        return bool(self.conn) and bool(self.cur)
+        return bool(self.pool) and self.pool.connected()
 
     def __req_tables(self) -> list:
         # (schema_name, table_name)
@@ -114,46 +125,54 @@ class ObjectStorage():
         if not self.connected():
             raise Exception("not connected")
             # def table_exists(self, cur, table_name, schema_name='public'):
+        conn = self.pool.get_conn()
+        cur = conn.cursor()
         for schema_name, table_name in self.__req_tables():
-            if not self.pgutils.table_exists(self.cur, table_name, schema_name):
+            if not self.pgutils.table_exists(cur, table_name, schema_name):
+                self.pool.putconn(conn)
                 return False
+        self.pool.putconn(conn)
         return True
 
     def make_db(self):
         if not self.connected():
             raise Exception("not connected")
-        self.cur.execute("""
+        conn = self.pool.get_conn()
+        cur = conn.cursor()
+        cur.execute("""
             CREATE TABLE public.data (
                 _row bigint NOT NULL,
                 id character varying(256) NOT NULL,
                 object jsonb NOT NULL
             );
             """)
-        self.cur.execute("""
+        cur.execute("""
             CREATE UNIQUE INDEX CONCURRENTLY obj_id
                 ON public.data USING btree
                 (id)
                 WITH (fillfactor=20, deduplicate_items=True)
                 TABLESPACE pg_default;
             """)
-        self.conn.commit()
+        conn.commit()
+        self.pool.putconn(conn)
 
     def emplace(self, obj, key=None) -> str:
         st = time.monotonic()
-        if not self.cur or not self.conn:
-            raise ValueError("no cursor")
         if not obj:
             raise ValueError("no object")
         if not key:
             key = f"{uuid.uuid4().hex}.{time.time()}"
         j = jsonpickle.encode(obj)
-        self.cur.execute("""
+        conn = self.pool.get_conn()
+        cur = conn.cursor()
+        cur.execute("""
             INSERT INTO data (id, object)
             VALUES (%s, %s)
             ON CONFLICT (id) DO UPDATE
             SET id = %s, object = %s;
         """, (key, j, key, j))
-        self.conn.commit()
+        conn.commit()
+        self.pool.putconn(conn)
         d = float(time.monotonic() - st) * 1000.
         self.timeline.add("emplace_ms", d)
         return key
@@ -170,15 +189,18 @@ class ObjectStorage():
 
     def get(self, key):
         st = time.monotonic()
-        if not self.cur or not self.conn:
-            raise ValueError("no cursor")
         if not key:
             raise ValueError("no key")
-        self.cur.execute("SELECT object FROM public.data WHERE (id=%s)", (key,))
+        conn = self.pool.get_conn()
+        cur = conn.cursor()
+        cur.execute("SELECT object FROM public.data WHERE (id=%s)", (key,))
         row = self.cur.fetchone()
+
         if not row:
             raise IndexError("%s not found" % key)
         j = row[0]
+        conn.commit()
+        self.pool.putconn(conn)
         js = j
         if isinstance(js, dict) or isinstance(js, list):
             js = json.dumps(j)
@@ -198,44 +220,11 @@ class ObjectStorage():
         if "contains_ms" in self.timeline:
             self.timeline.plot("contains_ms")
 
-    def __del__(self):
-        if self.cur:
-            self.cur.close()
-            self.cur = None
-        if self.conn:
-            self.conn.close()
-            self.conn = None
-    def __exit__(self):
-        if self.cur:
-            self.cur.close()
-            self.cur = None
-        if self.conn:
-            self.conn.close()
-            self.conn = None
-
 
 class MgennStorage():
-    def __init__(self, db_conf) -> None:
-        self.db_conf = db_conf
+    def __init__(self, pool:PGUtils) -> None:
+        self.pool = pool
         self.blob_storage = None
-        self.__bl_conn = None
-        self.__bl_cur = None
-
-    def __del__(self):
-        if self.__bl_cur:
-            self.__bl_cur.close()
-            self.__bl_cur = None
-        if self.__bl_conn:
-            self.__bl_conn.close()
-            self.__bl_conn = None
-
-    def __exit__(self):
-        if self.__bl_cur:
-            self.__bl_cur.close()
-            self.__bl_cur = None
-        if self.__bl_conn:
-            self.__bl_conn.close()
-            self.__bl_conn = None
 
     def is_connected(self):
         return bool(self.blob_storage) and self.blob_storage.connected() and self.__bl_cur
@@ -244,21 +233,7 @@ class MgennStorage():
         if self.blob_storage:
             del self.blob_storage
             self.blob_storage = None
-        self.blob_storage = ObjectStorage(self.db_conf)
-        if self.__bl_cur:
-            self.__bl_cur.close()
-            self.__bl_cur = None
-        if self.__bl_conn:
-            self.__bl_conn.close()
-            self.__bl_conn = None
-        host, user, password, dbname = self.db_conf
-        self.__bl_conn = psycopg2.connect(dbname=dbname, 
-                                    user=user, 
-                                    assword=password,
-                                    host=host,
-                                    port="5432", 
-                                    application_name="PyMgennStorage")
-        self.__bl_cur = self.conn.cursor()
+        self.blob_storage = ObjectStorage(self.pool)
         F.pring("MgennStorage init ok")
         if not self.check_db():
             F.print("make mgenn db")
@@ -272,15 +247,21 @@ class MgennStorage():
     def check_db(self):
         if not self.connected():
             raise Exception("not connected")
+        conn = self.pool.get_conn()
+        cur = conn.cursor()
         for schema_name, table_name in self.__req_tables():
-            if not self.pgutils.table_exists(self.cur, table_name, schema_name):
+            if not self.pgutils.table_exists(cur, table_name, schema_name):
+                self.pool.putconn(conn)
                 return False
+        self.pool.putconn(conn)
         return True
 
     def make_db(self):
         if not self.connected():
             raise Exception("not connected")
-        self.cur.execute("""
+        conn = self.pool.get_conn()
+        cur = conn.cursor()
+        cur.execute("""
             CREATE TABLE public.sys
             (
                 key character varying(128) NOT NULL,
@@ -289,7 +270,7 @@ class MgennStorage():
                 PRIMARY KEY (key)
             );
             """)
-        self.cur.execute("""
+        cur.execute("""
             CREATE TABLE public.analyze_ready
             (
                 task_id bigserial NOT NULL,
@@ -304,10 +285,11 @@ class MgennStorage():
                 PRIMARY KEY (task_id)
             )
             """)
-        self.cur.execute("""WITH ( autovacuum_enabled = TRUE );""")
-        self.cur.execute("""ALTER TABLE IF EXISTS public.analyze_ready ADD CONSTRAINT u_snapshot UNIQUE (snapshot_id);""")
+        cur.execute("""WITH ( autovacuum_enabled = TRUE );""")
+        cur.execute("""ALTER TABLE IF EXISTS public.analyze_ready ADD CONSTRAINT u_snapshot UNIQUE (snapshot_id);""")
 
-        self.cur.execute("""CREATE INDEX snapshot_rank_i ON public.analyze_ready USING btree (rank) WITH (deduplicate_items=True);""")
-        self.cur.execute("""CREATE INDEX snapshot_id_i ON public.analyze_ready USING btree (snapshot_id) WITH (deduplicate_items=True);""")
+        cur.execute("""CREATE INDEX snapshot_rank_i ON public.analyze_ready USING btree (rank) WITH (deduplicate_items=True);""")
+        cur.execute("""CREATE INDEX snapshot_id_i ON public.analyze_ready USING btree (snapshot_id) WITH (deduplicate_items=True);""")
 
-        self.conn.commit()
+        conn.commit()
+        self.pool.putconn(conn)
