@@ -8,6 +8,7 @@ import datetime
 import sys
 import inspect
 import os
+from dotenv import load_dotenv
 import pandas as pd
 import numpy as np
 import torch
@@ -295,3 +296,14 @@ class F():
     def i_approximate(lower_bound, upper_bound, n, keep_bounds = True):
         l = F.approximate(lower_bound, upper_bound, n, keep_bounds)
         return [ int(x) for x in l ]
+
+    def get_env(keys = []) -> dict:
+        if not keys:
+            return {}
+        load_dotenv()
+        env_data = {}
+        for key in keys:
+            env_data[key] = os.environ.get('key')
+        return env_data
+
+

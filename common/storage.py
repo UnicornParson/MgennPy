@@ -5,6 +5,25 @@ import time
 import jsonpickle
 import json
 from .timeline import *
+from .functional import F
+
+class PG_Pool:
+    def __init__(self, db_conf):
+        host, user, password, dbname = db_conf
+        self.connection_pool = psycopg2.pool.SimpleConnectionPool(
+            1,  # минимальное количество соединений
+            20,  # максимальное количество соединений
+            user=user,
+            password=password,
+            host=host,
+            port=5432,
+            database=dbname
+        )
+    def get_conn(self):
+        return self.connection_pool.getconn()
+
+    def put_conn(self, conn):
+        return self.connection_pool.putconn(conn)
 
 class PGUtils():
     def table_exists(self, cur, table_name, schema_name='public'):
@@ -21,7 +40,7 @@ class PGUtils():
         return exists
 
 class ObjectStorage():
-    def __init__(self, db_conf):
+    def __init__(self, pool:PGUtils):
         self.db_conf = db_conf
         host, user, password, dbname = db_conf
         self.conn = psycopg2.connect(dbname=dbname, user=user, password=password, host=host, port="5432", application_name="PyObjectStorage")
@@ -31,6 +50,16 @@ class ObjectStorage():
 
         if not self.check_db():
             self.make_db()
+
+    @staticmethod
+    def db_conf_from_env():
+        # return db_host, db_user, db_password, db_name
+        env = F.get_env(['DB_HOST', 'DB_USER', 'DB_PASSWORD', 'DB_NAME'])
+        db_host = env['DB_HOST']
+        db_user = env['DB_USER']
+        db_password = env['DB_PASSWORD']
+        db_name = env['DB_NAME']
+        return db_host, db_user, db_password, db_name
 
     def connected(self) -> bool:
         return bool(self.conn) and bool(self.cur)
@@ -230,10 +259,15 @@ class MgennStorage():
                                     port="5432", 
                                     application_name="PyMgennStorage")
         self.__bl_cur = self.conn.cursor()
+        F.pring("MgennStorage init ok")
+        if not self.check_db():
+            F.print("make mgenn db")
+            self.make_db()
+
 
     def __req_tables(self) -> list:
         # (schema_name, table_name)
-        return [("public", "data")]
+        return [("public", "sys")]
 
     def check_db(self):
         if not self.connected():
@@ -242,3 +276,38 @@ class MgennStorage():
             if not self.pgutils.table_exists(self.cur, table_name, schema_name):
                 return False
         return True
+
+    def make_db(self):
+        if not self.connected():
+            raise Exception("not connected")
+        self.cur.execute("""
+            CREATE TABLE public.sys
+            (
+                key character varying(128) NOT NULL,
+                s_val text,
+                j_val jsonb,
+                PRIMARY KEY (key)
+            );
+            """)
+        self.cur.execute("""
+            CREATE TABLE public.analyze_ready
+            (
+                task_id bigserial NOT NULL,
+                snapshot_id character varying(256) NOT NULL,
+                rank smallint NOT NULL,
+                tick bigint NOT NULL,
+                ctime timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                outputs jsonb,
+                creator character varying(256),
+                exec_telemetry jsonb,
+                ex jsonb,
+                PRIMARY KEY (task_id)
+            )
+            """)
+        self.cur.execute("""WITH ( autovacuum_enabled = TRUE );""")
+        self.cur.execute("""ALTER TABLE IF EXISTS public.analyze_ready ADD CONSTRAINT u_snapshot UNIQUE (snapshot_id);""")
+
+        self.cur.execute("""CREATE INDEX snapshot_rank_i ON public.analyze_ready USING btree (rank) WITH (deduplicate_items=True);""")
+        self.cur.execute("""CREATE INDEX snapshot_id_i ON public.analyze_ready USING btree (snapshot_id) WITH (deduplicate_items=True);""")
+
+        self.conn.commit()

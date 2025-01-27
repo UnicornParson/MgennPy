@@ -1,24 +1,7 @@
-import ApiClient as mg
-import json
+import mcore as mc
+from common import *
 
-apiUrl = "http://192.168.44.214/mgenn/api.php"
+db_conf = ObjectStorage.db_conf_from_env()
 
-engine = mg.Engine(apiUrl)
-rc = engine.start()
-if not rc:
-	print("cannot start engine")
-	exit()
-admin = mg.ApiAdminHelper(engine)
-list = admin.getSnapshotNames()
-
-if not list:
-	print("cannot get list")
-	exit()
-
-for name in list:
-	print(name + " => " + engine.getAlias(name))
-
-#snapshot = mg.Snapshot(engine)
-#snapshot.load("ad")
-
-#print("returned " + resp.meta.state + " with duration " + str(resp.meta.duration))
+storage = MgennStorage(db_conf)
+storage.init()

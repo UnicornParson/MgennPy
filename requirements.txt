@@ -13,3 +13,4 @@ unittest-parallel
 humanize
 jsonpickle
 hypothesis
+psycopg2-binary
