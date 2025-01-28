@@ -303,7 +303,7 @@ class F():
         load_dotenv()
         env_data = {}
         for key in keys:
-            env_data[key] = os.environ.get('key')
+            env_data[key] = os.getenv(key)
         return env_data
 
 

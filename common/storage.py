@@ -1,5 +1,6 @@
 import psycopg2
 from psycopg2 import sql
+from psycopg2.pool import SimpleConnectionPool
 import uuid
 import time
 import jsonpickle
@@ -9,6 +10,7 @@ from .functional import F
 
 class PG_Pool:
     def __init__(self, db_conf):
+        print(f" ------ conf: {db_conf}")
         host, user, password, dbname = db_conf
         self.connection_pool = psycopg2.pool.SimpleConnectionPool(
             1,  # минимальное количество соединений
@@ -37,9 +39,10 @@ class PG_Pool:
         db_user = env['DB_USER']
         db_password = env['DB_PASSWORD']
         db_name = env['DB_NAME']
-        return db_host, db_user, db_password, db_name
+        return (db_host, db_user, db_password, db_name)
+
     def connected(self) -> bool:
-        return bool(self.connection_pool) and self.connection_pool.check_connected()
+        return bool(self.connection_pool) and not self.connection_pool.closed 
 
     def get_conn(self):
         return self.connection_pool.getconn()
@@ -62,9 +65,11 @@ class PGUtils():
         return exists
 
 class ObjectStorage():
-    def __init__(self, pool:PGUtils):
+    def __init__(self, pool:PG_Pool):
         if not pool:
             raise ValueError("no pg pool")
+        if not isinstance(pool, PG_Pool):
+            raise ValueError(f"pg pool is not a pool {type(pool)}")
         self.pool = pool
         self.timeline = Timeline()
         self.pgutils = PGUtils()
@@ -129,9 +134,9 @@ class ObjectStorage():
         cur = conn.cursor()
         for schema_name, table_name in self.__req_tables():
             if not self.pgutils.table_exists(cur, table_name, schema_name):
-                self.pool.putconn(conn)
+                self.pool.put_conn(conn)
                 return False
-        self.pool.putconn(conn)
+        self.pool.put_conn(conn)
         return True
 
     def make_db(self):
@@ -139,6 +144,7 @@ class ObjectStorage():
             raise Exception("not connected")
         conn = self.pool.get_conn()
         cur = conn.cursor()
+        conn.autocommit = True
         cur.execute("""
             CREATE TABLE public.data (
                 _row bigint NOT NULL,
@@ -153,8 +159,8 @@ class ObjectStorage():
                 WITH (fillfactor=20, deduplicate_items=True)
                 TABLESPACE pg_default;
             """)
-        conn.commit()
-        self.pool.putconn(conn)
+        conn.autocommit = False
+        self.pool.put_conn(conn)
 
     def emplace(self, obj, key=None) -> str:
         st = time.monotonic()
@@ -172,7 +178,7 @@ class ObjectStorage():
             SET id = %s, object = %s;
         """, (key, j, key, j))
         conn.commit()
-        self.pool.putconn(conn)
+        self.pool.put_conn(conn)
         d = float(time.monotonic() - st) * 1000.
         self.timeline.add("emplace_ms", d)
         return key
@@ -200,7 +206,7 @@ class ObjectStorage():
             raise IndexError("%s not found" % key)
         j = row[0]
         conn.commit()
-        self.pool.putconn(conn)
+        self.pool.put_conn(conn)
         js = j
         if isinstance(js, dict) or isinstance(js, list):
             js = json.dumps(j)
@@ -222,19 +228,24 @@ class ObjectStorage():
 
 
 class MgennStorage():
-    def __init__(self, pool:PGUtils) -> None:
+    def __init__(self, pool:PG_Pool) -> None:
+        if not pool:
+            raise ValueError("no pg pool")
+        if not isinstance(pool, PG_Pool):
+            raise ValueError(f"pg pool is not a pool {type(pool)}")
         self.pool = pool
+        self.pgutils = PGUtils()
         self.blob_storage = None
 
-    def is_connected(self):
-        return bool(self.blob_storage) and self.blob_storage.connected() and self.__bl_cur
+    def connected(self):
+        return bool(self.blob_storage) and self.blob_storage.connected() and bool(self.pool) and self.pool.connected()
 
     def init(self):
         if self.blob_storage:
             del self.blob_storage
             self.blob_storage = None
         self.blob_storage = ObjectStorage(self.pool)
-        F.pring("MgennStorage init ok")
+        F.print("MgennStorage init ok")
         if not self.check_db():
             F.print("make mgenn db")
             self.make_db()
@@ -251,9 +262,9 @@ class MgennStorage():
         cur = conn.cursor()
         for schema_name, table_name in self.__req_tables():
             if not self.pgutils.table_exists(cur, table_name, schema_name):
-                self.pool.putconn(conn)
+                self.pool.put_conn(conn)
                 return False
-        self.pool.putconn(conn)
+        self.pool.put_conn(conn)
         return True
 
     def make_db(self):
@@ -261,8 +272,9 @@ class MgennStorage():
             raise Exception("not connected")
         conn = self.pool.get_conn()
         cur = conn.cursor()
+        conn.autocommit = True
         cur.execute("""
-            CREATE TABLE public.sys
+            CREATE TABLE IF NOT EXISTS public.sys
             (
                 key character varying(128) NOT NULL,
                 s_val text,
@@ -271,7 +283,7 @@ class MgennStorage():
             );
             """)
         cur.execute("""
-            CREATE TABLE public.analyze_ready
+            CREATE TABLE IF NOT EXISTS public.analyze_ready
             (
                 task_id bigserial NOT NULL,
                 snapshot_id character varying(256) NOT NULL,
@@ -283,13 +295,81 @@ class MgennStorage():
                 exec_telemetry jsonb,
                 ex jsonb,
                 PRIMARY KEY (task_id)
-            )
+            ) WITH ( autovacuum_enabled = TRUE )
             """)
-        cur.execute("""WITH ( autovacuum_enabled = TRUE );""")
         cur.execute("""ALTER TABLE IF EXISTS public.analyze_ready ADD CONSTRAINT u_snapshot UNIQUE (snapshot_id);""")
+        cur.execute("""CREATE INDEX IF NOT EXISTS snapshot_rank_i ON public.analyze_ready USING btree (rank) WITH (deduplicate_items=True);""")
+        cur.execute("""CREATE INDEX IF NOT EXISTS snapshot_id_i ON public.analyze_ready USING btree (snapshot_id) WITH (deduplicate_items=True);""")
 
-        cur.execute("""CREATE INDEX snapshot_rank_i ON public.analyze_ready USING btree (rank) WITH (deduplicate_items=True);""")
-        cur.execute("""CREATE INDEX snapshot_id_i ON public.analyze_ready USING btree (snapshot_id) WITH (deduplicate_items=True);""")
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS public.busy_by_analizer
+            (
+                task_id bigint NOT NULL,
+                snapshot_id character varying(256) NOT NULL,
+                rank smallint NOT NULL,
+                tick bigint NOT NULL,
+                ctime timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                outputs jsonb,
+                creator character varying(256),
+                owner character varying(256),
+                exec_telemetry jsonb,
+                ex jsonb,
+                PRIMARY KEY (task_id)
+            ) WITH ( autovacuum_enabled = TRUE )
+            """)
+        cur.execute("""CREATE INDEX IF NOT EXISTS snapshot_id_i ON public.busy_by_analizer USING btree (snapshot_id) WITH (deduplicate_items=True);""")
 
-        conn.commit()
-        self.pool.putconn(conn)
+        conn.autocommit = False
+        self.pool.put_conn(conn)
+
+    def checkout_analizer_job(self, snapshot_id):
+        if not snapshot_id:
+            raise ValueError("no snapshot id")
+        conn = self.pool.get_conn()
+        cur = conn.cursor()
+        conn.autocommit = False
+        try:
+            cur.execute(sql.SQL("""
+            INSERT INTO public.busy_by_analizer ( 
+                    task_id,
+                    snapshot_id,
+                    rank,
+                    tick,
+                    ctime,
+                    outputs,
+                    creator,
+                    exec_telemetry,
+                    ex
+            )
+            SELECT 
+                public.analyze_ready.task_id,
+                public.analyze_ready.snapshot_id,
+                public.analyze_ready.rank,
+                public.analyze_ready.tick,
+                public.analyze_ready.ctime,
+                public.analyze_ready.outputs,
+                public.analyze_ready.creator,
+                public.analyze_ready.exec_telemetry,
+                public.analyze_ready.ex
+            FROM    public.analyze_ready
+            WHERE   public.analyze_ready.snapshot_id = %s
+            LIMIT 0, 1;"""), (snapshot_id,))
+            if cur.rowcount != 1:
+                raise psycopg2.IntegrityError(f"invalid task checkout. affected:{cur.rowcount} id:{snapshot_id}")
+            cur.execute(sql.SQL("SELECT * FROM public.busy_by_analizer WHERE snapshot_id = %s LIMIT 0, 1" ), (snapshot_id,))
+            row = cur.fetchone()
+
+            if not row:
+                self.pool.put_conn(conn)
+                raise psycopg2.IntegrityError(f"no marked for checkout job with id {snapshot_id}")
+
+                
+            # Вставляем строку в целевую таблицу
+            cur.execute(sql.SQL("INSERT INTO target_table (column1, column2, ...) VALUES (%s, %s, ...)"), row)
+
+            # Удаляем строку из исходной таблицы
+            cur.execute(sql.SQL("DELETE FROM source_table WHERE some_column = %s"), ('some_value',))
+
+        except Exception as e:
+            F.print(f"checkout failed: {e}")
+            conn.rollback()
