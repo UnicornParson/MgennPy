@@ -8,6 +8,9 @@ import datetime
 import sys
 import inspect
 import os
+import json
+import socket
+import re
 from dotenv import load_dotenv
 import pandas as pd
 import numpy as np
@@ -207,6 +210,46 @@ class F():
             raise ValueError(f"dsort_val only for dicts, {type(x)} received")
         return dict(sorted(x.items(), key=lambda item: item[1]))
 
+
+
+    @staticmethod
+    def isHexString(s:str) -> bool:
+        s = s.strip()
+        if not s:
+            return False
+        pattern = r'^[0-9a-fA-F]+$'
+        return bool(re.match(pattern, s))
+
+    @staticmethod
+    def hex_to_az(s: str, with_nums: bool = False, with_upper: bool = False, with_syms: bool = False) -> str:
+        """
+        converts a hexadecimal string to an alphanumeric string representing the corresponding ASCII character.
+
+        Args:
+            s (str): The input hexadecimal string.
+            with_nums (bool, optional): If True, includes numerical characters in the output. Defaults to False.
+            with_upper (bool, optional): If True, includes uppercase letters in the output. Defaults to False.
+            with_syms (bool, optional): If True, includes special symbols in the output. Defaults to False.
+
+        Returns:
+            str: The converted alphanumeric string.
+        """
+        if not F.isHexString(s):
+            return ""
+
+        alphabet = 'abcdefghijklmnopqrstuvwxyz'
+        if with_upper:
+            alphabet += alphabet.upper()
+        if with_nums:
+            alphabet = "0123456789" + alphabet
+        if with_syms:
+            alphabet += "_."
+        az = ''.join(alphabet[int(s[i:i+2], 16) % len(alphabet) - 1] for i in range(0, len(s), 2))
+        print(az)
+        return az
+
+
+
     @staticmethod
     def getNodeName():
         """
@@ -218,8 +261,15 @@ class F():
         m = hashlib.sha512()
         m.update(strName.encode('utf-8'))
         nameHash = m.hexdigest()
-        F.print(f"new node name {nameHash}")
-        return nameHash
+        short_hash = F.hex_to_az(nameHash, with_nums = True, with_upper = True, with_syms = True)
+        F.print(f"new node name {short_hash}")
+        return short_hash
+
+    @staticmethod
+    def getNodeFullName():
+        h = F.getNodeName()
+        fqdn = socket.getfqdn()
+        return f"mgenn_{fqdn}_{h}"
 
     @staticmethod
     def generateOID() -> int:
@@ -297,6 +347,7 @@ class F():
         l = F.approximate(lower_bound, upper_bound, n, keep_bounds)
         return [ int(x) for x in l ]
 
+    @staticmethod
     def get_env(keys = []) -> dict:
         if not keys:
             return {}
@@ -305,5 +356,7 @@ class F():
         for key in keys:
             env_data[key] = os.getenv(key)
         return env_data
-
-
+        
+    @staticmethod
+    def jsump(o) -> str:
+        return json.dumps(o, default=str)

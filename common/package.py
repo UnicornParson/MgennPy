@@ -82,6 +82,9 @@ class Package:
         self.snapshot_id = ""
         self.parent = ""
 
+    def id(self) -> str:
+        return self.snapshot_id
+
     def __contains__(self, key):
         # check string names first
         if self.findInput(key) >= 0 or self.findOutputByName(key):

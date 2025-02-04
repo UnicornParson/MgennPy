@@ -7,6 +7,28 @@ import torch
 import hypothesis.strategies as st
 from hypothesis import given, settings
 
+class TestFHexToAz(unittest.TestCase):
+    def test_no_args(self):
+        self.assertEqual(F.hex_to_az(""), "")
+
+    def test_with_nums_and_upper_case(self):
+        self.assertEqual(F.hex_to_az("A0", with_nums=True, with_upper=True), "z")
+
+    def test_with_syms(self):
+        self.assertEqual(F.hex_to_az("30", with_syms=True), "t")
+
+    def test_with_nums_only(self):
+        self.assertEqual(F.hex_to_az("1234", with_nums=True), "hf")
+
+    def test_all_syms1(self):
+        s = ''.join(f"{i:02x}" for i in range(256))
+        self.assertEqual(F.hex_to_az(s, with_nums = True, with_upper = True, with_syms = True),
+        ".0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_.0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_.0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_.0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_")
+
+    def test_all_syms2(self):
+        s = ''.join(f"{i:02x}" for i in range(256))
+        self.assertEqual(F.hex_to_az(s, with_nums = False, with_upper = False, with_syms = False),
+        "zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstu")
 
 class TestF(unittest.TestCase):
     @given(st.text())
@@ -152,3 +174,47 @@ class TestF(unittest.TestCase):
         result = F.i_approximate(lower_bound, upper_bound, n)
         self.assertEqual(len(result), n + 2)
 
+    def test_isHexString_empty_string(self):
+        self.assertFalse(F.isHexString(""))
+
+    def test_isHexString_single_character(self):
+        self.assertTrue(F.isHexString("0"))
+        self.assertTrue(F.isHexString("1"))
+        self.assertTrue(F.isHexString("a"))
+        self.assertTrue(F.isHexString("A"))
+
+    def test_isHexString_multiple_characters(self):
+        self.assertTrue(F.isHexString("abcdef"))
+        self.assertTrue(F.isHexString("ABCDEF"))
+
+    def test_isHexString_empty_string(self):
+        self.assertFalse(F.isHexString(""))
+        self.assertFalse(F.isHexString(" "))
+
+    def test_isHexString_single_character(self):
+        self.assertTrue(F.isHexString("0"))
+        self.assertTrue(F.isHexString("1"))
+        self.assertTrue(F.isHexString("a"))
+        self.assertTrue(F.isHexString("A"))
+
+    def test_isHexString_multiple_characters(self):
+        self.assertTrue(F.isHexString("abcdef"))
+        self.assertTrue(F.isHexString("ABCDEF"))
+
+    def test_isHexString_non_hex_string(self):
+        self.assertFalse(F.isHexString("hello"))
+        self.assertFalse(F.isHexString("world"))
+        self.assertFalse(F.isHexString("python"))
+
+    def test_isHexString_numbers_only(self):
+        self.assertTrue(F.isHexString("1234567890"))
+
+    def test_isHexString_alphabets_only(self):
+        self.assertFalse(F.isHexString("abcdefghijklmnopqrstuvwxyz"))
+        self.assertFalse(F.isHexString("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
+
+    def test_isHexString_hex_string_with_spaces(self):
+        self.assertTrue(F.isHexString("abcdef "))
+        self.assertTrue(F.isHexString(" abcdef "))
+        self.assertTrue(F.isHexString("    abcdef            "))
+        self.assertFalse(F.isHexString("abcde f"))
