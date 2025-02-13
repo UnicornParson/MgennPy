@@ -15,9 +15,12 @@ class AnalizerJob():
         self.exec_telemetry = exec_telemetry
         self.ex = ex
 
-    @classmethod
-    def from_query_row(cls, row):
-        return cls(
+    def isValid(self):
+        return bool(self.snapshot_id) and bool(self.task_id)
+
+    @staticmethod
+    def from_query_row(row):
+        return AnalizerJob(
             task_id=row[0],
             snapshot_id=row[1],
             rank=row[2],
@@ -29,15 +32,15 @@ class AnalizerJob():
             ex=row[8]
         )
 
-    @classmethod
+    @staticmethod
     def from_db(table, snapshot_id, cur):
         #public.busy_by_analizer
-        cur.execute(sql.SQL("SELECT * FROM %s WHERE snapshot_id = %s LIMIT 0, 1" ), (table, snapshot_id,))
+        cur.execute(sql.SQL(f"SELECT * FROM {table} WHERE (snapshot_id = %s)" ), (snapshot_id,))
         row = cur.fetchone()
         if not row:
             F.print(f"job for {snapshot_id} not found in {table}")
             return None
-        return AnalizerJob.from_query_row()
+        return AnalizerJob.from_query_row(row)
 
     def to_dict(self):
         return {

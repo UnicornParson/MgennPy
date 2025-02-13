@@ -23,7 +23,7 @@ __all__ = ["F",
     "ListFilterMod",
     "SnapshotState",
     "ObjectFactory",
-    "PackageUtils", "Pkgz", "Package",
+    "PackageUtils", "Pkgz", "Package", "PkgSizePreset",
     "RobotsLogger",
     "Timeline",
     ]

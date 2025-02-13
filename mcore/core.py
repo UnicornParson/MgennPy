@@ -1,5 +1,6 @@
 import math
 import copy
+import time
 import pandas as pd
 from .core_object import RunnableObject, CoreObject
 from common import MgennConsts, MgennComon, F, Package, RobotsLogger, ObjectIdType
@@ -37,6 +38,7 @@ class Core(CoreObject):
         if not RobotsLogger.default:
             RobotsLogger.default = RobotsLogger()
         self.pending_events = []
+        self.last_exec_duration = 0
 
     def empty(self) -> bool:
         """
@@ -234,6 +236,7 @@ class Core(CoreObject):
         pkg.state = self.pkg.state
         pkg.tick = self.pkg.tick
         pkg.meta = copy.deepcopy(self.pkg.meta)
+        pkg.telemetry.exec_time_mc = self.last_exec_duration
         pkg.history["format"] = "robots"
         pkg.history["format_ver"] = "0.1"
         pkg.history["items"] = copy.deepcopy(RobotsLogger.default.log)
@@ -349,14 +352,17 @@ class Core(CoreObject):
             raise DirtyObjectException(who = f"core_{self.__hash__}",
                                        oid = self.pkg.snapshot_id,
                                        message = f"core is ditry. has {len(self.pending_events)} pending events")
+        self.last_exec_duration = 0
         self.pkg.tick += 1
+        start_time = time.perf_counter()
         self.__process_autoinputs()
         self.__process_tapes()
         self.__process_content()
         while(self.pending_events):
             self.__process_events()
         record = self.__extract_outputs()
-
+        end_time = time.perf_counter()
+        self.last_exec_duration = int((end_time - start_time) * 1000)
         return record
 
     def max_id(self):

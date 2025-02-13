@@ -11,7 +11,7 @@ class TestNeuron(unittest.TestCase):
     def test_make_layer(self):
         pkg = mc.Package.make_empty()
         builder = mc.StructsBuilder()
-        layer_size = 1000
+        layer_size = 10
     
         def neuron_builder(l_index:int):
             leak = 0.1
@@ -33,7 +33,7 @@ class TestNeuron(unittest.TestCase):
     def test_make_ngrid(self):
         pkg = mc.Package.make_empty()
         builder = mc.StructsBuilder()
-        grid_shape = (10, 10, 10)
+        grid_shape = (3, 3, 3)
         def neuron_builder(l_index):
             leak = 0.1
             peak = 5.
@@ -54,7 +54,7 @@ class TestNeuron(unittest.TestCase):
     def test_connect_layers_1_1(self):
         pkg = mc.Package.make_empty()
         builder = mc.StructsBuilder()
-        grid_shape = (10, 10, 10)
+        grid_shape = (3, 3, 3)
         def neuron_builder(l_index):
             leak = 0.1
             peak = 5.

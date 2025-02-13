@@ -360,3 +360,11 @@ class F():
     @staticmethod
     def jsump(o) -> str:
         return json.dumps(o, default=str)
+
+    @staticmethod
+    def frand(min_value:float, max_value:float) -> float:
+        min_value = float(min(min_value, max_value))
+        max_value = float(max(min_value, max_value))
+        if min_value == max_value:
+            raise ValueError("frand min=max")
+        return np.random.rand() * (max_value - min_value) + min_value

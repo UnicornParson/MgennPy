@@ -7,8 +7,13 @@ from .functional import F
 from .mgenn_comon import MgennComon, NumpyEncoder
 from .mgenn_consts import MgennConsts, ObjectIdType
 import lzma
+import enum
+import itertools
 
-
+class PkgSizePreset(enum.Enum):
+    Small = 0
+    Medium = 1
+    Large = 2
 
 class PackageUtils:
     @staticmethod
@@ -42,15 +47,83 @@ class PackageUtils:
             return True
         except:
             return False
-
+    @staticmethod
     def makeEmptyPkgData() -> dict:
         return {}
 
+    @staticmethod
+    def makeRandomContent(pkg,  preset: PkgSizePreset):
+        presets = {
+            # preset name -> neurons count
+            PkgSizePreset.Small: 10,
+            PkgSizePreset.Medium: 100,
+            PkgSizePreset.Large: 1000
+        }
+        if not preset or not isinstance(preset, PkgSizePreset):
+            raise ValueError(f"invalid preset [{preset}] type [{type(preset)}]")
+        if pkg is None or isinstance(pkg, dict) or not pkg.isValid():
+            raise ValueError(f"invalid pkg")
+        ids = []
+        for _ in range(presets[preset]):
+            ids.append(pkg.new_neuron(F.frand(0.1,10.), F.frand(0.1,10.), []))
+        for a, b in itertools.product(ids, repeat=2):
+            pkg.new_link_between(F.frand(0.1,10.0), 2.0, a, b)
+        return pkg
+
+class PkgTelemetry:
+    def __init__(self) -> None:
+        self.exec_time_mc = 0
+        self.size = 0
+        self.avg_energy = 0.0
+
+
+    def to_dict(self) -> dict:
+        """Returns a dictionary representation of the object"""
+        if not (self.exec_time_mc >= 0 and self.size >= 0):
+            raise ValueError("Execution time and size cannot be negative")
+        data = {
+            "exec_time_mc": self.exec_time_mc,
+            "size": self.size,
+            "avg_energy": self.avg_energy
+        }
+        return data
+
+
+    def from_dict(self, data: dict):
+        """
+        Creates an instance of PkgTelemetry from a dictionary.
+
+        :param cls: The class to instantiate.
+        :param data: A dictionary containing the telemetry data.
+        :return: An instance of PkgTelemetry created from the provided data.
+        :raises ValueError: If any of the input values are invalid (i.e., not within [0, infinity) or None).
+        """
+         # Validate that the input data is not empty and is a dictionary
+        if not isinstance(data, dict) or len(data) == 0:
+            raise ValueError("Input data must be a non-empty dictionary")
+        # Validate that the input values are non-negative
+        if not (isinstance(data.get("exec_time_mc", 0), (int, float)) and
+                isinstance(data.get("size", 0), (int, float)) and
+                isinstance(data.get("avg_energy", 0.0), (int, float))):
+            raise ValueError("Input values cannot be negative")
+
+        # Validate that the input values are not None
+        if data["exec_time_mc"] is None or data["size"] is None or data["avg_energy"] is None:
+            raise ValueError("Input values cannot be None")
+
+        self.exec_time_mc=data.get("exec_time_mc", 0),
+        self.size=data.get("size", 0),
+        self.avg_energy=data.get("avg_energy", 0.0)
+
 class Package:
+    PKG_FORMAT_VER = "j0.2.0"
+    PKG_FORMAT_COMPATIBLE = [PKG_FORMAT_VER]
+
     @staticmethod
     def make_empty():
         pkg = Package()
         pkg.state = "new"
+        pkg.fmt = Package.PKG_FORMAT_VER
         pkg.snapshot_id = MgennComon.makeId(ObjectIdType.Core)
         pkg.meta = {
             "branch":"default",
@@ -64,6 +137,7 @@ class Package:
         }
         pkg.parent = "NONE"
         pkg.tick = 0
+        pkg.telemetry = PkgTelemetry()
         return pkg
 
     def __init__(self):
@@ -81,6 +155,8 @@ class Package:
         self.seq = 0
         self.snapshot_id = ""
         self.parent = ""
+        self.fmt = Package.PKG_FORMAT_VER
+        self.telemetry = PkgTelemetry()
 
     def id(self) -> str:
         return self.snapshot_id
@@ -152,7 +228,13 @@ class Package:
             for event in l["events"]:
                 e += float(event["finalAmplitude"])
         return e
-
+    
+    def avg_energy(self) -> float:
+        total = self.total_energy()
+        sz = len(self.links) + len(self.neurons)
+        if sz <= 0.0:
+            return 0.0
+        return total / sz
 
     def introspection(self) -> tuple:
         ids = []
@@ -169,10 +251,6 @@ class Package:
                 values.append(float(event["finalAmplitude"]))
         l_df = pd.DataFrame(values, columns=ids)
         return (n_df, l_df)
-
-
-
-
 
     def findLink(self, id) -> int:
         if isinstance(id, str): ## skip "find by name"
@@ -227,9 +305,14 @@ class Package:
     def loadJsonStr(self, jstr:str):
         if not jstr:
             raise ValueError("empty json string")
-        self.pkg = json.loads(jstr)
-        PackageUtils.checkRawPkg(self.pkg)
+        data = json.loads(jstr)
+        self.loadData(data)
 
+    def loadData(self, data:dict):
+        if not data:
+            raise ValueError("empty data")
+        self.pkg = data
+        PackageUtils.checkRawPkg(self.pkg)
         self.inputs = self.pkg["content"]["inputs"]
         self.outputs = self.pkg["content"]["outputs"]
         self.links = self.pkg["content"]["storage"]["links"]
@@ -280,6 +363,11 @@ class Package:
         pkg["meta"] = self.meta
         pkg["state"] = self.state
         pkg["contenttype"] = "json"
+
+        # make telemetry
+        self.telemetry.avg_energy = self.avg_energy
+        self.telemetry.size = len(self)
+        pkg["telemetry"] = self.telemetry.to_dict()
 
         content = {}
         content["parent"] = lastName

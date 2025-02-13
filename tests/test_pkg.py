@@ -56,6 +56,27 @@ class TestPkg(unittest.TestCase):
         # dont compare parent. it changed by clone
         # self.assertEqual(pkg.parent, rpkg.parent)
         self.assertEqual(pkg.state, rpkg.state)
-
         self.assertEqual(rpkg, pkg)
+
+
+class TestPackageUtils(unittest.TestCase):
+
+    def test_preset_type_check(self):
+        with self.assertRaises(ValueError):
+            PackageUtils.makeRandomContent(None, PkgSizePreset.Small)
+        with self.assertRaises(ValueError):
+            PackageUtils.makeRandomContent({}, PkgSizePreset.Small)
+
+    def test_preset_size(self):
+        pkg = Package.make_empty()
+        self.assertEqual(len(PackageUtils.makeRandomContent(pkg, PkgSizePreset.Small).neurons), 10)
+        pkg = Package.make_empty()
+        self.assertEqual(len(PackageUtils.makeRandomContent(pkg, PkgSizePreset.Medium).neurons), 100)
+        pkg = Package.make_empty()
+        self.assertEqual(len(PackageUtils.makeRandomContent(pkg, PkgSizePreset.Large).neurons), 1000)
+
+    def test_link_count(self):
+        pkg = Package.make_empty()
+        self.assertEqual(len(PackageUtils.makeRandomContent(pkg, PkgSizePreset.Small).links), 10)
+        self.assertEqual(len(PackageUtils.makeRandomContent(pkg, PkgSizePreset.Small).links), 11)
 
