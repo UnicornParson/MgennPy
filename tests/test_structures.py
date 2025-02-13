@@ -1,14 +1,18 @@
 import unittest
 from unittest.mock import Mock, patch
 import math
+import inspect
 import numpy as np
 import mcore as mc
 from common import *
-from numba import jit
-
+from utils import TestUtils
 
 class TestNeuron(unittest.TestCase):
+    def __del__(self):
+        F.set_print_token("")
+
     def test_make_layer(self):
+        F.set_print_token(inspect.currentframe().f_code.co_name)
         pkg = mc.Package.make_empty()
         builder = mc.StructsBuilder()
         layer_size = 10
@@ -29,8 +33,10 @@ class TestNeuron(unittest.TestCase):
             self.assertEqual(n["energyLeak"], 0.1)
             self.assertEqual(n["peakEnergy"], 5.)
             self.assertEqual(n["currentEnergy"], 0.)
+        F.set_print_token("")
 
     def test_make_ngrid(self):
+        F.set_print_token(inspect.currentframe().f_code.co_name)
         pkg = mc.Package.make_empty()
         builder = mc.StructsBuilder()
         grid_shape = (3, 3, 3)
@@ -50,8 +56,10 @@ class TestNeuron(unittest.TestCase):
             self.assertEqual(n["energyLeak"], 0.1)
             self.assertEqual(n["peakEnergy"], 5.)
             self.assertEqual(n["currentEnergy"], 0.)
+        F.set_print_token("")
 
     def test_connect_layers_1_1(self):
+        F.set_print_token(inspect.currentframe().f_code.co_name)
         pkg = mc.Package.make_empty()
         builder = mc.StructsBuilder()
         grid_shape = (3, 3, 3)
@@ -84,12 +92,18 @@ class TestNeuron(unittest.TestCase):
         pkgName, pkg_data = pkg.dump()
         self.assertTrue(bool(pkgName))
         self.assertTrue(bool(pkg_data))
+        F.set_print_token("")
 
     def test_connect_layers_all(self):
+        F.set_print_token(inspect.currentframe().f_code.co_name)
         pkg = mc.Package.make_empty()
         builder = mc.StructsBuilder()
-        grid_shape_l = (3, 4, 5)
-        grid_shape_r = (6, 7, 8)
+        grid_shape_l = (2, 2, 2)
+        grid_shape_r = (2, 2, 2)
+
+        if TestUtils.run_long_tests():
+            grid_shape_l = (3, 4, 5)
+            grid_shape_r = (6, 7, 8)
         def neuron_builder(l_index:int):
             leak = 0.1
             peak = 5.
@@ -119,9 +133,12 @@ class TestNeuron(unittest.TestCase):
         pkgName, pkg_data = pkg.dump()
         self.assertTrue(bool(pkgName))
         self.assertTrue(bool(pkg_data))
+        F.set_print_token("")
 
     def test_neuron_builder(self):
+        F.set_print_token(inspect.currentframe().f_code.co_name)
         builder = mc.StructsBuilder()
         leak, peak = builder.neuron_builder(0)
         self.assertEqual(leak, 0.)
         self.assertEqual(peak, 5.)
+        F.set_print_token("")

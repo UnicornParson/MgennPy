@@ -2,13 +2,16 @@ import unittest
 import mcore as mc
 import os
 from common import *
+import inspect
 
 class TestCore(unittest.TestCase):
     def __init__(self, methodName: str = ...) -> None:
         super().__init__(methodName)
         self.__pkg_path = f"{os.getcwd()}/tests/test_data/namespacetest_rev0.pkg"
         self.__powered_pkg_path = f"{os.getcwd()}/tests/test_data/namespacetest_rev1_powered.pkg"
-
+    def __del__(self):
+        F.set_print_token("")
+        
     def test_init(self):
         core = mc.Core()
         self.assertIsNone(core.pkg)
@@ -92,6 +95,7 @@ class TestCore(unittest.TestCase):
         self.assertTrue(os.path.isfile(self.__pkg_path))
 
     def test_empty_core(self):
+        F.set_print_token(inspect.currentframe().f_code.co_name)
         core = mc.Core()
         self.assertTrue(core.empty())
         pkg = core.dump()
@@ -101,8 +105,10 @@ class TestCore(unittest.TestCase):
         self.assertEqual(e, 0.0)
         self.assertTrue(pkg.isValid())
         self.assertTrue(pkg.empty())
+        F.set_print_token("")
 
     def test_measure_powered_core(self):
+        F.set_print_token(inspect.currentframe().f_code.co_name)
         pkg = mc.Package.make_empty()
         pkg.loadFile(self.__powered_pkg_path)
         self.assertEqual(pkg.total_energy(), 10.0)
@@ -117,9 +123,11 @@ class TestCore(unittest.TestCase):
         self.assertEqual(cloned_pkg.total_energy(), 0.0)
         core.removeDynamic()
         self.assertEqual(core.total_energy(), 0.0)
+        F.set_print_token("")
 
 
     def test_load_from_file(self):
+        F.set_print_token(inspect.currentframe().f_code.co_name)
         pkg = mc.Package()
         pkg.loadFile(self.__pkg_path)
         core = mc.Core()
@@ -153,8 +161,10 @@ class TestCore(unittest.TestCase):
         self.assertNotEqual(next_id, max_id)
         self.assertTrue(core.__contains__(max_id))
         self.assertFalse(core.__contains__(next_id))
+        F.set_print_token("")
 
     def test_dump_core(self):
+        F.set_print_token(inspect.currentframe().f_code.co_name)
         pkg = mc.Package()
         pkg.loadFile(self.__pkg_path)
 
@@ -206,5 +216,5 @@ class TestCore(unittest.TestCase):
         self.assertEqual(len(new_pkg.outputs), len(orig.outputs))
         self.assertEqual(len(new_pkg.links), len(orig.links))
         self.assertEqual(len(new_pkg.neurons), len(orig.neurons))
-
+        F.set_print_token("")
 

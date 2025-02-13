@@ -1,5 +1,6 @@
 import unittest
 import pandas as pd
+import inspect
 import mcore as mc
 import os
 from common import *
@@ -8,8 +9,11 @@ class TestLiveCore(unittest.TestCase):
     def __init__(self, methodName: str = ...) -> None:
         super().__init__(methodName)
         self.__pkg_path = f"{os.getcwd()}/tests/test_data/namespacetest_rev0.pkg"
+    def __del__(self):
+        F.set_print_token("")
 
     def test_load_exec(self):
+        F.set_print_token(inspect.currentframe().f_code.co_name)
         pkg = mc.Package()
         pkg.loadFile(self.__pkg_path)
         core = mc.Core()
@@ -34,8 +38,10 @@ class TestLiveCore(unittest.TestCase):
         exp_o_names = ["out0",  "out1",  "out2",  "out3",  "out4",  "out5",  "out6",  "out7",  "out8",  "out9"]
         F.print(f"o_record: {record.data}")
         self.assertEqual(list(record.data.columns.values).sort(), exp_o_names.sort())
+        F.set_print_token("")
 
     def test_pd_to_pd(self):
+        F.set_print_token(inspect.currentframe().f_code.co_name)
         pkg = mc.Package.make_empty()
         n1 = pkg.new_neuron(leak=1.0, peak=5.0, receivers=[])
         i1 = pkg.new_tape_input("i1", [])
@@ -60,7 +66,7 @@ class TestLiveCore(unittest.TestCase):
 
         io = pd.concat([df_in, df_out, df_expected], axis=1)
         io['error'] = io['o1'].astype(float) - io['o1_exp'].astype(float)
-        for index, row in io.iterrows():
+        for _, row in io.iterrows():
             self.assertEqual(row["o1"], row["o1_exp"])
             self.assertEqual(row["error"], 0.0)
         # cleanup
@@ -90,7 +96,8 @@ class TestLiveCore(unittest.TestCase):
             
         io = pd.concat([df_in, df_out, df_expected], axis=1)
         io['error'] = io['o1'].astype(float) - io['o1_exp'].astype(float)
-        for index, row in io.iterrows():
+        for _, row in io.iterrows():
             self.assertEqual(row["o1"], row["o1_exp"])
             self.assertEqual(row["error"], 0.0)
+        F.set_print_token("")
 

@@ -24,6 +24,7 @@ from pympler.asizeof import asizeof
 class F():
     __nextId = 0
     __debug_env = "MGENN_DEBUG"
+    __print_token = ""
 
     @staticmethod
     def median(data):
@@ -62,6 +63,10 @@ class F():
         Enable debug print
         """
         os.environ[F.__debug_env] = "Y"
+    
+    @staticmethod
+    def set_print_token(newToken:str):
+        F.__print_token = newToken
 
     @staticmethod
     def print(*args, **kwargs):
@@ -77,8 +82,11 @@ class F():
         if e_debug != 1 and e_debug != "Y":
             return
         cf = inspect.stack()[1]
+        pt = F.__print_token.strip()
+        if pt:
+            pt = f"<<{F.__print_token.strip()}>>"
         current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        sys.stdout.write(f"[{current_time}]in[{cf.function}.{cf.lineno}] ")
+        sys.stdout.write(f"[{current_time}]{pt}in[{cf.function}.{cf.lineno}] ")
         return print(*args, **kwargs, flush=True)
 
     @staticmethod
