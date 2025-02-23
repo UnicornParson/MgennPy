@@ -20,3 +20,4 @@ torchaudio
 tensorflow
 pympler
 numba
+tabulate

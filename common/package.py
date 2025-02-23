@@ -161,6 +161,10 @@ class Package:
     def id(self) -> str:
         return self.snapshot_id
 
+    def renew_id(self) -> str:
+        self.snapshot_id = MgennComon.makeId(ObjectIdType.Core)
+        return self.id()
+
     def __contains__(self, key):
         # check string names first
         if self.findInput(key) >= 0 or self.findOutputByName(key):
@@ -408,13 +412,15 @@ class Package:
         with open(fname, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=4, sort_keys = True, cls=NumpyEncoder)
             return True
-
+    def print_counts(self):
+        F.print(self.counts)
+        
     def counts(self):
         i = len(self.inputs)
         o = len(self.outputs)
         l = len(self.links)
         n = len(self.neurons)
-        F.print(f"inputs:{i}, outputs:{o}, neurons:{l}, links:{n}, total:{(i+o+l+n)}")
+        return f"inputs:{i}, outputs:{o}, neurons:{l}, links:{n}, total:{(i+o+l+n)}"
 
     def maxId(self):
         ret = np.int64(0)
@@ -548,6 +554,46 @@ class Package:
         return self.new_input(name, "tape", receivers, {})
     def new_clock_input(self, name:str, receivers:list, args:dict):
         return self.new_input(name, "clockgenerator", receivers, args)
+
+
+    def pretty_print(self):
+        table = [
+            ("tick", int(self.tick)),
+            ("gen", self.generation),
+            ("seq", self.seq),
+            ("parent", self.parent),
+            ("fmt", self.fmt),
+            ("sid", self.snapshot_id),
+            ("maxid", self.maxId()),
+            ("counts", self.counts()),
+        ]
+        F.table_print(table, ["param", "val"])
+        table = []
+        h = ["id","currentEnergy","energyLeak","mode","peakEnergy","receivers"]
+        for n in self.neurons:
+            table.append((
+                n["id"],
+                n["currentEnergy"],
+                n["energyLeak"],
+                n["mode"],
+                n["peakEnergy"],
+                [int(x) for x in n["receivers"]]
+            ))
+        print("\nneurons:")
+        F.table_print(table, h)
+
+        table = []
+        h = ["id","apt","length","receiverId"]
+        for l in self.links:
+            table.append((
+                int(l["id"]),
+                l["attenuationPerTick"],
+                l["length"],
+                int(l["receiverId"])
+            ))
+        print("\nlinks:")
+        F.table_print(table, h)
+
 
 
 

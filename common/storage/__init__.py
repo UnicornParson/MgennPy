@@ -7,7 +7,7 @@ from .object_storage import *
 from .job import *
 
 __all__ = ["MgennStorage", "ObjectStorage",
-"StorageDataError", # errors
+"StorageDataError", "StorageKeyNotFoundError", "StorageIntegrityError", "StorageConcurrencyError", "StorageNoDataError", # errors
 "PG_Pool", "PGUtils",
-"AnalizerJob", # job objects
+"AnalizerJob", "ExecutorJob", # job objects
 ]

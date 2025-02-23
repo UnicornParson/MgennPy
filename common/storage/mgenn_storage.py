@@ -7,7 +7,7 @@ import jsonpickle
 import json
 import pandas as pd
 from ..timeline import *
-from ..functional import F
+from ..functional import F, W
 from ..package import *
 
 # storage imports
@@ -31,15 +31,28 @@ class MgennStorageStats:
     def __init__(self) -> None:
         self.analyze_ready_size = 0
         self.busy_by_analizer_size = 0
+        self.exec_ready_size = 0
+        self.busy_by_executor_size = 0
+        # durations
+        self.eb_max_duration = 0.0
+        self.ab_max_duration = 0.0
         # errors
-        self.error_ab_rb_collision = 0
+        self.error_ab_ar_collision = 0
+        self.error_eb_er_collision = 0
+        
 
     def __repr__(self):
         return (
             f"MgennStorageStats("
             f"AR_size:{self.analyze_ready_size}, "
             f"AB_size:{self.busy_by_analizer_size}, "
-            f"error_ab_rb_collision={self.error_ab_rb_collision})"
+            f"ER_size:{self.exec_ready_size}, "
+            f"EB_size:{self.busy_by_executor_size}, "
+            f"AB_duration:{self.ab_max_duration:0.2f}, "
+            f"EB_duration:{self.eb_max_duration:0.2f}, "
+            f"AR/AB_collision={self.error_ab_ar_collision}, "
+            f"ER/EB_collision={self.error_eb_er_collision}"
+            ")"
         )
     @staticmethod
     def load(cur):
@@ -49,25 +62,45 @@ class MgennStorageStats:
         task_id
         """
         stat = MgennStorageStats()
-        cur.execute(sql.SQL("""
-            SELECT COUNT(public.analyze_ready.task_id) as ar_count
-                FROM public.analyze_ready
-        """))
+        cur.execute(sql.SQL("""SELECT COUNT(public.analyze_ready.task_id) as ar_count FROM public.analyze_ready"""))
         row = cur.fetchone()
         stat.analyze_ready_size = int(row[0])
-        cur.execute(sql.SQL("""
-            SELECT COUNT(public.busy_by_analizer.task_id) as ab_count
-                FROM public.busy_by_analizer
-        """))
+        cur.execute(sql.SQL("""SELECT COUNT(public.busy_by_analizer.task_id) as ab_count FROM public.busy_by_analizer"""))
         row = cur.fetchone()
         stat.busy_by_analizer_size = int(row[0])
+
+        cur.execute(sql.SQL("""SELECT COUNT(public.exec_ready.task_id) as er_count FROM public.exec_ready"""))
+        row = cur.fetchone()
+        stat.exec_ready_size = int(row[0])
+        cur.execute(sql.SQL("""SELECT COUNT(public.busy_by_executor.task_id) as er_count FROM public.busy_by_executor"""))
+        row = cur.fetchone()
+        stat.busy_by_executor_size = int(row[0])
+
+        # durations
+        cur.execute(sql.SQL("""SELECT MAX(s) as ms FROM public.\"AB_duration\""""))
+        row = cur.fetchone()
+        stat.ab_max_duration = 0.0
+        if row and row[0]:
+            stat.ab_max_duration = float(row[0])
+        cur.execute(sql.SQL("""SELECT MAX(s) as ms FROM public.\"EB_duration\""""))
+        row = cur.fetchone()
+        stat.eb_max_duration = 0.0
+        if row and row[0]:
+            stat.eb_max_duration = float(row[0])
+
+        # errors
         cur.execute(sql.SQL("""
-            SELECT COUNT(*) as cnt
-            FROM public.busy_by_analizer bba1 
+            SELECT COUNT(*) as cnt FROM public.busy_by_analizer bba1 
             JOIN public.analyze_ready ar ON bba1.task_id = ar.task_id AND bba1.snapshot_id = ar.snapshot_id;
         """))
         row = cur.fetchone()
-        stat.error_ab_rb_collision = int(row[0])
+        stat.error_ab_ar_collision = int(row[0])
+        cur.execute(sql.SQL("""
+            SELECT COUNT(*) as cnt FROM public.busy_by_executor bba1 
+            JOIN public.exec_ready ar ON bba1.task_id = ar.task_id AND bba1.snapshot_id = ar.snapshot_id;
+        """))
+        row = cur.fetchone()
+        stat.error_eb_er_collision = int(row[0])
         return stat
 
 class StorageTable(enum.Enum):
@@ -134,7 +167,14 @@ class MgennStorage():
 
     def __req_tables(self) -> list:
         # (schema_name, table_name)
-        return [("public", "sys")]
+        return [
+            ("public", "sys"),
+            ("public", "analyze_ready"),
+            ("public", "busy_by_analizer"),
+            ("public", "exec_ready"),
+            ("public", "busy_by_executor"),
+            ("public", "done"),
+            ]
 
     def check_db(self):
         if not self.connected():
@@ -198,6 +238,8 @@ class MgennStorage():
                 PRIMARY KEY (task_id)
             ) WITH ( autovacuum_enabled = TRUE )
             """))
+        cur.execute(sql.SQL("""CREATE INDEX IF NOT EXISTS snapshot_id_i ON public.busy_by_analizer USING btree (snapshot_id) WITH (deduplicate_items=True);"""))
+        cur.execute(sql.SQL("""CREATE INDEX IF NOT EXISTS rank_i ON public.busy_by_analizer USING btree (rank) WITH (deduplicate_items=True);"""))
 
         cur.execute(sql.SQL("""
             CREATE TABLE IF NOT EXISTS public.exec_ready
@@ -207,20 +249,57 @@ class MgennStorage():
                 rank smallint NOT NULL,
                 tick bigint NOT NULL,
                 ctime timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                outputs jsonb,
-                creator character varying(256),
-                exec_telemetry jsonb,
                 ex jsonb,
                 PRIMARY KEY (task_id)
             ) WITH ( autovacuum_enabled = TRUE )
             """))
+        cur.execute(sql.SQL("""CREATE INDEX IF NOT EXISTS snapshot_id_i ON public.exec_ready USING btree (snapshot_id) WITH (deduplicate_items=True);"""))
+        cur.execute(sql.SQL("""CREATE INDEX IF NOT EXISTS rank_i ON public.exec_ready USING btree (rank) WITH (deduplicate_items=True);"""))
+        cur.execute(sql.SQL("""
+            CREATE TABLE IF NOT EXISTS public.busy_by_executor
+            (
+                task_id bigserial NOT NULL,
+                snapshot_id character varying(256) NOT NULL,
+                rank smallint NOT NULL,
+                tick bigint NOT NULL,
+                ctime timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                ex jsonb,
+                PRIMARY KEY (task_id)
+            ) WITH ( autovacuum_enabled = TRUE )
+            """))
+        cur.execute(sql.SQL("""CREATE INDEX IF NOT EXISTS snapshot_id_i ON public.busy_by_executor USING btree (snapshot_id) WITH (deduplicate_items=True);"""))
+        cur.execute(sql.SQL("""CREATE INDEX IF NOT EXISTS rank_i ON public.busy_by_executor USING btree (rank) WITH (deduplicate_items=True);"""))
 
-        cur.execute(sql.SQL("""CREATE INDEX IF NOT EXISTS snapshot_id_i ON public.busy_by_analizer USING btree (snapshot_id) WITH (deduplicate_items=True);"""))
+        cur.execute(sql.SQL("""
+            CREATE TABLE public.done
+            (
+                i bigserial NOT NULL,
+                snapshot_id character varying(256) NOT NULL,
+                last_owner character varying(512),
+                reason character varying(512),
+                ex jsonb,
+                PRIMARY KEY (i)
+            );
+            """))
+            
+        # views
+        cur.execute(sql.SQL("""
+            CREATE VIEW public."EB_duration" AS
+                SELECT task_id as tid, snapshot_id as sid, (NOW()-ctime) as duration, EXTRACT(EPOCH FROM (NOW()-ctime)) as s
+                FROM public.busy_by_executor 
+                ORDER BY (NOW()-ctime) DESC;
+            """))
+        cur.execute(sql.SQL("""COMMENT ON VIEW public."EB_duration" IS 'executor busy durations';"""))
+        cur.execute(sql.SQL("""
+            CREATE VIEW public."AB_duration" AS
+                SELECT task_id as tid, snapshot_id as sid, (NOW()-ctime) as duration, EXTRACT(EPOCH FROM (NOW()-ctime)) as s
+                FROM public.busy_by_analizer 
+                ORDER BY (NOW()-ctime) DESC;
+            """))
+        cur.execute(sql.SQL("""COMMENT ON VIEW public."AB_duration" IS 'executor busy durations';"""))
 
         conn.autocommit = False
         self.pool.put_conn(conn)
-
-
 
     def checkout_analizer_job(self, snapshot_id):
         if not self.connected():
@@ -232,6 +311,8 @@ class MgennStorage():
         conn.autocommit = False
         last_e = None
         try:
+            if not self.__sid_in_table(snapshot_id, "public.analyze_ready", cur):
+                raise StorageKeyNotFoundError(snapshot_id, "AR")
             cur.execute(sql.SQL("""
             INSERT INTO public.busy_by_analizer ( 
                     task_id,
@@ -258,7 +339,7 @@ class MgennStorage():
             WHERE   public.analyze_ready.snapshot_id = %s
             LIMIT 1;"""), (snapshot_id,))
             if cur.rowcount != 1:
-                raise StorageIntegrityError(f"invalid task checkout. affected:{cur.rowcount} id:{snapshot_id}")
+                raise StorageIntegrityError(f"invalid task AR checkout. affected:{cur.rowcount} id:{snapshot_id}")
 
             job =  AnalizerJob.from_db("public.busy_by_analizer", snapshot_id, cur)
 
@@ -277,24 +358,25 @@ class MgennStorage():
             last_e = e
             conn.rollback()
         self.pool.put_conn(conn)
-
+        if last_e:
+            raise last_e
         pkg_data = self.blob_storage.get(job.snapshot_id)
         pkg = Package()
         pkg.loadData(pkg_data)
-        if last_e:
-            raise last_e
         return job, pkg
 
     def undo_analyzer_checkout(self, snapshot_id):
         if not self.connected():
             raise Exception("not connected")
         if not snapshot_id:
-            return ValueError("no key")
+            raise ValueError("no key")
         conn = self.pool.get_conn()
         cur = conn.cursor()
         conn.autocommit = False
         last_e = None
         try:
+            if not self.__sid_in_table(snapshot_id, "public.busy_by_analizer", cur):
+                raise StorageKeyNotFoundError(snapshot_id, "AB")
             # move back to ready list
             cur.execute(sql.SQL("""
             INSERT INTO public.analyze_ready ( 
@@ -322,7 +404,7 @@ class MgennStorage():
             WHERE   public.busy_by_analizer.snapshot_id = %s
             LIMIT 1;"""), (snapshot_id,))
             if cur.rowcount != 1:
-                raise StorageIntegrityError(f"invalid task checkout. affected:{cur.rowcount} id:{snapshot_id}")
+                raise StorageIntegrityError(f"invalid task AB checkout undo. affected:{cur.rowcount} id:{snapshot_id}")
             # cleanup busy list
             cur.execute(sql.SQL("DELETE FROM public.busy_by_analizer WHERE (snapshot_id=%s)"), (snapshot_id,))
             conn.commit()
@@ -378,7 +460,7 @@ class MgennStorage():
             if self.pedantic_validation and not self.__sid_in_table(sid, "public.analyze_ready", cur):
                 raise Exception("[PV] object [{sid}] already in AR backlog")
         except Exception as e:
-            F.print(f"save pkg failed: {e}")
+            F.print(f"on_exec_done failed: {e}")
             last_e = e
             conn.rollback()
         self.pool.put_conn(conn)
@@ -389,7 +471,8 @@ class MgennStorage():
         if not self.connected():
             raise Exception("not connected")
         if not snapshot_id:
-            return ValueError("no key")
+            raise ValueError("no key")
+
         conn = self.pool.get_conn()
         cur = conn.cursor()
         conn.autocommit = False
@@ -408,3 +491,231 @@ class MgennStorage():
         self.pool.put_conn(conn)
         if last_e:
             raise last_e
+
+    def checkout_executor_job(self, snapshot_id, cur = None):
+        if not self.connected():
+            raise Exception("not connected")
+        if not snapshot_id:
+            raise ValueError("no snapshot id")
+        push_conn = False
+        conn = None
+        if not cur:
+            conn = self.pool.get_conn()
+            cur = conn.cursor()
+            push_conn = True
+        conn.autocommit = False
+        last_e = None
+        job = None
+        try:
+            if not self.__sid_in_table(snapshot_id, "public.exec_ready", cur):
+                raise StorageKeyNotFoundError(snapshot_id, "ER")
+            cur.execute(sql.SQL("""
+            INSERT INTO public.busy_by_executor ( 
+                    task_id,
+                    snapshot_id,
+                    rank,
+                    tick,
+                    ctime,
+                    ex
+            )
+            SELECT 
+                public.exec_ready.task_id,
+                public.exec_ready.snapshot_id,
+                public.exec_ready.rank,
+                public.exec_ready.tick,
+                public.exec_ready.ctime,
+                public.exec_ready.ex
+            FROM    public.exec_ready
+            WHERE   public.exec_ready.snapshot_id = %s
+            LIMIT 1;"""), (snapshot_id,))
+            if cur.rowcount != 1:
+                raise StorageIntegrityError(f"invalid task ER checkout. affected:{cur.rowcount} id:{snapshot_id}")
+
+            job =  ExecutorJob.from_db("public.busy_by_executor", snapshot_id, cur)
+
+            if not job or not job.isValid():
+                raise StorageIntegrityError(f"no marked for checkout job with id {snapshot_id}")
+
+            cur.execute(sql.SQL("DELETE FROM exec_ready WHERE public.exec_ready.snapshot_id = %s"), (snapshot_id,))
+            if self.pedantic_validation:
+                if self.__sid_in_table(snapshot_id, "public.exec_ready", cur):
+                    raise StorageIntegrityError(f"[PV] {snapshot_id} should be removed from ER")
+                if not self.__sid_in_table(snapshot_id, "public.busy_by_executor", cur):
+                    raise StorageIntegrityError(f"[PV] {snapshot_id} should be added to EB")
+            conn.commit()
+        except Exception as e:
+            F.print(f"exec checkout failed: {e}")
+            last_e = e
+            conn.rollback()
+        if push_conn:
+            self.pool.put_conn(conn)
+        if last_e:
+            raise last_e
+        pkg_data = self.blob_storage.get(job.snapshot_id)
+        pkg = Package()
+        pkg.loadData(pkg_data)
+
+        return job, pkg
+
+    def on_ready_for_exec(self, pkg:Package, rank:int, ex = {}, reuse_blob = False):
+        if not self.connected():
+            raise Exception("not connected")
+        if not pkg or not pkg.isValid():
+            raise ValueError("invalid package")
+        tick = int(pkg.tick)
+        sid = pkg.id()
+
+        
+        if (sid in self.blob_storage):
+            if not reuse_blob:
+                raise Exception(f"package [{sid}]already stored")
+        else:
+            _, jpkg = pkg.dump()
+            sid = self.blob_storage.emplace(jpkg, sid)
+
+        if sid not in self.blob_storage:
+            raise Exception("object [{sid}] not saved")
+        conn = self.pool.get_conn()
+        cur = conn.cursor()
+        conn.autocommit = False
+
+        if self.__sid_in_table(sid, "public.analyze_ready", cur):
+            raise Exception("object [{sid}] already in AR backlog")
+
+        q = sql.SQL("""
+            INSERT INTO public.exec_ready(
+                snapshot_id, rank, tick, ctime, ex) 
+            VALUES (%s, %s, %s, NOW(), %s);
+        """)
+
+        last_e = None
+        try:
+            cur.execute(q, (sid, rank, tick, F.jsump(ex)))
+            conn.commit()
+            if self.pedantic_validation and not self.__sid_in_table(sid, "public.exec_ready", cur):
+                raise Exception("[PV] object [{sid}] already in ER backlog")
+        except Exception as e:
+            F.print(f"on_ready_for_exec failed: {e}")
+            last_e = e
+            conn.rollback()
+        self.pool.put_conn(conn)
+        if last_e:
+            raise last_e
+
+    def undo_exec_checkout(self, snapshot_id):
+        if not self.connected():
+            raise Exception("not connected")
+        if not snapshot_id:
+            raise ValueError("no key")
+        conn = self.pool.get_conn()
+        cur = conn.cursor()
+        conn.autocommit = False
+        last_e = None
+        try:
+            if not self.__sid_in_table(snapshot_id, "public.busy_by_executor", cur):
+                raise StorageKeyNotFoundError(snapshot_id, "EB")
+            # move back to ready list
+            cur.execute(sql.SQL("""
+            INSERT INTO public.exec_ready ( 
+                    task_id,
+                    snapshot_id,
+                    rank,
+                    tick,
+                    ctime,
+                    ex
+            )
+            SELECT 
+                public.busy_by_executor.task_id,
+                public.busy_by_executor.snapshot_id,
+                public.busy_by_executor.rank,
+                public.busy_by_executor.tick,
+                public.busy_by_executor.ctime,
+                public.busy_by_executor.ex
+            FROM    public.busy_by_executor
+            WHERE   public.busy_by_executor.snapshot_id = %s
+            LIMIT 1;"""), (snapshot_id,))
+            if cur.rowcount != 1:
+                raise StorageIntegrityError(f"invalid task EB checkout undo. affected:{cur.rowcount} id:{snapshot_id}")
+            # cleanup busy list
+            cur.execute(sql.SQL("DELETE FROM public.busy_by_executor WHERE (snapshot_id=%s)"), (snapshot_id,))
+            conn.commit()
+
+            if self.pedantic_validation:
+                if self.__sid_in_table(snapshot_id, "public.busy_by_executor", cur):
+                    raise StorageIntegrityError(f"[PV] {snapshot_id} should be removed from EB")
+                if not self.__sid_in_table(snapshot_id, "public.exec_ready", cur):
+                    raise StorageIntegrityError(f"[PV] {snapshot_id} should be added to ER")
+
+        except Exception as e:
+            F.print(f"undo_exec_checkout [{snapshot_id}] failed: {e}")
+            last_e = e
+            conn.rollback()
+        self.pool.put_conn(conn)
+        if last_e:
+            raise last_e
+
+    def __get_top(self, table:str, count:int = 10, cur = None):
+        if not self.connected():
+            raise Exception("not connected")
+        put_conn = False
+        conn = None
+        if not cur:
+            conn = self.pool.get_conn()
+            cur = conn.cursor()
+            put_conn = True
+        last_e = None
+        rc_l = None
+        try: #
+            cur.execute(sql.SQL(f"""
+                SELECT snapshot_id, rank
+                FROM {table}
+                ORDER BY rank DESC
+                LIMIT %s; 
+                """), (int(count),))
+            rc_l = list(cur.fetchall())
+        except Exception as e:
+            F.print(f"top_ar failed: {e}")
+            last_e = e
+        self.pool.put_conn(conn)
+        if last_e:
+            raise last_e
+        return rc_l
+    
+    def top_ar(self, count:int = 10, cur = None):
+        return self.__get_top("public.analyze_ready", count, cur)
+    def top_er(self, count:int = 10, cur = None):
+        return self.__get_top("public.exec_ready", count, cur)
+
+    def checkout_some_AR(self):
+        if not self.connected():
+            raise Exception("not connected")
+        if not snapshot_id:
+            raise ValueError("no key")
+        conn = self.pool.get_conn()
+        cur = conn.cursor()
+        conn.autocommit = False
+        retry_count = 10
+        top_count = 10
+        ret_job = None
+        ret_pkg = None
+        while retry_count >= 0:
+            l = self.top_ar(top_count, cur)
+            if not l:
+                raise StorageNoDataError("AR empty")
+            candiddate = random.choice(l)
+            print(f"[{retry_count}] try candidate {candidate}")
+            sid = candiddate[0]
+            if not sid:
+                raise ValueError(f"no sid in {candidate}")
+            try:
+                ret_job, ret_pkg = self.checkout_analizer_job(sid)
+            except (StorageIntegrityError, StorageKeyNotFoundError):
+                retry_count -= 1
+                continue
+        if ret_pkg and ret_job:
+            return ret_job, ret_pkg
+        if retry_count <= 0:
+            raise StorageConcurrencyError("AR co retry limit reached")
+        
+        # co data broken!
+        raise ValueError("no job or pkg")

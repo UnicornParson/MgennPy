@@ -13,6 +13,19 @@ from ..functional import F
 from .utils import *
 from .pgpool import *
 
+class ObjectStorageJEncoder:
+    def encode(self, obj):
+        return json.dumps(obj, default=str)
+    def decode(self, jstr):
+        return json.loads(jstr)
+
+class ObjectStorageJPickle:
+    def encode(self, obj):
+        return jsonpickle.encode(obj)
+    def decode(self, jstr):
+        return jsonpickle.decode(jstr)
+
+
 class ObjectStorage():
     def __init__(self, pool:PG_Pool):
         if not pool:
@@ -26,6 +39,7 @@ class ObjectStorage():
         self.pool = pool
         self.timeline = Timeline()
         self.pgutils = PGUtils()
+        self.jencoder = ObjectStorageJEncoder()
 
         if not self.check_db():
             self.make_db()
@@ -127,7 +141,7 @@ class ObjectStorage():
             raise ValueError("no object")
         if not key:
             key = f"{uuid.uuid4().hex}.{time.time()}"
-        j = jsonpickle.encode(obj)
+        j = self.jencoder.encode(obj)
         conn = self.pool.get_conn()
         cur = conn.cursor()
         cur.execute("""
@@ -167,12 +181,14 @@ class ObjectStorage():
         
         self.pool.put_conn(conn)
         js = j
+        obj = None
         if isinstance(js, dict) or isinstance(js, list):
             js = json.dumps(j)
         try:
-            obj = jsonpickle.decode(js)
-        except TypeError:
-            print(js)
+            obj = self.jencoder.decode(js)
+        except TypeError as te:
+            obj = None
+            raise ValueError(f"cannot decode {js} - {te}")
         d = float(time.monotonic() - st) * 1000.
         self.timeline.add("get_ms", d)
         return obj

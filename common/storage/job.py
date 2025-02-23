@@ -57,3 +57,49 @@ class AnalizerJob():
 
     def __repr__(self):
         return f"Job(task_id={self.task_id}, snapshot_id={self.snapshot_id})"
+
+
+class ExecutorJob():
+    def __init__(self, task_id, snapshot_id, rank, tick, ctime, ex = {}):
+        self.task_id = task_id
+        self.snapshot_id = snapshot_id
+        self.rank = rank
+        self.tick = tick
+        self.ctime = ctime
+        self.ex = ex
+
+    def isValid(self):
+        return bool(self.snapshot_id) and bool(self.task_id)
+
+    @staticmethod
+    def from_query_row(row):
+        return ExecutorJob(
+            task_id=row[0],
+            snapshot_id=row[1],
+            rank=row[2],
+            tick=row[3],
+            ctime=row[4],
+            ex=row[5]
+        )
+
+    @staticmethod
+    def from_db(table, snapshot_id, cur):
+        cur.execute(sql.SQL(f"SELECT * FROM {table} WHERE (snapshot_id = %s)" ), (snapshot_id,))
+        row = cur.fetchone()
+        if not row:
+            F.print(f"exec job for {snapshot_id} not found in {table}")
+            return None
+        return ExecutorJob.from_query_row(row)
+
+    def to_dict(self):
+        return {
+            "task_id": self.task_id,
+            "snapshot_id": self.snapshot_id,
+            "rank": self.rank,
+            "tick": self.tick,
+            "ctime": self.ctime,
+            "ex": self.ex
+        }
+
+    def __repr__(self):
+        return f"ExecJob(task_id={self.task_id}, snapshot_id={self.snapshot_id})"

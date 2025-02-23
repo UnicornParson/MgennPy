@@ -19,12 +19,15 @@ import datetime
 import humanize
 import statistics
 from pympler.asizeof import asizeof
+from functools import wraps
+from tabulate import tabulate
 
 
 class F():
     __nextId = 0
     __debug_env = "MGENN_DEBUG"
     __print_token = ""
+    __token_s_time = time.monotonic()
 
     @staticmethod
     def median(data):
@@ -67,6 +70,7 @@ class F():
     @staticmethod
     def set_print_token(newToken:str):
         F.__print_token = newToken
+        F.__token_s_time = time.monotonic()
 
     @staticmethod
     def print(*args, **kwargs):
@@ -84,7 +88,7 @@ class F():
         cf = inspect.stack()[1]
         pt = F.__print_token.strip()
         if pt:
-            pt = f"<<{F.__print_token.strip()}>>"
+            pt = f"<<{F.__print_token.strip()} +{float(time.monotonic() - F.__token_s_time):0.3f}>>"
         current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         sys.stdout.write(f"[{current_time}]{pt}in[{cf.function}.{cf.lineno}] ")
         return print(*args, **kwargs, flush=True)
@@ -376,3 +380,19 @@ class F():
         if min_value == max_value:
             raise ValueError("frand min=max")
         return np.random.rand() * (max_value - min_value) + min_value
+
+    def table_print(data, headers:list):
+        print(tabulate(data, headers=headers, tablefmt="fancy_grid"))
+
+# wrappers
+class W():
+    @staticmethod
+    def timeit(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            start_time = time.perf_counter()
+            result = func(*args, **kwargs)
+            end_time = time.perf_counter()
+            F.print(f"@T [{func.__name__!r}] t: {float(end_time - start_time):0.6f}s")
+            return result
+        return wrapper

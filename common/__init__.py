@@ -8,7 +8,7 @@ from .functional import *
 from .timeline import *
 from .storage import *
 
-__all__ = ["F",
+__all__ = ["F", "W",
     "MgennConsts",
     "ObjectIdType",
     "MgennComon",
