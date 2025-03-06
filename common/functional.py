@@ -381,8 +381,16 @@ class F():
             raise ValueError("frand min=max")
         return np.random.rand() * (max_value - min_value) + min_value
 
-    def table_print(data, headers:list):
-        print(tabulate(data, headers=headers, tablefmt="fancy_grid"))
+    def table_print(data, headers:list, title=""):
+        table = tabulate(data, headers=headers, tablefmt="fancy_grid")
+        if title:
+            table_lines = table.split('\n')
+            table_width = max(len(line) for line in table_lines)
+            title_frame = f"╒═{'═' * (table_width - 4)}═╕"
+            title_line = f"│{title.center(table_width - 2)}│"
+            print(title_frame)
+            print(title_line)
+        print(table)
 
 # wrappers
 class W():

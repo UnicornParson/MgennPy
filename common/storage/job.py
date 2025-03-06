@@ -4,9 +4,10 @@ from psycopg2 import sql
 from ..functional import F
 
 class AnalizerJob():
-    def __init__(self, task_id, snapshot_id, rank, tick, ctime, outputs, creator, exec_telemetry = {}, ex = {}):
+    def __init__(self, task_id, snapshot_id, group, rank, tick, ctime, outputs, creator, exec_telemetry = {}, ex = {}):
         self.task_id = task_id
         self.snapshot_id = snapshot_id
+        self.group = group
         self.rank = rank
         self.tick = tick
         self.ctime = ctime
@@ -23,13 +24,14 @@ class AnalizerJob():
         return AnalizerJob(
             task_id=row[0],
             snapshot_id=row[1],
-            rank=row[2],
-            tick=row[3],
-            ctime=row[4],
-            outputs=row[5],
-            creator=row[6],
-            exec_telemetry=row[7],
-            ex=row[8]
+            group=row[2],
+            rank=row[3],
+            tick=row[4],
+            ctime=row[5],
+            outputs=row[6],
+            creator=row[7],
+            exec_telemetry=row[8],
+            ex=row[9]
         )
 
     @staticmethod
@@ -46,6 +48,7 @@ class AnalizerJob():
         return {
             "task_id": self.task_id,
             "snapshot_id": self.snapshot_id,
+            "snapshot_group": self.group,
             "rank": self.rank,
             "tick": self.tick,
             "ctime": self.ctime,
@@ -56,13 +59,14 @@ class AnalizerJob():
         }
 
     def __repr__(self):
-        return f"Job(task_id={self.task_id}, snapshot_id={self.snapshot_id})"
+        return f"Job(task_id={self.task_id}, snapshot_id=[{self.group}]{self.snapshot_id})"
 
 
 class ExecutorJob():
-    def __init__(self, task_id, snapshot_id, rank, tick, ctime, ex = {}):
+    def __init__(self, task_id, snapshot_id, group, rank, tick, ctime, ex = {}):
         self.task_id = task_id
         self.snapshot_id = snapshot_id
+        self.group = group
         self.rank = rank
         self.tick = tick
         self.ctime = ctime
@@ -76,10 +80,11 @@ class ExecutorJob():
         return ExecutorJob(
             task_id=row[0],
             snapshot_id=row[1],
-            rank=row[2],
-            tick=row[3],
-            ctime=row[4],
-            ex=row[5]
+            group=row[2],
+            rank=row[3],
+            tick=row[4],
+            ctime=row[5],
+            ex=row[6]
         )
 
     @staticmethod
@@ -95,6 +100,7 @@ class ExecutorJob():
         return {
             "task_id": self.task_id,
             "snapshot_id": self.snapshot_id,
+            "snapshot_group": self.group,
             "rank": self.rank,
             "tick": self.tick,
             "ctime": self.ctime,
@@ -102,4 +108,4 @@ class ExecutorJob():
         }
 
     def __repr__(self):
-        return f"ExecJob(task_id={self.task_id}, snapshot_id={self.snapshot_id})"
+        return f"ExecJob(task_id={self.task_id}, snapshot_id=[{self.group}]{self.snapshot_id})"

@@ -579,8 +579,8 @@ class Package:
                 n["peakEnergy"],
                 [int(x) for x in n["receivers"]]
             ))
-        print("\nneurons:")
-        F.table_print(table, h)
+
+        F.table_print(table, h, title="neurons")
 
         table = []
         h = ["id","apt","length","receiverId"]
@@ -591,8 +591,7 @@ class Package:
                 l["length"],
                 int(l["receiverId"])
             ))
-        print("\nlinks:")
-        F.table_print(table, h)
+        F.table_print(table, h, title="links")
 
 
 

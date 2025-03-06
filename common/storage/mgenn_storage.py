@@ -6,6 +6,7 @@ import time
 import jsonpickle
 import json
 import pandas as pd
+import random
 from ..timeline import *
 from ..functional import F, W
 from ..package import *
@@ -110,6 +111,7 @@ class StorageTable(enum.Enum):
 
 
 class MgennStorage():
+    NO_GROUP_DEFAULT = "NOGROUP"
     def __init__(self, pool:PG_Pool) -> None:
         if not pool:
             raise ValueError("no pg pool")
@@ -136,6 +138,9 @@ class MgennStorage():
         s = MgennStorageStats.load(cur)
         self.pool.put_conn(conn)
         return s
+    def labels(self, cur = None):
+        # TODO: implement
+        pass
 
     def init(self):
         if self.blob_storage:
@@ -203,11 +208,12 @@ class MgennStorage():
                 PRIMARY KEY (key)
             );
             """))
-        cur.execute(sql.SQL("""
+        cur.execute(sql.SQL(f"""
             CREATE TABLE IF NOT EXISTS public.analyze_ready
             (
                 task_id bigserial NOT NULL,
                 snapshot_id character varying(256) NOT NULL,
+                snapshot_group character varying(256) NOT NULL DEFAULT '{MgennStorage.NO_GROUP_DEFAULT}',
                 rank smallint NOT NULL,
                 tick bigint NOT NULL,
                 ctime timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -221,12 +227,14 @@ class MgennStorage():
         cur.execute(sql.SQL("""ALTER TABLE IF EXISTS public.analyze_ready ADD CONSTRAINT u_snapshot UNIQUE (snapshot_id);"""))
         cur.execute(sql.SQL("""CREATE INDEX IF NOT EXISTS snapshot_rank_i ON public.analyze_ready USING btree (rank) WITH (deduplicate_items=True);"""))
         cur.execute(sql.SQL("""CREATE INDEX IF NOT EXISTS snapshot_id_i ON public.analyze_ready USING btree (snapshot_id) WITH (deduplicate_items=True);"""))
-
-        cur.execute(sql.SQL("""
+        cur.execute(sql.SQL("""CREATE INDEX IF NOT EXISTS snapshot_group_i ON public.analyze_ready USING btree (snapshot_group) WITH (deduplicate_items=True);"""))
+        
+        cur.execute(sql.SQL(f"""
             CREATE TABLE IF NOT EXISTS public.busy_by_analizer
             (
                 task_id bigint NOT NULL,
                 snapshot_id character varying(256) NOT NULL,
+                snapshot_group character varying(256) NOT NULL DEFAULT '{MgennStorage.NO_GROUP_DEFAULT}',
                 rank smallint NOT NULL,
                 tick bigint NOT NULL,
                 ctime timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -239,13 +247,15 @@ class MgennStorage():
             ) WITH ( autovacuum_enabled = TRUE )
             """))
         cur.execute(sql.SQL("""CREATE INDEX IF NOT EXISTS snapshot_id_i ON public.busy_by_analizer USING btree (snapshot_id) WITH (deduplicate_items=True);"""))
+        cur.execute(sql.SQL("""CREATE INDEX IF NOT EXISTS snapshot_group_i ON public.busy_by_analizer USING btree (snapshot_group) WITH (deduplicate_items=True);"""))
         cur.execute(sql.SQL("""CREATE INDEX IF NOT EXISTS rank_i ON public.busy_by_analizer USING btree (rank) WITH (deduplicate_items=True);"""))
 
-        cur.execute(sql.SQL("""
+        cur.execute(sql.SQL(f"""
             CREATE TABLE IF NOT EXISTS public.exec_ready
             (
                 task_id bigserial NOT NULL,
                 snapshot_id character varying(256) NOT NULL,
+                snapshot_group character varying(256) NOT NULL DEFAULT '{MgennStorage.NO_GROUP_DEFAULT}',
                 rank smallint NOT NULL,
                 tick bigint NOT NULL,
                 ctime timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -255,11 +265,15 @@ class MgennStorage():
             """))
         cur.execute(sql.SQL("""CREATE INDEX IF NOT EXISTS snapshot_id_i ON public.exec_ready USING btree (snapshot_id) WITH (deduplicate_items=True);"""))
         cur.execute(sql.SQL("""CREATE INDEX IF NOT EXISTS rank_i ON public.exec_ready USING btree (rank) WITH (deduplicate_items=True);"""))
-        cur.execute(sql.SQL("""
+        cur.execute(sql.SQL("""CREATE INDEX IF NOT EXISTS snapshot_group_i ON public.exec_ready USING btree (snapshot_group) WITH (deduplicate_items=True);"""))
+
+        
+        cur.execute(sql.SQL(f"""
             CREATE TABLE IF NOT EXISTS public.busy_by_executor
             (
                 task_id bigserial NOT NULL,
                 snapshot_id character varying(256) NOT NULL,
+                snapshot_group character varying(256) NOT NULL DEFAULT '{MgennStorage.NO_GROUP_DEFAULT}',
                 rank smallint NOT NULL,
                 tick bigint NOT NULL,
                 ctime timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -269,12 +283,14 @@ class MgennStorage():
             """))
         cur.execute(sql.SQL("""CREATE INDEX IF NOT EXISTS snapshot_id_i ON public.busy_by_executor USING btree (snapshot_id) WITH (deduplicate_items=True);"""))
         cur.execute(sql.SQL("""CREATE INDEX IF NOT EXISTS rank_i ON public.busy_by_executor USING btree (rank) WITH (deduplicate_items=True);"""))
+        cur.execute(sql.SQL("""CREATE INDEX IF NOT EXISTS snapshot_group_i ON public.busy_by_executor USING btree (snapshot_group) WITH (deduplicate_items=True);"""))
 
-        cur.execute(sql.SQL("""
+        cur.execute(sql.SQL(f"""
             CREATE TABLE public.done
             (
                 i bigserial NOT NULL,
                 snapshot_id character varying(256) NOT NULL,
+                snapshot_group character varying(256) NOT NULL DEFAULT '{MgennStorage.NO_GROUP_DEFAULT}',
                 last_owner character varying(512),
                 reason character varying(512),
                 ex jsonb,
@@ -285,14 +301,14 @@ class MgennStorage():
         # views
         cur.execute(sql.SQL("""
             CREATE VIEW public."EB_duration" AS
-                SELECT task_id as tid, snapshot_id as sid, (NOW()-ctime) as duration, EXTRACT(EPOCH FROM (NOW()-ctime)) as s
+                SELECT task_id as tid, snapshot_group as sg, snapshot_id as sid, (NOW()-ctime) as duration, EXTRACT(EPOCH FROM (NOW()-ctime)) as s
                 FROM public.busy_by_executor 
                 ORDER BY (NOW()-ctime) DESC;
             """))
         cur.execute(sql.SQL("""COMMENT ON VIEW public."EB_duration" IS 'executor busy durations';"""))
         cur.execute(sql.SQL("""
             CREATE VIEW public."AB_duration" AS
-                SELECT task_id as tid, snapshot_id as sid, (NOW()-ctime) as duration, EXTRACT(EPOCH FROM (NOW()-ctime)) as s
+                SELECT task_id as tid, snapshot_id as sid, snapshot_group as sg, (NOW()-ctime) as duration, EXTRACT(EPOCH FROM (NOW()-ctime)) as s
                 FROM public.busy_by_analizer 
                 ORDER BY (NOW()-ctime) DESC;
             """))
@@ -317,6 +333,7 @@ class MgennStorage():
             INSERT INTO public.busy_by_analizer ( 
                     task_id,
                     snapshot_id,
+                    snapshot_group,
                     rank,
                     tick,
                     ctime,
@@ -328,6 +345,7 @@ class MgennStorage():
             SELECT 
                 public.analyze_ready.task_id,
                 public.analyze_ready.snapshot_id,
+                public.analyze_ready.snapshot_group,
                 public.analyze_ready.rank,
                 public.analyze_ready.tick,
                 public.analyze_ready.ctime,
@@ -382,6 +400,7 @@ class MgennStorage():
             INSERT INTO public.analyze_ready ( 
                     task_id,
                     snapshot_id,
+                    snapshot_group,
                     rank,
                     tick,
                     ctime,
@@ -393,6 +412,7 @@ class MgennStorage():
             SELECT 
                 public.busy_by_analizer.task_id,
                 public.busy_by_analizer.snapshot_id,
+                public.busy_by_analizer.snapshot_group,
                 public.busy_by_analizer.rank,
                 public.busy_by_analizer.tick,
                 public.busy_by_analizer.ctime,
@@ -424,7 +444,7 @@ class MgennStorage():
             raise last_e
 
 
-    def on_exec_done(self, pkg:Package, rank:int, outputs:pd.DataFrame, telemetry = {}, ex = {}):
+    def on_exec_done(self, pkg:Package, rank:int, outputs:pd.DataFrame, label=NO_GROUP_DEFAULT, telemetry = {}, ex = {}):
         if not self.connected():
             raise Exception("not connected")
         if not pkg or not pkg.isValid():
@@ -449,13 +469,13 @@ class MgennStorage():
 
         q = sql.SQL("""
             INSERT INTO public.analyze_ready(
-                snapshot_id, rank, tick, ctime, outputs, creator, exec_telemetry, ex) 
-            VALUES (%s, %s, %s, NOW(), %s, %s, %s, %s);
+                snapshot_id, snapshot_group, rank, tick, ctime, outputs, creator, exec_telemetry, ex) 
+            VALUES (%s, %s, %s, %s, NOW(), %s, %s, %s, %s);
         """)
 
         last_e = None
         try:
-            cur.execute(q, (sid, rank, tick, F.jsump(j_out), app_name, F.jsump(telemetry), F.jsump(ex)))
+            cur.execute(q, (sid, label, rank, tick, F.jsump(j_out), app_name, F.jsump(telemetry), F.jsump(ex)))
             conn.commit()
             if self.pedantic_validation and not self.__sid_in_table(sid, "public.analyze_ready", cur):
                 raise Exception("[PV] object [{sid}] already in AR backlog")
@@ -513,6 +533,7 @@ class MgennStorage():
             INSERT INTO public.busy_by_executor ( 
                     task_id,
                     snapshot_id,
+                    snapshot_group,
                     rank,
                     tick,
                     ctime,
@@ -521,6 +542,7 @@ class MgennStorage():
             SELECT 
                 public.exec_ready.task_id,
                 public.exec_ready.snapshot_id,
+                public.exec_ready.snapshot_group,
                 public.exec_ready.rank,
                 public.exec_ready.tick,
                 public.exec_ready.ctime,
@@ -557,7 +579,7 @@ class MgennStorage():
 
         return job, pkg
 
-    def on_ready_for_exec(self, pkg:Package, rank:int, ex = {}, reuse_blob = False):
+    def on_ready_for_exec(self, pkg:Package, rank:int, label=NO_GROUP_DEFAULT, ex = {}, reuse_blob = False):
         if not self.connected():
             raise Exception("not connected")
         if not pkg or not pkg.isValid():
@@ -584,13 +606,13 @@ class MgennStorage():
 
         q = sql.SQL("""
             INSERT INTO public.exec_ready(
-                snapshot_id, rank, tick, ctime, ex) 
-            VALUES (%s, %s, %s, NOW(), %s);
+                snapshot_id, snapshot_group, rank, tick, ctime, ex) 
+            VALUES (%s, %s, %s, %s, NOW(), %s);
         """)
 
         last_e = None
         try:
-            cur.execute(q, (sid, rank, tick, F.jsump(ex)))
+            cur.execute(q, (sid, label, rank, tick, F.jsump(ex)))
             conn.commit()
             if self.pedantic_validation and not self.__sid_in_table(sid, "public.exec_ready", cur):
                 raise Exception("[PV] object [{sid}] already in ER backlog")
@@ -619,6 +641,7 @@ class MgennStorage():
             INSERT INTO public.exec_ready ( 
                     task_id,
                     snapshot_id,
+                    snapshot_group,
                     rank,
                     tick,
                     ctime,
@@ -627,6 +650,7 @@ class MgennStorage():
             SELECT 
                 public.busy_by_executor.task_id,
                 public.busy_by_executor.snapshot_id,
+                public.busy_by_executor.snapshot_group,
                 public.busy_by_executor.rank,
                 public.busy_by_executor.tick,
                 public.busy_by_executor.ctime,
@@ -676,7 +700,8 @@ class MgennStorage():
         except Exception as e:
             F.print(f"top_ar failed: {e}")
             last_e = e
-        self.pool.put_conn(conn)
+        if put_conn:
+            self.pool.put_conn(conn)
         if last_e:
             raise last_e
         return rc_l
@@ -689,8 +714,6 @@ class MgennStorage():
     def checkout_some_AR(self):
         if not self.connected():
             raise Exception("not connected")
-        if not snapshot_id:
-            raise ValueError("no key")
         conn = self.pool.get_conn()
         cur = conn.cursor()
         conn.autocommit = False
@@ -702,9 +725,9 @@ class MgennStorage():
             l = self.top_ar(top_count, cur)
             if not l:
                 raise StorageNoDataError("AR empty")
-            candiddate = random.choice(l)
+            candidate = random.choice(l)
             print(f"[{retry_count}] try candidate {candidate}")
-            sid = candiddate[0]
+            sid = candidate[0]
             if not sid:
                 raise ValueError(f"no sid in {candidate}")
             try:
