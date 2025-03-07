@@ -25,7 +25,9 @@ abbreviations:
  +  AB - busy_by_analizer table
  +  AR - analyze_ready table
  +  ER - exec_ready
- +  EB - exec_busy
+ +  EB - busy_by_executor
+
+
 """
 
 class MgennStorageStats:
@@ -132,15 +134,41 @@ class MgennStorage():
         cur.execute(sql.SQL(f"SELECT snapshot_id FROM {table} WHERE (snapshot_id = %s) LIMIT 1;"), (snapshot_id,))
         return cur.rowcount >= 1
 
+
     def stats(self):
         conn = self.pool.get_conn()
         cur = conn.cursor()
         s = MgennStorageStats.load(cur)
         self.pool.put_conn(conn)
         return s
-    def labels(self, cur = None):
-        # TODO: implement
-        pass
+    
+    def __labels_from(self, table:str, cur) -> list:
+        if not cur:
+            raise ValueError('No cursor')
+        cur.execute(sql.SQL (f"SELECT DISTINCT snapshot_group FROM public.{table} ORDER BY snapshot_group;"))
+        rows = cur.fetchall()
+        if not rows:
+            return []
+        return [t[0] for t in rows]
+
+    def labels(self, cur = None) -> list: 
+        push_conn = False
+        conn = None
+        l = []
+        if not cur:
+            conn = self.pool.get_conn()
+            cur = conn.cursor()
+            push_conn = True
+        l.extend(self.__labels_from("busy_by_analizer", cur))
+        l.extend(self.__labels_from("analyze_ready", cur))
+
+        l.extend(self.__labels_from("exec_ready", cur))
+        l.extend(self.__labels_from("busy_by_executor", cur))
+        if push_conn:
+            self.pool.put_conn(conn)
+        l = list(set(l))
+        l.sort()
+        return l
 
     def init(self):
         if self.blob_storage:
@@ -168,7 +196,6 @@ class MgennStorage():
         self.pool.put_conn(conn)
 
         return ret
-
 
     def __req_tables(self) -> list:
         # (schema_name, table_name)
@@ -732,6 +759,7 @@ class MgennStorage():
                 raise ValueError(f"no sid in {candidate}")
             try:
                 ret_job, ret_pkg = self.checkout_analizer_job(sid)
+                break # only one candidate for now.
             except (StorageIntegrityError, StorageKeyNotFoundError):
                 retry_count -= 1
                 continue

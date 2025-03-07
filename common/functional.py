@@ -222,8 +222,6 @@ class F():
             raise ValueError(f"dsort_val only for dicts, {type(x)} received")
         return dict(sorted(x.items(), key=lambda item: item[1]))
 
-
-
     @staticmethod
     def isHexString(s:str) -> bool:
         s = s.strip()
@@ -259,8 +257,6 @@ class F():
         az = ''.join(alphabet[int(s[i:i+2], 16) % len(alphabet) - 1] for i in range(0, len(s), 2))
         print(az)
         return az
-
-
 
     @staticmethod
     def getNodeName():
@@ -394,8 +390,14 @@ class F():
 
 # wrappers
 class W():
+    # Global statistics storage
+    _stats = {
+        'total_calls': 0,
+        'functions': {}
+    }
+
     @staticmethod
-    def timeit(func):
+    def timeit_old(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
             start_time = time.perf_counter()
@@ -404,3 +406,83 @@ class W():
             F.print(f"@T [{func.__name__!r}] t: {float(end_time - start_time):0.6f}s")
             return result
         return wrapper
+
+    @staticmethod 
+    def timeit(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            start_time = time.perf_counter()
+            result = func(*args, **kwargs)
+            end_time = time.perf_counter()
+            
+            # Update global statistics
+            W._stats['total_calls'] += 1
+            
+            if func.__name__ not in W._stats['functions']:
+                W._stats['functions'][func.__name__] = {
+                    'total_time': 0.0,
+                    'avg_time': 0.0,
+                    'min_time': float('inf'),
+                    'max_time': 0.0,
+                    'calls': 0
+                }
+            
+            func_stats = W._stats['functions'][func.__name__]
+            duration = end_time - start_time
+            
+            func_stats['total_time'] += duration
+            func_stats['avg_time'] = func_stats['total_time'] / (func_stats['calls'] + 1)
+            func_stats['min_time'] = min(func_stats['min_time'], duration)
+            func_stats['max_time'] = max(func_stats['max_time'], duration)
+            func_stats['calls'] += 1
+            
+            F.print(f"@T [{func.__name__!r}] t: {duration:.6f}s")
+            
+            return result
+        return wrapper
+    
+    @staticmethod 
+    def get_timeit_stats():
+        """
+        Returns global statistics dictionary:
+        {
+            'total_calls': int,
+            'functions': {
+                func_name: {
+                    'total_time': float,
+                    'avg_time': float,
+                    'min_time': float,
+                    'max_time': float,
+                    'calls': int
+                },
+                ...
+            }
+        }
+        """
+        return W._stats
+    
+    @staticmethod 
+    def print_timeit_stats():
+        """
+        Prints global statistics in a formatted table.
+        """
+        stats = W.get_timeit_stats()
+        
+        # Prepare data for table printing
+        headers = ['Function Name', 'Calls', 'Avg Time (s)', 'Min Time (s)', 'Max Time (s)', 'Total Time (s)']
+        rows = []
+        
+       
+        # Sort functions by name for consistent display
+        sorted_functions = sorted(stats['functions'].items(), key=lambda x: x[0])
+        
+        for func_name, func_stats in sorted_functions:
+            rows.append((
+                func_name,
+                f"{func_stats['calls']}",
+                f"{func_stats['avg_time']:.2f}",
+                f"{func_stats['min_time']:.2f}", 
+                f"{func_stats['max_time']:.2f}",
+                f"{func_stats['total_time']:.2f}"
+            ))
+        F.table_print(rows, headers, title="functional performance statistics")
