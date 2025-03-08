@@ -151,6 +151,23 @@ class MgennStorage():
             return []
         return [t[0] for t in rows]
 
+    def make_label(self, hint:str = "") -> str:
+        conn = self.pool.get_conn()
+        cur = conn.cursor()
+        i = 0
+        if not hint:
+            hint = f"GROUP_{F.generateToken()}"
+        candidate = hint
+        while True:
+            labels = self.labels(cur)
+            if candidate not in labels:
+                break
+            candidate = f"{hint}_{i}"
+            i += 1
+        
+        self.pool.put_conn(conn)
+        return candidate
+
     def labels(self, cur = None) -> list: 
         push_conn = False
         conn = None
@@ -164,6 +181,8 @@ class MgennStorage():
 
         l.extend(self.__labels_from("exec_ready", cur))
         l.extend(self.__labels_from("busy_by_executor", cur))
+
+        l.extend(self.__labels_from("done", cur))
         if push_conn:
             self.pool.put_conn(conn)
         l = list(set(l))

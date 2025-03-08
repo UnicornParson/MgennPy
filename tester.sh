@@ -3,6 +3,7 @@ set -e
 
 source venv/bin/activate
 export MGENN_DEBUG="Y"
+pip3 install -r examples_requirements.txt
 echo "======================================================" >> tester.log
 echo " Start " >> tester.log
 date >> tester.log
