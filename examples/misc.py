@@ -34,6 +34,11 @@ def example_labels():
     lebel_after = storage.labels()
     assert len(lebel_before) + len(labels_added) == len(lebel_after)
 
+    # try generate labels
+    for _ in range(100):
+        new_label = storage.make_label()
+        assert bool(new_label)
+        assert new_label not in lebel_after
     # check snapshots
     for sid in sids:
         assert storage.find_snapshot(sid) != mstorage.StorageTable.Notable
