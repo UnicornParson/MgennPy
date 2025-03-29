@@ -11,6 +11,7 @@ import os
 import json
 import socket
 import re
+import tqdm
 from dotenv import load_dotenv
 import pandas as pd
 import numpy as np
@@ -73,6 +74,22 @@ class F():
         F.__token_s_time = time.monotonic()
 
     @staticmethod
+    def iter(iterable):
+        v = F.verbose()
+        print(f"v: {v}")
+        if F.verbose():
+            return tqdm.tqdm(iterable)
+        return iterable
+
+
+    @staticmethod
+    def verbose() -> bool:
+        if F.__debug_env not in os.environ:
+            return False
+        e_debug = os.environ[F.__debug_env]
+        return e_debug == 1 or e_debug == "Y"
+
+    @staticmethod
     def print(*args, **kwargs):
         """
         Prints a message with the current timestamp and function name.
@@ -80,11 +97,9 @@ class F():
         :param args: Any arguments to be printed.
         :param kwargs: Any keyword arguments to be printed.
         """
-        if F.__debug_env not in os.environ:
+        if not F.verbose():
             return
-        e_debug = os.environ[F.__debug_env]
-        if e_debug != 1 and e_debug != "Y":
-            return
+
         cf = inspect.stack()[1]
         pt = F.__print_token.strip()
         if pt:

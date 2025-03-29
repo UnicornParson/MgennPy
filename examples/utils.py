@@ -24,8 +24,7 @@ def fill_ar(storage, count = 10, randomize_labels = True):
         apt = random.uniform(0.2, 1.1)
         length = 1
         return (apt, length)
-    
-    
+
     struct_builder = mc.StructsBuilder()
     
     sids = []

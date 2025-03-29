@@ -286,6 +286,8 @@ class Package:
         return -1
     def findInput(self, name) -> int:
         for i in range(len(self.inputs)):
+            if not isinstance(self.inputs[i], dict):
+                raise ValueError(f"input {self.inputs} not a dict!")
             if self.inputs[i]['name'] == name:
                 return i
         return -1
@@ -420,7 +422,7 @@ class Package:
         o = len(self.outputs)
         l = len(self.links)
         n = len(self.neurons)
-        return f"inputs:{i}, outputs:{o}, neurons:{l}, links:{n}, total:{(i+o+l+n)}"
+        return f"inputs:{i}, outputs:{o}, neurons:{n}, links:{l}, total:{(i+o+l+n)}"
 
     def maxId(self):
         ret = np.int64(0)
@@ -457,31 +459,33 @@ class Package:
         return (start, stop)
 
     def connect(self, from_id, target_id)-> bool:
+        if not isinstance(from_id, (np.int64, str)):
+            raise TypeError(f"connect: invalid from type {type(from_id)}")
         if from_id  not in self:
             F.print(f"from object {from_id} not found")
             return False
         if target_id  not in self:
             F.print(f"target object {target_id} not found")
             return False
-
-        index = self.findLink(from_id)
-        if index >= 0:
-            self.links[index]['receiverId'] = np.int64(target_id)
-            F.print(f"linked L[{from_id}] to {target_id}")
-            return True
-        index = self.findNeuron(from_id)
-        if index >= 0:
-            if np.int64(target_id) not in self.neurons[index]["receivers"]:
-                self.neurons[index]["receivers"].append(np.int64(target_id))
-            F.print(f"linked N[{from_id}] to {target_id}")
-            return True
+        if isinstance(from_id, str): # is name
+            index = self.findLink(from_id)
+            if index >= 0:
+                self.links[index]['receiverId'] = np.int64(target_id)
+                F.print(f"linked L[{from_id}] to {target_id}")
+                return True
+            index = self.findNeuron(from_id)
+            if index >= 0:
+                if np.int64(target_id) not in self.neurons[index]["receivers"]:
+                    self.neurons[index]["receivers"].append(np.int64(target_id))
+                F.print(f"linked N[{from_id}] to {target_id}")
+                return True
 
         ## id can be name
+        
         index = self.findInput(from_id)
         if index >= 0:
             if np.int64(target_id) not in self.inputs[index]["receivers"]:
                 self.inputs[index]["receivers"].append(np.int64(target_id))
-            F.print(f"linked I[{from_id}] to {target_id}")
             return True
         F.print(f"source object [{from_id}] not found!")
         return False
@@ -511,7 +515,7 @@ class Package:
         self.links.append(data)
         return id
 
-    def new_link_between(self, apt:float, length:int, src:np.int64, dst:np.int64):
+    def new_link_between(self, apt:float, length:int, src:np.int64|str, dst:np.int64):
         lnk = self.new_link(apt, length, dst)
         self.connect(src, lnk)
         return lnk
@@ -528,7 +532,7 @@ class Package:
         self.outputs.append(data)
         return id
 
-    def new_input(self, name:str, type:str, receivers:list, args:dict):
+    def new_input(self, name:str, type:str, receivers:list, args:dict) -> str:
         if not name:
             raise ValueError("no input name")
         if not type:

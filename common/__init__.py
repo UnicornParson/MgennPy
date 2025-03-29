@@ -7,6 +7,7 @@ from .robots_logger import *
 from .functional import *
 from .timeline import *
 from .storage import *
+from .notebooks_utils import *
 
 __all__ = ["F", "W",
     "MgennConsts",
@@ -26,4 +27,5 @@ __all__ = ["F", "W",
     "PackageUtils", "Pkgz", "Package", "PkgSizePreset",
     "RobotsLogger",
     "Timeline",
+    "PackageUIHelper",
     ]
