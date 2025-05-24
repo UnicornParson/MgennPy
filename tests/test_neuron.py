@@ -76,14 +76,14 @@ class TestNeuron(unittest.TestCase):
         self.assertNotEqual(n.energyLeak, 0.0)
         self.assertNotEqual(n.peakEnergy, 0.0)
         self.assertNotEqual(n.mode, "")
-        self.assertNotEqual(n.receivers, 0)
+        self.assertNotEqual(n.receivers, [])
         n.reset()
         self.assertEqual(n.localId, MgennConsts.NULL_ID)
         self.assertEqual(n.currentEnergy, 0.0)
         self.assertEqual(n.energyLeak, 0.0)
         self.assertEqual(n.peakEnergy, 0.0)
         self.assertEqual(n.mode, "")
-        self.assertEqual(n.receivers, 0)
+        self.assertEqual(n.receivers, [])
 
 
 if __name__ == '__main__':

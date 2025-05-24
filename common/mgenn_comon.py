@@ -1,5 +1,6 @@
 import hashlib
 import time
+import os
 import platform
 import numpy as np
 import json
@@ -31,6 +32,49 @@ class NumpyEncoder(json.JSONEncoder):
             return None
 
         return json.JSONEncoder.default(self, obj)
+
+class TickTracer:
+    __messages = []
+    __tick = 0
+    __coreid = ""
+    output_file = f"./trace/{float(time.time())}_pid{os.getpid()}.txt"
+    tracer_enabler = "TICKTRACE"
+
+    @staticmethod
+    def enabled() -> bool:
+        if TickTracer.tracer_enabler not in os.environ:
+            return False
+        e_debug = os.environ[TickTracer.tracer_enabler]
+        return e_debug == 1 or e_debug == "Y"
+
+    @staticmethod
+    def dump_to_file():
+        if not TickTracer.enabled():
+            return
+        with open (TickTracer.output_file, "a") as file:
+            file.write(f"------ dump start ------\n")
+            msg = "\n".join(TickTracer.dump()) + "\n"
+            file.write(msg)
+            file.write(f"------ dump end ------\n\n")
+
+    @staticmethod
+    def start(tick, core_id) -> None:
+        if not TickTracer.enabled():
+            return
+        TickTracer.__messages = []
+        TickTracer.__tick = tick
+        TickTracer.__coreid = core_id
+    
+    @staticmethod
+    def dump() -> list:
+        return TickTracer.__messages
+
+    @staticmethod
+    def trace(msg:str):
+        if not TickTracer.enabled():
+            return
+        fmsg = f"{time.time()} - {TickTracer.__coreid}[{TickTracer.__tick}] {msg}"
+        TickTracer.__messages.append (fmsg)
 
 class MgennComon:
     nextid = 0

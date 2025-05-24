@@ -24,7 +24,7 @@ class PackageUIHelper():
             nx_graph.add_node(str(n["id"]), size = 10 + int(float(n["currentEnergy"])), title=('neuron %d' % n["id"]), group=1)
         for o in pkg.outputs:
             nx_graph.add_node(str(o["id"]), size = 10, title=('outputs %d' % n["id"]), group=2)
-        for i in pkg.inputs:
+        for i in pkg.inputs.values():
             nx_graph.add_node(str(i["name"]), size = 5, title=('input %s' % i["name"]), group=3)
 
         #make direct links

@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-
+mkdir -p trace
 source venv/bin/activate
 export MGENN_DEBUG="Y"
 pip3 install -r examples_requirements.txt

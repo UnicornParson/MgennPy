@@ -21,3 +21,7 @@ tensorflow
 pympler
 numba
 tabulate
+snakeviz
+line_profiler
+memory_profiler
+py-spy

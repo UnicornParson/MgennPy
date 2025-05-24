@@ -26,6 +26,6 @@ __all__ = ["F", "W",
     "ObjectFactory",
     "PackageUtils", "Pkgz", "Package", "PkgSizePreset",
     "RobotsLogger",
-    "Timeline",
+    "Timeline", "TickTracer",
     "PackageUIHelper",
     ]

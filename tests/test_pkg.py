@@ -52,7 +52,7 @@ class TestPkg(unittest.TestCase):
         rpkg = Pkgz.unpack(zdata)
         self.assertFalse(rpkg.empty())
         self.assertTrue(rpkg.isValid(explain=True))
-        self.assertTrue(F.l_eq(pkg.inputs, rpkg.inputs))
+        self.assertTrue(F.d_eq(pkg.inputs, rpkg.inputs))
         self.assertTrue(F.l_eq(pkg.outputs, rpkg.outputs))
         self.assertTrue(F.l_eq(pkg.links, rpkg.links))
         self.assertTrue(F.l_eq(pkg.neurons, rpkg.neurons))

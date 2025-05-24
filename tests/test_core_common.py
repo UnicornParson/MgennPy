@@ -195,7 +195,7 @@ class TestCore(unittest.TestCase):
         self.assertTrue("links" in pkg_content["storage"])
         self.assertTrue("neurons" in pkg_content["storage"])
 
-        self.assertEqual(len(pkg_content["inputs"]), len(orig.inputs))
+        self.assertEqual(len(pkg_content["inputs"]), len(orig.inputs.values()))
         self.assertEqual(len(pkg_content["outputs"]), len(orig.outputs))
         self.assertEqual(len(pkg_content["storage"]["links"]), len(orig.links))
         self.assertEqual(len(pkg_content["storage"]["neurons"]), len(orig.neurons))
@@ -212,7 +212,7 @@ class TestCore(unittest.TestCase):
         self.assertEqual(new_pkg.meta["tick"], orig.meta["tick"]) ## not executed yet
 
         # all objects restored
-        self.assertEqual(len(new_pkg.inputs), len(orig.inputs))
+        self.assertEqual(len(new_pkg.inputs), len(orig.inputs.values()))
         self.assertEqual(len(new_pkg.outputs), len(orig.outputs))
         self.assertEqual(len(new_pkg.links), len(orig.links))
         self.assertEqual(len(new_pkg.neurons), len(orig.neurons))

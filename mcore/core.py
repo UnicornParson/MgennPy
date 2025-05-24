@@ -3,7 +3,7 @@ import copy
 import time
 import pandas as pd
 from .core_object import RunnableObject, CoreObject
-from common import MgennConsts, MgennComon, F, Package, RobotsLogger, ObjectIdType
+from common import *
 from .neuron import Neuron
 from .link import Link, LinkEvent
 from .output import Output, OutputRecord
@@ -135,7 +135,7 @@ class Core(CoreObject):
             if output.id() in self.content:
                 raise ValueError(f"output id {output.id()} is not unic in this core")
             self.content[output.id()] = output
-        for i in pkg.inputs:
+        for i in pkg.inputs.values():
             if not isinstance(i, dict):
                 raise ValueError(f"input {l} is not a dict")
             bi = Input()
@@ -255,12 +255,13 @@ class Core(CoreObject):
                 if explain:
                     F.print(f"save output {id}")
                 pkg.outputs.append(data)
-        for ai in self.autoinputs.values():
-            pkg.inputs.append(ai.serialize())
+        for ai in self.autoinputs:
+            pkg.inputs[ai.name] = ai.serialize()
         if explain:
             F.print(f"p1 inputs len {len(pkg.inputs)}")
         if self.itape:
-            pkg.inputs.extend(self.itape.dump())
+            for ientry in self.itape.dump():
+                pkg.inputs[ientry["name"]] = ientry
         if explain:
             F.print(f"p2 inputs len {len(pkg.inputs)}")
         self.pkg = pkg
@@ -310,12 +311,13 @@ class Core(CoreObject):
         events = self.pending_events
         self.pending_events = []
         for target, amp, from_id in events:
-
             if target not in self.content:
                 raise ConnectivityError(f"({target} is not a valid target)")
             if not self.content[target]:
                 raise BrokenObject(f"invalid object {target}")
-            F.print(f"process p.event {from_id}->{type(self.content[target]).__name__}_{target} amp:{amp}")
+            log_msg = f"process p.event {from_id}->{type(self.content[target]).__name__}_{target} amp:{amp}"
+            F.print(log_msg)
+            TickTracer.trace(log_msg)
             self.content[target].onSignal(self.pkg.tick, amp, from_id)
 
     def __extract_outputs(self) -> OutputRecord:
@@ -352,8 +354,11 @@ class Core(CoreObject):
             raise DirtyObjectException(who = f"core_{self.__hash__}",
                                        oid = self.pkg.snapshot_id,
                                        message = f"core is ditry. has {len(self.pending_events)} pending events")
+        
         self.last_exec_duration = 0
         self.pkg.tick += 1
+        TickTracer.start(self.pkg.tick, self.pkg.snapshot_id)
+
         start_time = time.perf_counter()
         self.__process_autoinputs()
         self.__process_tapes()
@@ -363,6 +368,7 @@ class Core(CoreObject):
         record = self.__extract_outputs()
         end_time = time.perf_counter()
         self.last_exec_duration = int((end_time - start_time) * 1000)
+        TickTracer.dump_to_file()
         return record
 
     def max_id(self):

@@ -2,7 +2,7 @@ import math
 import copy
 import numpy as np
 from .core_object import RunnableObject, CoreRobotKeys
-from common import MgennConsts, MgennComon, F
+from common import *
 
 class Neuron(RunnableObject):
     def __init__(self):
@@ -21,7 +21,7 @@ class Neuron(RunnableObject):
         self.energyLeak = 0.0
         self.peakEnergy = 0.0
         self.mode = ""
-        self.receivers = 0
+        self.receivers = []
 
     def makeEvents(self, amp: float)->list:
         if amp == 0.0:
@@ -78,6 +78,7 @@ class Neuron(RunnableObject):
             shot_energy = self.currentEnergy
             self.currentEnergy = 0.0
             self.onRobotsEvent(CoreRobotKeys.NEURON_SHOT, {"tick":tick_num, "amp":shot_energy})
+            TickTracer.trace(f"N[{self.localId}] shot {shot_energy} -> [{self.receivers}]")
             return MgennComon.mround(shot_energy)
         self.currentEnergy -= MgennComon.mround(self.energyLeak)
         if self.currentEnergy < 0.0:
@@ -86,6 +87,7 @@ class Neuron(RunnableObject):
         return 0.0
     def __on_e_changed(self, prev):
         F.print(f"N[{self.localId}] changed {prev} --> {self.currentEnergy} in {F.caller_str()}")
+
     def onSignal(self, tick_num, amplitude:float, from_id = 0):
         self.onRobotsEvent(CoreRobotKeys.NEURON_IN, {"tick":tick_num, "amp":amplitude, "from": from_id})
         prev = self.currentEnergy

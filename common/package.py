@@ -142,7 +142,7 @@ class Package:
 
     def __init__(self):
         self.pkg = {}
-        self.inputs = []
+        self.inputs = {}
         self.outputs = []
         self.links = []
         self.neurons = []
@@ -158,6 +158,9 @@ class Package:
         self.fmt = Package.PKG_FORMAT_VER
         self.telemetry = PkgTelemetry()
 
+        self._safe_mode = False
+        self._cached_max_id = 0
+
     def id(self) -> str:
         return self.snapshot_id
 
@@ -165,9 +168,21 @@ class Package:
         self.snapshot_id = MgennComon.makeId(ObjectIdType.Core)
         return self.id()
 
+    def enable_safe_mode(self):
+        """
+        DONT use pkg content by itself. use functions
+        USE nextId function for making new ids
+        LOADING does not work in this mode 
+        """
+        self._cached_max_id = self.maxId()
+        self._safe_mode = True
+
+    def disable_safe_mode(self):
+        self._safe_mode = False
+
     def __contains__(self, key):
         # check string names first
-        if self.findInput(key) >= 0 or self.findOutputByName(key):
+        if key in self.inputs or self.findOutputByName(key):
             return True
         return self.isLink(key) or self.isNeuron(key) or self.isOutput(key)
 
@@ -176,7 +191,7 @@ class Package:
 
     def __eq__(self, o) -> bool:
         # dont compare parent. it changed by clone
-        return (F.l_eq(self.inputs, o.inputs)
+        return (F.d_eq(self.inputs, o.inputs)
             and F.l_eq(self.outputs, o.outputs)
             and F.l_eq(self.links, o.links)
             and F.l_eq(self.neurons, o.neurons)
@@ -284,13 +299,6 @@ class Package:
             if self.outputs[i]['name'] == name:
                 return i
         return -1
-    def findInput(self, name) -> int:
-        for i in range(len(self.inputs)):
-            if not isinstance(self.inputs[i], dict):
-                raise ValueError(f"input {self.inputs} not a dict!")
-            if self.inputs[i]['name'] == name:
-                return i
-        return -1
 
     def isLink(self, id) -> bool:
         return (self.findLink(id) >= 0)
@@ -301,25 +309,37 @@ class Package:
 
 
     def loadFile(self, fname):
+        if self._safe_mode:
+            raise ValueError('safe mode is on')
         if not os.path.isfile(fname):
-            FileNotFoundError(f"pkg not founf in {fname}")
+            raise FileNotFoundError(f"pkg not founf in {fname}")
         f = open(fname)
         jstr = f.read()
         f.close()
         return self.loadJsonStr(jstr)
 
     def loadJsonStr(self, jstr:str):
+        if self._safe_mode:
+            raise ValueError('safe mode is on')
         if not jstr:
             raise ValueError("empty json string")
         data = json.loads(jstr)
         self.loadData(data)
 
     def loadData(self, data:dict):
+        if self._safe_mode:
+            raise ValueError('safe mode is on')
         if not data:
             raise ValueError("empty data")
         self.pkg = data
         PackageUtils.checkRawPkg(self.pkg)
-        self.inputs = self.pkg["content"]["inputs"]
+        for ientry in self.pkg["content"]["inputs"]:
+            if not isinstance(ientry, dict):
+                raise TypeError(f"ientry t({type(ientry)}) {ientry} ")
+                
+            iname = ientry.get("name")
+            self.inputs[iname] = ientry
+
         self.outputs = self.pkg["content"]["outputs"]
         self.links = self.pkg["content"]["storage"]["links"]
         self.neurons = self.pkg["content"]["storage"]["neurons"]
@@ -345,11 +365,9 @@ class Package:
             self.neurons[i]['id'] = np.int64(self.neurons[i]['id'])
             for j in range(0, len(self.neurons[i]["receivers"])):
                 self.neurons[i]["receivers"][j] = np.int64(self.neurons[i]["receivers"][j])
-
-        for i in range(0, len(self.inputs)):
-            for j in range(0, len(self.inputs[i]["receivers"])):
-                ##print(self.inputs[i]["receivers"])
-                self.inputs[i]["receivers"][j] = np.int64(self.inputs[i]["receivers"][j])
+ 
+        for ientry in self.inputs.values():
+            ientry["receivers"][j] = np.int64(ientry["receivers"][j])
 
         for i in range(0, len(self.outputs)):
             self.outputs[i]['id'] = np.int64(self.outputs[i]['id'])
@@ -381,7 +399,7 @@ class Package:
         content["id"] = self.snapshot_id
         content["generation"] = self.generation
         content["seq"] = self.seq
-        content["inputs"] = self.inputs
+        content["inputs"] = list(self.inputs.values())
         content["outputs"] = self.outputs
 
         content["storage"] = {}
@@ -418,13 +436,15 @@ class Package:
         F.print(self.counts)
         
     def counts(self):
-        i = len(self.inputs)
+        i = len(self.inputs.keys())
         o = len(self.outputs)
         l = len(self.links)
         n = len(self.neurons)
         return f"inputs:{i}, outputs:{o}, neurons:{n}, links:{l}, total:{(i+o+l+n)}"
 
     def maxId(self):
+        if self._safe_mode:
+            return self._cached_max_id
         ret = np.int64(0)
         for o in self.outputs:
             ret = max(ret, np.int64(o['id']))
@@ -435,7 +455,9 @@ class Package:
         return ret
 
     def nextId(self):
-        return self.maxId() + 1
+        n = self.maxId() + 1
+        self._cached_max_id = n
+        return n
 
     def linkEnds(self, link):
         link_id = int(link["id"])
@@ -448,7 +470,7 @@ class Package:
             if link_id in np.array(n["receivers"]):
                 start = np.int64(nid)
                 break
-        for i in self.inputs:
+        for i in self.inputs.values():
             iid = i["name"]
             ##print(np.array(i["receivers"]))
             if link_id == np.array(i["receivers"]):
@@ -459,7 +481,7 @@ class Package:
         return (start, stop)
 
     def connect(self, from_id, target_id)-> bool:
-        if not isinstance(from_id, (np.int64, str)):
+        if not isinstance(from_id, (np.int64, str, int)):
             raise TypeError(f"connect: invalid from type {type(from_id)}")
         if from_id  not in self:
             F.print(f"from object {from_id} not found")
@@ -473,19 +495,18 @@ class Package:
                 self.links[index]['receiverId'] = np.int64(target_id)
                 F.print(f"linked L[{from_id}] to {target_id}")
                 return True
-            index = self.findNeuron(from_id)
-            if index >= 0:
-                if np.int64(target_id) not in self.neurons[index]["receivers"]:
-                    self.neurons[index]["receivers"].append(np.int64(target_id))
-                F.print(f"linked N[{from_id}] to {target_id}")
-                return True
+        index = self.findNeuron(from_id)
+        if index >= 0:
+            if np.int64(target_id) not in self.neurons[index]["receivers"]:
+                self.neurons[index]["receivers"].append(np.int64(target_id))
+            F.print(f"linked N[{from_id}] to {target_id}")
+            return True
 
         ## id can be name
         
-        index = self.findInput(from_id)
-        if index >= 0:
-            if np.int64(target_id) not in self.inputs[index]["receivers"]:
-                self.inputs[index]["receivers"].append(np.int64(target_id))
+        if from_id in self.inputs:
+            if np.int64(target_id) not in self.inputs[from_id]["receivers"]:
+                self.inputs[from_id]["receivers"].append(np.int64(target_id))
             return True
         F.print(f"source object [{from_id}] not found!")
         return False
@@ -517,7 +538,9 @@ class Package:
 
     def new_link_between(self, apt:float, length:int, src:np.int64|str, dst:np.int64):
         lnk = self.new_link(apt, length, dst)
-        self.connect(src, lnk)
+        connect_rc = self.connect(src, lnk)
+        if not connect_rc:
+            raise ValueError(f"failed to connect {src} -> {dst}")
         return lnk
 
     def new_output(self, name:str):
@@ -537,9 +560,8 @@ class Package:
             raise ValueError("no input name")
         if not type:
             raise ValueError("no input type")
-        for o in self.inputs:
-            if o["name"] == name:
-                raise ValueError(f"input name {name} already exists")
+        if name in self.inputs:
+            raise ValueError(f"input name {name} already exists")
 
         if args == None:
             args = {}
@@ -551,7 +573,7 @@ class Package:
             "receivers": receivers,
             "args": args
         }
-        self.inputs.append(idata)
+        self.inputs[name] = idata
         return name
 
     def new_tape_input(self, name:str, receivers:list):
@@ -616,5 +638,9 @@ class Pkgz:
     def unpack(pkgz_data):
         j = lzma.decompress(pkgz_data).decode('utf-8')
         pkg = Package()
-        pkg.loadJsonStr(j)
+        try:
+            pkg.loadJsonStr(j)
+        except Exception as e:
+            F.print(f"loadJsonStr failed. reason {e}. data: \n\n{j}\n")
+            raise e
         return pkg

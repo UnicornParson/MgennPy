@@ -74,6 +74,8 @@ class TestNeuron(unittest.TestCase):
         sz = math.prod(grid_shape)
         l_grid_name, l_ids, pkg = builder.make_ngrid(pkg, grid_shape, neuron_builder)
         r_grid_name, r_ids, pkg = builder.make_ngrid(pkg, grid_shape, neuron_builder)
+        print(f"l_ids {type(l_ids)} - {l_ids}")
+        print(f"r_ids {type(r_ids)} - {r_ids}")
         self.assertTrue(bool(l_grid_name))
         self.assertTrue(bool(r_grid_name))
         self.assertNotEqual(l_grid_name, r_grid_name)

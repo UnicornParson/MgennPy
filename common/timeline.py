@@ -1,9 +1,6 @@
 if 'SHJYTHON' in globals() and globals()['SHJYTHON']:
     import matplotlib.pyplot as plt
 
-
-
-
 class Timeline:
     def __init__(self) -> None:
         self.__data = {}

@@ -49,6 +49,11 @@ class TestLiveCore(unittest.TestCase):
 
         l1 = pkg.new_link_between(apt=0.0, length=1, src=i1, dst=n1)
         l2 = pkg.new_link_between(apt=0.0, length=1, src=n1, dst=o1)
+        n = pkg.neurons[pkg.findNeuron(n1)]
+        self.assertTrue("receivers" in n)
+        self.assertNotEqual(n["receivers"], [])
+        self.assertNotEqual(n["receivers"][0], o1) ## check if the output is connected to a neuron with different name than expected (it should be disconnected now). 
+        
         ce = mc.Engine()
         ce.core = mc.Core()
         ce.core.load(pkg)
@@ -66,9 +71,10 @@ class TestLiveCore(unittest.TestCase):
 
         io = pd.concat([df_in, df_out, df_expected], axis=1)
         io['error'] = io['o1'].astype(float) - io['o1_exp'].astype(float)
+
         for _, row in io.iterrows():
-            self.assertEqual(row["o1"], row["o1_exp"])
-            self.assertEqual(row["error"], 0.0)
+            self.assertEqual(row["o1"], row["o1_exp"], msg = f"io:\n{io.to_string(index=True)}\n")
+            self.assertEqual(row["error"], 0.0, msg = f"io:\n{io.to_string(index=True)}\n")
         # cleanup
         ce.core = None
         ce = None

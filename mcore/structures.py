@@ -47,6 +47,8 @@ class StructsBuilder():
 
     @staticmethod
     def grid_to_list(grid:np.ndarray) -> list:
+        if grid.dtype != np.int64:
+            grid = grid.astype(np.int64)
         return grid.flatten().tolist()
 
 
@@ -63,21 +65,30 @@ class StructsBuilder():
         if not layer_name:
             layer_name = f"grid_{F.generateToken()}"
         pkg.addStructureHints({layer_name: inexes})
-        return (layer_name, inexes, pkg)
+        return (layer_name, inexes.astype(np.int64), pkg)
 
     def connect_layers_1_1(self, pkg, l, r, link_builder):
         if not pkg.isValid():
             raise ValueError("invalid pkg")
         if isinstance(l, np.ndarray):
+            if l.dtype != np.int64:
+                l = r.astype(np.int64)
             l = StructsBuilder.grid_to_list(l)
         if isinstance(r, np.ndarray):
+            if r.dtype != np.int64:
+                r = r.astype(np.int64)
             r = StructsBuilder.grid_to_list(r)
         if len(l) != len(r):
             raise ValueError(f"sizes not match l({len(l)}) != ({len(r)})")
         links = []
         for i in range(len(l)):
             apt, length = link_builder(l[i], r[i])
-            lnk = pkg.new_link_between(apt, length, l[i], r[i])
+            lnk = None
+            try:
+                lnk = pkg.new_link_between(apt, length, l[i], r[i])
+            except Exception as e:
+                F.print(f"cannot make links. grids: \n{l}\n{r}")
+                raise e
             links.append(lnk)
         return links, pkg
 
