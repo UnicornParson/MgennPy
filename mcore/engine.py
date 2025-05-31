@@ -51,7 +51,7 @@ class Engine:
         tick = self.tick()
         row_index = tick + self.tick_offset
         if len(input) <= row_index:
-            raise IndexError(f"row[{row_index} not found in input len:{len(input)}")
+            raise IndexError(f"row[{row_index}] not found in input len:{len(input)} tick:{tick}")
         
         row.from_frame(input, row_index)
 
