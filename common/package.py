@@ -465,13 +465,13 @@ class Package:
         stop = np.int64(link["receiverId"])
         for n in self.neurons:
             nid = (n["id"])
-            if MgennComon.contains(link_id, i["receivers"]):
+            if MgennComon.contains(link_id, n["receivers"]):
                 start = np.int64(nid)
                 break
         for i in self.inputs.values():
             iid = i["name"]
             if MgennComon.contains(link_id, i["receivers"]):
-                F.print(f"@@ i[name]:{i["name"]} {start} = {iid}")
+                ##F.print(f"@@ i[name]:{i['name']} {start} = {iid}")
                 start = iid
                 break
         if not start or not stop:

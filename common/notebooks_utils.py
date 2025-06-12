@@ -3,6 +3,7 @@ from IPython.display import Markdown
 import matplotlib.pyplot as plt
 import networkx as nx
 import json
+import tqdm
 from pyvis.network import Network
 from IPython.display import display, HTML
 
@@ -20,11 +21,11 @@ class PackageUIHelper():
             return False
         nx_graph = nx.DiGraph()
 
-        for n in pkg.neurons:
+        for n in tqdm.tqdm(pkg.neurons, desc="add neurons"):
             nx_graph.add_node(str(n["id"]), size = 10 + int(float(n["currentEnergy"])), title=('neuron %d' % n["id"]), group=1)
-        for o in pkg.outputs:
+        for o in tqdm.tqdm(pkg.outputs, desc="add outputs"):
             nx_graph.add_node(str(o["id"]), size = 10, title=('outputs %d' % n["id"]), group=2)
-        for i in pkg.inputs.values():
+        for i in tqdm.tqdm(pkg.inputs.values(), desc="add inputs"):
             nx_graph.add_node(str(i["name"]), size = 5, title=('input %s' % i["name"]), group=3)
 
         #make direct links
@@ -32,10 +33,10 @@ class PackageUIHelper():
         if pkg.links:
             l = pkg.links[1]
             start, stop = pkg.linkEnds(l)
-            for l in pkg.links:
+            for l in tqdm.tqdm(pkg.links, desc="add outputs"):
                 start, stop = pkg.linkEnds(l)
                 link_len = int(l['length'])
-                print("link ", start, " to " , str(stop), " sz:", link_len)
+                ## print("link ", start, " to " , str(stop), " sz:", link_len)
                 if not start:
                     if link_to_zero:
                         nx_graph.add_edge(ZH, stop, length = (link_len + 1), weight=(link_len + 1))
@@ -46,7 +47,7 @@ class PackageUIHelper():
                     continue
                 nx_graph.add_edge(str(start), str(stop), length = (link_len + 1), weight=(link_len + 1) )
 
-        for n in pkg.neurons:
+        for n in tqdm.tqdm(pkg.neurons, desc="connect outputs"):
             for rc in n['receivers']:
                 if not pkg.isLink(rc):
                     nx_graph.add_edge(str(n["id"]), str(rc), length = 1, weight = 1)

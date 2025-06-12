@@ -108,7 +108,7 @@ class MgennComon:
     def contains(val, arr) -> bool:
         # operator in does not work with numpy arrays and multilevel lists
         for item in arr:
-            if isinstance(item,(list | np.array)) and MgennComon.contains(val, item):
+            if isinstance(item, (list, np.ndarray)) and MgennComon.contains(val, item):
                 return True
             if item == val:
                 return True
