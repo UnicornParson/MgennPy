@@ -103,3 +103,13 @@ class MgennComon:
     @staticmethod
     def hasMissingKeys(dictionary: dict, keys: list) -> bool:
         return len(set(keys) - set(dictionary.keys())) > 0
+    
+    @staticmethod
+    def contains(val, arr) -> bool:
+        # operator in does not work with numpy arrays and multilevel lists
+        for item in arr:
+            if isinstance(item,(list | np.array)) and MgennComon.contains(val, item):
+                return True
+            if item == val:
+                return True
+        return False

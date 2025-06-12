@@ -461,19 +461,17 @@ class Package:
 
     def linkEnds(self, link):
         link_id = int(link["id"])
-        #print("looking for ", link_id)
         start = 0
         stop = np.int64(link["receiverId"])
         for n in self.neurons:
             nid = (n["id"])
-            ##print(np.array(n["receivers"]))
-            if link_id in np.array(n["receivers"]):
+            if MgennComon.contains(link_id, i["receivers"]):
                 start = np.int64(nid)
                 break
         for i in self.inputs.values():
             iid = i["name"]
-            ##print(np.array(i["receivers"]))
-            if link_id == np.array(i["receivers"]):
+            if MgennComon.contains(link_id, i["receivers"]):
+                F.print(f"@@ i[name]:{i["name"]} {start} = {iid}")
                 start = iid
                 break
         if not start or not stop:
