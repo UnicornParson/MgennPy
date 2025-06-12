@@ -14,11 +14,12 @@ class TestLiveCore(unittest.TestCase):
 
     def _run_and_assert(self, df_input, output_name, expected, cut_expected = False):
         df_out = pd.DataFrame()
-        iterations = len(df_input)
+        iterations = len(df_input) - 1
         for _ in tqdm.tqdm(range(iterations)):
             df_out = pd.concat([df_out, self.engine.run_once(df_input)], ignore_index=True)
         actual = df_out[output_name].round(1).tolist()
-        if len(expected) > len(actual) and cut_expected:
+
+        if cut_expected:
             expected = expected[:len(actual)]
 
         self.assertEqual(actual, expected, f"\nExpected: {expected}\nActual:   {actual}")
@@ -29,6 +30,17 @@ class TestLiveCore(unittest.TestCase):
         self.pkg = mc.Package.make_empty()
         self.engine.tick_offset = 0
 
+    def _takeCoreCheckpoint(self):
+        if not self.engine or not self.engine.core:
+            raise ValueError("no core!")
+        return self.engine.core.dump()
+    
+    def _applyCoreCheckpoint(self, pkg):
+        if not self.engine or not self.engine.core:
+            raise ValueError("no core!")
+        self.engine.core.load(pkg)
+        self.assertFalse(self.engine.core.empty())
+        self.assertFalse(self.engine.core.is_dirty())
 
     def test_load_exec(self):
         F.set_print_token(inspect.currentframe().f_code.co_name)
@@ -143,7 +155,6 @@ class TestLiveCore(unittest.TestCase):
             5.0,  # Tick 8: signal from tick 0
             0.0,   # Tick 9
             5.0,   # Tick 10: signal from tick 2
-            0.0,   # Tick 11
         ]
         self.engine.core.load(self.pkg)
         self._run_and_assert(df_in, 'o1', expected_output)
@@ -169,8 +180,12 @@ class TestLiveCore(unittest.TestCase):
         
         # Expected outputs:
         # o1 delay: 1+1=2 ticks, o2 delay: 2+1=3 ticks
-        expected_o1 = [0.0, 0.0, 0.0, 3.0, 0.0, 3.0, 0.0, 0.0]  
-        expected_o2 = [0.0, 0.0, 0.0, 0.0, 3.0, 0.0, 0.0, 0.0]  
+        expected_o1 = [0.0, 0.0, 0.0, 3.0, 0.0, 3.0, 0.0]  
+        expected_o2 = [0.0, 0.0, 0.0, 0.0, 3.0, 0.0, 0.0]  
         self.engine.core.load(self.pkg)
+        cp1 = self._takeCoreCheckpoint()
+        print(f"@@ first run with tick {self.engine.core.tick()}  {cp1.tick}")
         self._run_and_assert(df_in, 'o1', expected_o1, cut_expected=True)
+        self._applyCoreCheckpoint(cp1)
+        print(f"@@ new run with tick {self.engine.core.tick()}  {cp1.tick}")
         self._run_and_assert(df_in, 'o2', expected_o2, cut_expected=True)

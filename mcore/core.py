@@ -31,12 +31,17 @@ class Core(CoreObject):
         Creates a default package and sets up the core's content, itape and autoinputs.
         """
         super().__init__()
+        self.clean()
+
+        if not RobotsLogger.default:
+            RobotsLogger.default = RobotsLogger()
+
+
+    def clean(self):
         self.pkg = None
         self.content = {}
         self.itape = None
         self.autoinputs = {}
-        if not RobotsLogger.default:
-            RobotsLogger.default = RobotsLogger()
         self.pending_events = []
         self.last_exec_duration = 0
 
@@ -110,6 +115,7 @@ class Core(CoreObject):
         """
         if not pkg:
             raise ValueError("empty pkg")
+        self.clean()
         self.pkg = pkg
         for n in pkg.neurons:
             if not isinstance(n, dict):
@@ -265,7 +271,7 @@ class Core(CoreObject):
         if explain:
             F.print(f"p2 inputs len {len(pkg.inputs)}")
         self.pkg = pkg
-        return pkg
+        return pkg.clone() # no links to internal pkg
 
     def input_names(self) -> list:
         """
