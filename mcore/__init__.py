@@ -24,5 +24,5 @@ __all__ = [
     "InputDataSelector", "Rater",
     ## classes
     "RunChain", "Engine",
-    "StructsBuilder"
+    "StructsBuilder", "LayerInfo"
 ]

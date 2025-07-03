@@ -218,3 +218,31 @@ class TestCore(unittest.TestCase):
         self.assertEqual(len(new_pkg.neurons), len(orig.neurons))
         F.set_print_token("")
 
+    def test_clean(self):
+        F.set_print_token(inspect.currentframe().f_code.co_name)
+        pkg = mc.Package()
+        pkg.loadFile(self.__pkg_path)
+        core = mc.Core()
+        core.load(pkg)
+        before_clean = len(core.content.values())
+        core.clean()
+        after_clean = len(core.content.values())
+        self.assertNotEqual(before_clean, 0)
+        self.assertEqual(after_clean, 0)
+        new_pkg = mc.Package.make_empty()
+        new_pkg.loadFile(self.__pkg_path)
+        core.load(new_pkg)
+        self.assertEqual(len(core.content.values()), before_clean)
+        F.set_print_token("")
+
+    def test_reload(self):
+        F.set_print_token(inspect.currentframe().f_code.co_name)
+        core = mc.Core()
+        last_stat = ""
+        for _ in range(10):
+            pkg = mc.Package()
+            pkg.loadFile(self.__pkg_path)
+            core.load(pkg)
+            new_stat = core.stat_string()
+            if last_stat:
+                self.assertEqual(last_stat, new_stat)

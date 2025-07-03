@@ -113,3 +113,35 @@ class MgennComon:
             if item == val:
                 return True
         return False
+    
+    @staticmethod
+    def grep_dict(data, target_key, current_path=""):
+        """
+        Recursively searches for a key in nested dictionaries/lists/tuples.
+        Returns dict of {full_path: value} for all occurrences.
+        
+        :param data: Current data structure being searched
+        :param target_key: Key to search for
+        :param current_path: Dot-separated path of current location (for recursion)
+        :return: Dictionary of {full_path: value} pairs
+        """
+        results = {}
+        
+        if isinstance(data, dict):
+            # Check if current dict contains target key
+            if target_key in data:
+                full_path = f"{current_path}.{target_key}" if current_path else target_key
+                results[full_path] = data[target_key]
+            
+            # Recurse through all key-value pairs
+            for key, value in data.items():
+                new_path = f"{current_path}.{key}" if current_path else key
+                results.update(MgennComon.grep_dict(value, target_key, new_path))
+        
+        elif isinstance(data, (list, tuple)):
+            # Recurse through list elements with index notation
+            for idx, item in enumerate(data):
+                new_path = f"{current_path}.{idx}"
+                results.update(MgennComon.grep_dict(item, target_key, new_path))
+        
+        return results

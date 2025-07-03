@@ -36,8 +36,14 @@ class Core(CoreObject):
         if not RobotsLogger.default:
             RobotsLogger.default = RobotsLogger()
 
+    def stat_string(self) -> str:
+        dflag = "(ditry)" if self.is_dirty() else ""
+        return f"{self.pkg.id()}{dflag}[t{self.tick()}] sz:{len(self.content)}"
 
     def clean(self):
+        """
+        Make core empty
+        """
         self.pkg = None
         self.content = {}
         self.itape = None
@@ -178,7 +184,7 @@ class Core(CoreObject):
         rc = []
         for obj in self.content.values():
             if isinstance(obj, Neuron):
-                rc.append(obj)
+                rc.append(copy.deepcopy(obj))
         return rc
 
     def links(self):
@@ -193,7 +199,7 @@ class Core(CoreObject):
         rc = []
         for obj in self.content.values():
             if isinstance(obj, Link):
-                rc.append(obj)
+                rc.append(copy.deepcopy(obj))
         return rc
 
     def outputs(self):
@@ -208,7 +214,7 @@ class Core(CoreObject):
         rc = []
         for obj in self.content.values():
             if isinstance(obj, Output):
-                rc.append(obj)
+                rc.append(copy.deepcopy(obj))
         return rc
     
     def get_autoinputs(self):

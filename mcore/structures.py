@@ -11,6 +11,40 @@ from .input import *
 from .clock_input import *
 from .errors import *
 
+class LayerInfo():
+    CONTENT_TYPE_NONE = 0
+    CONTENT_TYPE_NEURONS = 1
+    CONTENT_TYPE_INPUTS = 2
+    CONTENT_TYPE_OUTPUTS = 3
+
+    def __init__(self) -> None:
+        self.layer_name = ""
+        self.content_type = LayerInfo.CONTENT_TYPE_NONE
+        self.ids_type = list
+        self.ids = []
+        self.shape = (0, )
+        self.dims = 0
+
+    def to_dict(self):
+        d = {}
+        if self.ids_type == list:
+            if not isinstance(self.ids, list):
+                raise ValueError(f"ids not a list (actual: {type(self.ids)}) but declared type is list")
+            d["ids_type"] = "list"
+            d["ids"] = self.ids
+        elif self.ids_type == np.ndarray:
+            if not isinstance(self.ids, np.ndarray):
+                raise ValueError(f"ids not a np.ndarray (actual: {type(self.ids)}) but declared type is np.ndarray")
+            d["ids"] = self.ids.tolist()
+            d["ids_type"] = "np.ndarray"
+        else:
+            raise ValueError("invalid ids_type")
+        d["content_type"] = self.content_type
+        d["layer_name"] = self.layer_name
+        d["dims"] = self.dims
+        return d
+
+    def from_dict(self, d):
 
 
 
@@ -35,15 +69,21 @@ class StructsBuilder():
             raise ValueError("invalid params")
         if not pkg.isValid():
             raise ValueError("invalid pkg")
-        ids = []
+        li = LayerInfo()
+        li.ids = []
+        li.ids_type = list
+        li.content_type = LayerInfo.CONTENT_TYPE_NEURONS
+        li.layer_name = layer_name
+        li.dims = 1
         for i in range(size):
             leak, peak = config_builder(i)
             id = pkg.new_neuron(leak, peak, [])
-            ids.append(id)
-        if not layer_name:
-            layer_name = f"layer_{F.generateToken()}"
-        pkg.addStructureHints({layer_name: ids})
-        return (layer_name, ids, pkg)
+            li.ids.append(id)
+        if not li.layer_name:
+            li.layer_name = f"n_layer_{F.generateToken()}"
+        li.shape = (len(li.ids), )
+        pkg.addStructureHints({layer_name: li.ids})
+        return (li, pkg)
 
     @staticmethod
     def grid_to_list(grid:np.ndarray) -> list:
@@ -57,15 +97,22 @@ class StructsBuilder():
             raise ValueError("invalid params")
         if not pkg.isValid():
             raise ValueError("invalid pkg")
-        inexes = np.empty(shape)
-        for i in np.ndindex(inexes.shape):
+        li = LayerInfo()
+        li.ids_type = np.ndarray
+        li.content_type = LayerInfo.CONTENT_TYPE_NEURONS
+        li.layer_name = layer_name
+        li.ids = np.empty(shape)
+        li.shape = shape
+        li.dims = len(shape)
+        for i in np.ndindex(li.ids.shape):
             leak, peak = config_builder(i)
             id = pkg.new_neuron(leak, peak, [])
-            inexes[i] = id
+            li.ids[i] = id
         if not layer_name:
-            layer_name = f"grid_{F.generateToken()}"
-        pkg.addStructureHints({layer_name: inexes})
-        return (layer_name, inexes.astype(np.int64), pkg)
+            layer_name = f"n_grid_{F.generateToken()}"
+        li.ids = li.ids.astype(np.int64)
+        pkg.addStructureHints({layer_name: li.ids})
+        return (li, pkg)
 
     def connect_layers_1_1(self, pkg, l, r, link_builder):
         if not pkg.isValid():
