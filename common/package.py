@@ -9,6 +9,7 @@ from .mgenn_consts import MgennConsts, ObjectIdType
 import lzma
 import enum
 import itertools
+import networkx as nx
 
 class PkgSizePreset(enum.Enum):
     Small = 0
@@ -69,6 +70,77 @@ class PackageUtils:
         for a, b in itertools.product(ids, repeat=2):
             pkg.new_link_between(F.frand(0.1,10.0), 2.0, a, b)
         return pkg
+
+    @staticmethod
+    def build_graph(pkg):
+        """
+        Builds a directed graph of the network, where nodes are object ids and edges are links with delay.
+        """
+        # Validate package
+        if pkg is None or not hasattr(pkg, 'isValid') or not pkg.isValid():
+            raise ValueError("Invalid package: must be a valid Package instance.")
+        G = nx.DiGraph()
+        # Add neurons, inputs, outputs as nodes
+        for n in pkg.neurons:
+            G.add_node(n['id'], type='neuron')
+        for o in pkg.outputs:
+            G.add_node(o['id'], type='output')
+        for i in pkg.inputs.values():
+            G.add_node(i['name'], type='input')  # input name as id
+        # Add edges (links)
+        for l in pkg.links:
+            from_id = l.get('id')  # link id
+            to_id = l.get('receiverId')
+            length = l.get('length', 1)
+            G.add_edge(from_id, to_id, weight=length)
+        return G
+
+    @staticmethod
+    def shortest_signal_path_length(pkg):
+        """
+        Returns the length of the shortest path from any input to any output.
+        """
+        # Validate package
+        if pkg is None or not hasattr(pkg, 'isValid') or not pkg.isValid():
+            raise ValueError("Invalid package: must be a valid Package instance.")
+        G = PackageUtils.build_graph(pkg)
+        min_length = float('inf')
+        input_nodes = [n for n, d in G.nodes(data=True) if d.get('type') == 'input']
+        output_nodes = [n for n, d in G.nodes(data=True) if d.get('type') == 'output']
+        for inp in input_nodes:
+            for out in output_nodes:
+                try:
+                    length = nx.shortest_path_length(G, source=inp, target=out, weight='weight')
+                    if length < min_length:
+                        min_length = length
+                except nx.NetworkXNoPath:
+                    continue
+        return min_length if min_length != float('inf') else None
+
+    @staticmethod
+    def optimal_signal_path_length(pkg):
+        """
+        Returns the length of the optimal path: from input to output, passing through at least one neuron.
+        """
+        # Validate package
+        if pkg is None or not hasattr(pkg, 'isValid') or not pkg.isValid():
+            raise ValueError("Invalid package: must be a valid Package instance.")
+        G = PackageUtils.build_graph(pkg)
+        min_length = float('inf')
+        input_nodes = [n for n, d in G.nodes(data=True) if d.get('type') == 'input']
+        output_nodes = [n for n, d in G.nodes(data=True) if d.get('type') == 'output']
+        neuron_nodes = [n for n, d in G.nodes(data=True) if d.get('type') == 'neuron']
+        for inp in input_nodes:
+            for out in output_nodes:
+                try:
+                    for path in nx.all_simple_paths(G, source=inp, target=out):
+                        if any(node in neuron_nodes for node in path):
+                            length = sum(G[u][v]['weight'] for u, v in zip(path[:-1], path[1:]))
+                            if length < min_length:
+                                min_length = length
+                except nx.NetworkXNoPath:
+                    continue
+        return min_length if min_length != float('inf') else None
 
 class PkgTelemetry:
     def __init__(self) -> None:
