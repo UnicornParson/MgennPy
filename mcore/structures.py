@@ -101,8 +101,9 @@ class StructsBuilder():
             leak, peak = config_builder(i)
             id = pkg.new_neuron(leak, peak, [])
             li.ids.append(id)
-        if not li.layer_name:
-            li.layer_name = f"n_layer_{F.generateToken()}"
+        if not layer_name:
+            layer_name = f"n_layer_{F.generateToken()}"
+        li.layer_name = layer_name
         li.shape = (len(li.ids), )
         pkg.addStructureHints({layer_name: li.ids})
         return (li, pkg)
@@ -132,6 +133,7 @@ class StructsBuilder():
             li.ids[i] = id
         if not layer_name:
             layer_name = f"n_grid_{F.generateToken()}"
+        li.layer_name = layer_name  # ensure always set
         li.ids = li.ids.astype(np.int64)
         pkg.addStructureHints({layer_name: li.ids})
         return (li, pkg)

@@ -21,14 +21,14 @@ class TestNeuron(unittest.TestCase):
             leak = 0.1
             peak = 5.
             return (leak, peak)
-        layer_name, ids, pkg = builder.make_layer(pkg, layer_size, neuron_builder)
+        layer_info, pkg = builder.make_layer(pkg, layer_size, neuron_builder)
 
-        self.assertTrue(bool(layer_name))
-        self.assertTrue(bool(ids))
+        self.assertTrue(bool(layer_info.layer_name))
+        self.assertTrue(bool(layer_info.ids))
         self.assertTrue(pkg.isValid())
         self.assertFalse(pkg.empty())
         self.assertEqual(len(pkg.neurons), layer_size)
-        self.assertEqual(len(ids), layer_size)
+        self.assertEqual(len(layer_info.ids), layer_size)
         for n in pkg.neurons:
             self.assertEqual(n["energyLeak"], 0.1)
             self.assertEqual(n["peakEnergy"], 5.)
@@ -44,10 +44,11 @@ class TestNeuron(unittest.TestCase):
             leak = 0.1
             peak = 5.
             return (leak, peak)
-        grid_name, ids, pkg = builder.make_ngrid(pkg, grid_shape, neuron_builder)
-        self.assertTrue(isinstance(ids, np.ndarray))
+        layer_info, pkg = builder.make_ngrid(pkg, grid_shape, neuron_builder)
+        ids = layer_info.ids
         sh = ids.shape
-        self.assertTrue(bool(grid_name))
+        self.assertTrue(isinstance(ids, np.ndarray))
+        self.assertTrue(bool(layer_info.layer_name))
         self.assertTrue(bool(sh))
         self.assertEqual(sh, grid_shape)
         sz = math.prod(grid_shape)
@@ -72,13 +73,13 @@ class TestNeuron(unittest.TestCase):
             length = 1
             return (apt, length)
         sz = math.prod(grid_shape)
-        l_grid_name, l_ids, pkg = builder.make_ngrid(pkg, grid_shape, neuron_builder)
-        r_grid_name, r_ids, pkg = builder.make_ngrid(pkg, grid_shape, neuron_builder)
-        #print(f"l_ids {type(l_ids)} - {l_ids}")
-        #print(f"r_ids {type(r_ids)} - {r_ids}")
-        self.assertTrue(bool(l_grid_name))
-        self.assertTrue(bool(r_grid_name))
-        self.assertNotEqual(l_grid_name, r_grid_name)
+        l_layer_info, pkg = builder.make_ngrid(pkg, grid_shape, neuron_builder)
+        r_layer_info, pkg = builder.make_ngrid(pkg, grid_shape, neuron_builder)
+        l_ids = l_layer_info.ids
+        r_ids = r_layer_info.ids
+        self.assertTrue(bool(l_layer_info.layer_name))
+        self.assertTrue(bool(r_layer_info.layer_name))
+        self.assertNotEqual(l_layer_info.layer_name, r_layer_info.layer_name)
         self.assertEqual(len(pkg.neurons), sz*2)
         self.assertTrue(pkg.isValid())
         links, pkg = builder.connect_layers_1_1(pkg, l_ids, r_ids, link_builder)
@@ -88,7 +89,7 @@ class TestNeuron(unittest.TestCase):
 
         # no new neurons
         self.assertEqual(len(pkg.neurons), sz*2)
-        self.assertTrue(bool(l_grid_name))
+        self.assertTrue(bool(l_layer_info.layer_name))
 
         # not broken
         pkgName, pkg_data = pkg.dump()
@@ -116,11 +117,13 @@ class TestNeuron(unittest.TestCase):
             return (apt, length)
         sz_l = math.prod(grid_shape_l)
         sz_r = math.prod(grid_shape_r)
-        l_grid_name, l_ids, pkg = builder.make_ngrid(pkg, grid_shape_l, neuron_builder)
-        r_grid_name, r_ids, pkg = builder.make_ngrid(pkg, grid_shape_r, neuron_builder)
-        self.assertTrue(bool(l_grid_name))
-        self.assertTrue(bool(r_grid_name))
-        self.assertNotEqual(l_grid_name, r_grid_name)
+        l_layer_info, pkg = builder.make_ngrid(pkg, grid_shape_l, neuron_builder)
+        r_layer_info, pkg = builder.make_ngrid(pkg, grid_shape_r, neuron_builder)
+        l_ids = l_layer_info.ids
+        r_ids = r_layer_info.ids
+        self.assertTrue(bool(l_layer_info.layer_name))
+        self.assertTrue(bool(r_layer_info.layer_name))
+        self.assertNotEqual(l_layer_info.layer_name, r_layer_info.layer_name)
         self.assertEqual(len(pkg.neurons), (sz_l + sz_r))
         self.assertTrue(pkg.isValid())
         links, pkg = builder.connect_layers_all(pkg, l_ids, r_ids, link_builder)
