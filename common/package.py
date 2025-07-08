@@ -439,7 +439,9 @@ class Package:
                 self.neurons[i]["receivers"][j] = np.int64(self.neurons[i]["receivers"][j])
  
         for ientry in self.inputs.values():
-            ientry["receivers"][j] = np.int64(ientry["receivers"][j])
+            # Ensure all receiver ids are np.int64
+            for j in range(len(ientry["receivers"])):
+                ientry["receivers"][j] = np.int64(ientry["receivers"][j])
 
         for i in range(0, len(self.outputs)):
             self.outputs[i]['id'] = np.int64(self.outputs[i]['id'])
@@ -477,8 +479,6 @@ class Package:
         content["storage"] = {}
         content["storage"]["links"] = self.links
         content["storage"]["neurons"] = self.neurons
-
-
 
         content["history"] = self.history
         content["external"] = self.external

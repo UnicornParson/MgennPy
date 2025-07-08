@@ -144,3 +144,60 @@ class TestNeuron(unittest.TestCase):
         self.assertEqual(leak, 0.)
         self.assertEqual(peak, 5.)
         F.set_print_token("")
+
+class TestLayerInfo(unittest.TestCase):
+    def test_to_dict_and_from_dict_list(self):
+        li = mc.LayerInfo()
+        li.layer_name = "test_layer"
+        li.content_type = mc.LayerInfo.CONTENT_TYPE_NEURONS
+        li.ids_type = list
+        li.ids = [1, 2, 3]
+        li.shape = (3,)
+        li.dims = 1
+        d = li.to_dict()
+        li2 = mc.LayerInfo().from_dict(d)
+        self.assertEqual(li2.layer_name, li.layer_name)
+        self.assertEqual(li2.content_type, li.content_type)
+        self.assertEqual(li2.ids_type, list)
+        self.assertEqual(li2.ids, [1, 2, 3])
+        self.assertEqual(li2.shape, (3,))
+        self.assertEqual(li2.dims, 1)
+
+    def test_to_dict_and_from_dict_ndarray(self):
+        li = mc.LayerInfo()
+        li.layer_name = "test_grid"
+        li.content_type = mc.LayerInfo.CONTENT_TYPE_NEURONS
+        li.ids_type = np.ndarray
+        li.ids = np.array([[1, 2], [3, 4]], dtype=np.int64)
+        li.shape = li.ids.shape
+        li.dims = 2
+        d = li.to_dict()
+        li2 = mc.LayerInfo().from_dict(d)
+        self.assertEqual(li2.layer_name, li.layer_name)
+        self.assertEqual(li2.content_type, li.content_type)
+        self.assertEqual(li2.ids_type, np.ndarray)
+        self.assertTrue(np.array_equal(li2.ids, li.ids))
+        self.assertEqual(li2.shape, (2, 2))
+        self.assertEqual(li2.dims, 2)
+
+    def test_from_dict_missing_key(self):
+        d = {
+            "layer_name": "test",
+            "content_type": mc.LayerInfo.CONTENT_TYPE_NEURONS,
+            "dims": 1,
+            "ids_type": "list"
+            # 'ids' is missing
+        }
+        with self.assertRaises(ValueError):
+            mc.LayerInfo().from_dict(d)
+
+    def test_from_dict_invalid_ids_type(self):
+        d = {
+            "layer_name": "test",
+            "content_type": mc.LayerInfo.CONTENT_TYPE_NEURONS,
+            "dims": 1,
+            "ids_type": "unknown_type",
+            "ids": [1, 2, 3]
+        }
+        with self.assertRaises(ValueError):
+            mc.LayerInfo().from_dict(d)

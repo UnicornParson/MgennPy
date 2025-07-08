@@ -45,7 +45,29 @@ class LayerInfo():
         return d
 
     def from_dict(self, d):
-
+        """
+        Restore LayerInfo fields from a dictionary (e.g., after serialization).
+        All required keys must be present, otherwise ValueError is raised.
+        """
+        required_keys = ["layer_name", "content_type", "dims", "ids_type", "ids"]
+        for key in required_keys:
+            if key not in d:
+                raise ValueError(f"Missing required key in LayerInfo dict: '{key}'")
+        self.layer_name = d["layer_name"]
+        self.content_type = d["content_type"]
+        self.dims = d["dims"]
+        ids_type = d["ids_type"]
+        if ids_type == "list":
+            self.ids_type = list
+            self.ids = d["ids"]
+            self.shape = (len(self.ids),)
+        elif ids_type == "np.ndarray":
+            self.ids_type = np.ndarray
+            self.ids = np.array(d["ids"], dtype=np.int64)
+            self.shape = self.ids.shape
+        else:
+            raise ValueError(f"Unknown ids_type: {ids_type}")
+        return self
 
 
 class StructsBuilder():
