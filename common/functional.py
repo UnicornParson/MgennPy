@@ -127,6 +127,8 @@ class F():
         :param length: The desired length of the ID string.
         :return: A random ID string.
         """
+        if length <= 0:
+            raise ValueError("length must be positive")
         letters = string.ascii_lowercase
         return ''.join(random.choice(letters) for i in range(length))
 
@@ -355,7 +357,8 @@ class F():
 
     @staticmethod
     def approximate(lower_bound, upper_bound, n, keep_bounds = True):
-        assert n > 0
+        if n <= 0:
+            raise ValueError("n must be positive")
         l = []
         if keep_bounds:
             l.append(lower_bound)

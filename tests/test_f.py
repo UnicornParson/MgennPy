@@ -218,3 +218,47 @@ class TestF(unittest.TestCase):
         self.assertTrue(F.isHexString(" abcdef "))
         self.assertTrue(F.isHexString("    abcdef            "))
         self.assertFalse(F.isHexString("abcde f"))
+
+    def test_uhash_empty_and_none(self):
+        self.assertIsInstance(F.uhash(""), int)
+        self.assertIsInstance(F.uhash(None), int)
+
+    def test_random_id_zero_and_negative(self):
+        with self.assertRaises(ValueError):
+            F.random_id(0)
+        with self.assertRaises(ValueError):
+            F.random_id(-1)
+
+    def test_hex_to_az_invalid(self):
+        self.assertEqual(F.hex_to_az("nothex"), "")
+        self.assertEqual(F.hex_to_az("!@#$%^"), "")
+
+    def test_tensor_to_float_invalid(self):
+        with self.assertRaises(Exception):
+            F.tensor_to_float([1, 2, 3])  # not a torch.Tensor
+
+    def test_sizeof_str_various(self):
+        self.assertIsInstance(F.sizeof_str("test"), str)
+        self.assertIsInstance(F.sizeof_str(None), str)
+        self.assertIsInstance(F.sizeof_str(123), str)
+
+    def test_approximate_zero(self):
+        with self.assertRaises(ValueError):
+            F.approximate(1.0, 1.0, 0)
+
+    def test_i_approximate_negative(self):
+        with self.assertRaises(ValueError):
+            F.i_approximate(1.0, 2.0, -1)
+
+    def test_dsort_non_numeric(self):
+        d = {"a": "x", "b": "y"}
+        sorted_d = F.dsort(d)
+        self.assertIsInstance(sorted_d, dict)
+
+    def test_generateToken_uniqueness(self):
+        tokens = {F.generateToken() for _ in range(100)}
+        self.assertEqual(len(tokens), 100)
+
+    def test_generateOID_uniqueness(self):
+        oids = {F.generateOID() for _ in range(100)}
+        self.assertEqual(len(oids), 100)
